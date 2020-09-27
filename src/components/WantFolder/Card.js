@@ -25,11 +25,12 @@ import styled from 'styled-components'
 
 const StyledContainer=styled(Container)`
   .big-container {
-    margin: 50px 60px 50px;
-  },
+    margin: 50px 60px 50px!important;
+  }
+  /* },
   .small-container {
     margin-bottom: 16px;
-  }
+  } */
     `
 const StyledTypography=styled(Typography)`
     margin: 12px;
@@ -40,8 +41,9 @@ const StyledPaper = styled(Paper)`
 `
 
 const StyledTooltip=styled(Tooltip)`
-    margin-left: 95px; 
-    margin-top: 30px;
+    display: block!important;
+    margin-top: 30px!important;
+    margin: 0 auto;
     `
 
 
@@ -128,11 +130,13 @@ const handleChange = (event) => {
                 </StyledPaper>
               </StyledContainer>
             </Grid>
-            <StyledTooltip title="Add" aria-label="add" m={10}>
-              <Fab color="primary" className={classes.absolute}>
-                <AddIcon />
-              </Fab>
-            </StyledTooltip>
+            <StyledContainer className="tooltip-container">
+              <StyledTooltip title="Add" aria-label="add" m={10}>
+                <Fab color="primary" className={classes.absolute}>
+                  <AddIcon />
+                </Fab>
+              </StyledTooltip>
+            </StyledContainer>
           </StyledContainer>
         </React.Fragment>
     )
