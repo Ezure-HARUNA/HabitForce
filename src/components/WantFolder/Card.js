@@ -37,7 +37,8 @@ const StyledTypography=styled(Typography)`
 `
 
 const StyledPaper = styled(Paper)`
-  
+  width: 250%!important;
+  margin-top: 16px;
 `
 
 const StyledTooltip=styled(Tooltip)`

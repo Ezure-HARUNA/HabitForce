@@ -9,10 +9,16 @@ import Detail from './WantFolder/Detail';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import styled from 'styled-components';
+import styled, {createGlobalStyle} from 'styled-components';
 import clsx from 'clsx';
+import Button from '@material-ui/core/Button';
+import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 
 const drawerWidth = 240;
+
+const StyledButton=styled(Button)`
+  margin-left: 80%!important;
+`
 
 function Copyright() {
   return (
@@ -115,12 +121,14 @@ const StyledContainer = styled(Container)`
   }
   .router-container {
     margin: 50px 60px 50px;
-
+    background-color: #f8f8f8!important;
   }
 `
 
 const StyledPaper = styled(Paper)`
   margin: 10px;
+  height: 100vh;
+  overflow:visible;
   `
 
 
@@ -133,48 +141,41 @@ const Top = (props) => {
     }
     return (
         <div>
-            <Header></Header>
+            {/* <Header></Header> */}
             <StyledContainer className="router-container">
               <h2>Top画面だよ</h2>
               <Link className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
                 やりたいことリスト画面へ
               </Link>
+              <StyledButton
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  size="large"
+                  startIcon={<ForwardOutlinedIcon />}
+                >
+                  次のステップ
+              </StyledButton>
             </StyledContainer>
-            {/* <StyledContainer className="main-container">
-              <Grid container spacing={3}>
-                <Card />
-              </Grid>
-              <StyledContainer className="sub-container">
-                <StyledPaper >
-                  <Detail />
-                </StyledPaper>
-              </StyledContainer>
-            </StyledContainer> */}
-            <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Card />
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={6} lg={6}>
-              <Paper className={fixedHeightPaper}>
-                <Detail />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            {/* <Grid item xs={12}>
-              <Paper >
-                <Detail />
-              </Paper>
-            </Grid> */}
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
+              <main className={classes.content}>
+                <div className={classes.appBarSpacer} />
+                  <Container maxWidth="lg" className={classes.container}>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12} md={6} lg={6}>
+                        <Card />
+                      </Grid>
+                      {/* Recent Deposits */}
+                      <Grid item xs={12} md={6} lg={6}>
+                        <StyledPaper className={fixedHeightPaper}>
+                          <Detail />
+                        </StyledPaper>
+                      </Grid>
+                      
+                    </Grid>
+                    <Box pt={4}>
+                      <Copyright />
+                    </Box>
+                  </Container>
       </main>
             
         </div>

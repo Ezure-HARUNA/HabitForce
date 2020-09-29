@@ -23,6 +23,16 @@ import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
 import WatchLaterOutlinedIcon from '@material-ui/icons/WatchLaterOutlined';
 import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledLink=styled(Link)`
+  /* text-decoration:none!important; */
+  color: gray!important;
+  text-decoration: none;
+  :hover {
+    color: blue!important;
+  }
+`
 
 const drawerWidth = 240;
 
@@ -31,20 +41,20 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm', 'md', 'lg')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
   },
   appBar: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm', 'md', 'lg')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm', 'md', 'lg')]: {
       display: 'none',
     },
   },
@@ -77,46 +87,46 @@ function ResponsiveDrawer(props) {
     <div>
       <div className={classes.toolbar} />
       <Divider />
-      <Link className="link" onClick={(e)=>{handleId()}} to=''>
+      <StyledLink className="link" onClick={(e)=>{handleId()}} to=''>
         <ListItem button>
           <ListItemIcon>
             <HomeOutlinedIcon />
           </ListItemIcon>
         <ListItemText primary="Home" />
        </ListItem>
-      </Link>
-      <Link className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
+      </StyledLink>
+      <StyledLink className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
         <ListItem button>
           <ListItemIcon>
             <WhatshotOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="やりたいことリスト作成" />
         </ListItem>
-      </Link>
-      <Link className="link" onClick={(e)=>{handleId()}} to='/calendar'>
+      </StyledLink>
+      <StyledLink className="link" onClick={(e)=>{handleId()}} to='/calendar'>
         <ListItem button>
           <ListItemIcon>
             <DateRangeOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="カレンダー" />
         </ListItem>
-      </Link>
-      <Link className="link" onClick={(e)=>{handleId()}} to='/pomodoro'>
+      </StyledLink>
+      <StyledLink className="link" onClick={(e)=>{handleId()}} to='/pomodoro'>
         <ListItem button>
           <ListItemIcon>
             <WatchLaterOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="ポモドーロ" />
         </ListItem>
-      </Link>
-      <Link className="link" onClick={(e)=>{handleId()}} to='/rewards'>
+      </StyledLink>
+      <StyledLink className="link" onClick={(e)=>{handleId()}} to='/rewards'>
         <ListItem button>
           <ListItemIcon>
             <CardGiftcardOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="ご褒美設定" />
         </ListItem>
-      </Link>
+      </StyledLink>
 
       <Divider />
 
