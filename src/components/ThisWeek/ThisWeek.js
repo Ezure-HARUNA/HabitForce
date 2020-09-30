@@ -1,6 +1,7 @@
-import React, { makeStyles } from 'react';
+import React, { makeStyles, useContext  } from 'react';
 import ThisWeekCard from './ThisWeekCard'
 import Paper from '@material-ui/core/Paper';
+import AppContext from '../contexts/AppContext'
 
 import clsx from 'clsx';
 
@@ -26,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const ThisWeek = () => {
+const ThisWeek = ({stack}) => {
+  const { state, dispatch } = useContext(AppContext);
+  const stack = stack.id
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (

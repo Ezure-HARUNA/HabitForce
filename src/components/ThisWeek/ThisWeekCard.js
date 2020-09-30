@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
@@ -11,6 +11,7 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Pomodoro from './Pomodoro'
 import TimeLimit from './TimeLimit'
 import Week from './Week'
+// import AppContext from '../contexts/AppContext'
 
 const useStyles = makeStyles((theme) => ({
   
@@ -58,8 +59,9 @@ const StylesTextField=styled(TextField)`
   width: 40%;
 `
 
-const ThisWeekCard = () => {
+const ThisWeekCard = ({stack}) => {
   const classes = useStyles();
+  // const{ state, dispatch } = useContext(AppContext)
     return (
         <React.Fragment>
           <Container>
@@ -84,9 +86,12 @@ const ThisWeekCard = () => {
               </StyledButton> */}
               </StyledContainer>
               <h2>今週やること</h2>
-              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 タスク
-              </StyledTypography> */}
+              </StyledTypography>
+              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                {stack.task}
+              </StyledTypography>
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="今週やること" />
               </form>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../Layout/Header';
@@ -13,17 +13,17 @@ import styled, {createGlobalStyle} from 'styled-components';
 import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
-// import reducer from '../reducers'
+import reducer from '../reducers/nextToWeek'
+import AppContext from '../contexts/AppContext'
+import { FOLLOW_TO_TASK_THIS_WEEK } from '../actions/actions'
+
 
 const drawerWidth = 240;
 
-const StyledButton=styled(Button)`
-  margin-left: 10%!important;
-  margin-top: 16px!important;
-`
+
 
 function Copyright() {
-//   const [state, dispatch] = useReducer(reducer, [])
+
   return (
     // <AppContext.Provider value={{ state, dispatch}}>
       <Typography variant="body2" color="textSecondary" align="center">
@@ -118,54 +118,59 @@ const StyledPaper = styled(Paper)`
 
 
 const Wanttodo = (props) => {
+  const [state, dispatch] = useReducer(reducer, [])
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    const handleId= (e)=>{
+
+  const handleId= (e)=>{
+    //e.preventDefault()
+    props.setId(props.id)
+  }
+    const nextToPage1= (e)=>{
         //e.preventDefault()
         props.setId(props.id)
+
+        dispatch({
+          type: 'FOLLOW_TO_TASK_THIS_WEEK',
+          task,
+          week,
+          category
+        })
     }
+    const [task, setTask] = useState('');
+    const [week, setWeek] = useState([]);
+    const [category, setCategory] = useState('');
+
     return (
-        <div>
-            {/* <Header></Header> */}
-            <StyledContainer className="router-container">
-            　<h2>Top画面だよ</h2>
-              <Link className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
-                やりたいことリスト画面へ
-              </Link>
-              
-            </StyledContainer>
-              <main className={classes.content}>
-                <div className={classes.appBarSpacer} />
-                  <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} md={6} lg={6}>
-                        {/* <Card /> */}
+            <AppContext.Provider value={{ state, dispatch}}>
+              <StyledContainer className="router-container">
+              　<h2>Top画面だよ</h2>
+                <Link className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
+                  やりたいことリスト画面へ
+                </Link>
+              </StyledContainer>
+                <main className={classes.content}>
+                  <div className={classes.appBarSpacer} />
+                    <Container maxWidth="lg" className={classes.container}>
+                      <Grid container spacing={3}>
+                        <Grid item xs={12} md={6} lg={6}>
+                          {/* <Card /> */}
+                        </Grid>
+                        {/* Recent Deposits */}
+                        <Grid item xs={12} md={6} lg={6}>
+                          <StyledPaper className={fixedHeightPaper}>
+                            <Detail />
+                            
+                          </StyledPaper>
+                        </Grid>
                       </Grid>
-                      {/* Recent Deposits */}
-                      <Grid item xs={12} md={6} lg={6}>
-                        <StyledPaper className={fixedHeightPaper}>
-                          <Detail />
-                          <Link className="link" onClick={(e)=>{handleId()}} to='/thisweek'>
-                            <StyledButton
-                              variant="contained"
-                              color="primary"
-                              className={classes.button}
-                              size="large"
-                              startIcon={<ForwardOutlinedIcon />}
-                            >
-                              次のページ（今週やること）へ
-                            </StyledButton>
-                          </Link>
-                        </StyledPaper>
-                      </Grid>
-                    </Grid>
-                    <Box pt={4}>
-                      <Copyright />
-                    </Box>
-                  </Container>
-      </main>
-            
-        </div>
+                      <Box pt={4}>
+                        <Copyright />
+                      </Box>
+                    </Container>
+                    </main>
+                  </AppContext.Provider>
+      
     )
 }
 
