@@ -9,16 +9,19 @@ import Pomodoro from './Pomodoro.jsx';
 import Rewards from './Rewards.jsx';
 import MainItems from '../Layout/MainItems';
 import SecondItems from '../Layout/SecondItems';
+import ThisWeek from './ThisWeek/ThisWeekCard'
 const App = () => {
   
   const [id, setId] =React.useState("")
 
-  const [wantTodo, setWantTodo] = React.useState("")
-  const [description, setDescription] = React.useState("")
-  const [purpose, setPurpose] = React.useState("")
-  const [rewards, setRewards] = React.useState("")
-  const [category, setCategory] = React.useState("")
-  const 
+  // やりたいことリストの番号
+  // const [taskId, setTaskId] =React.useState("")
+  // const [wantTodo, setWantTodo] = React.useState("")
+  // const [description, setDescription] = React.useState("")
+  // const [purpose, setPurpose] = React.useState("")
+  // const [rewards, setRewards] = React.useState("")
+  // const [category, setCategory] = React.useState("")
+
   return (
     <BrowserRouter>
           <Route exact path='/' render={() => <Top id={id} setId={setId}></Top>}></Route>
@@ -29,6 +32,7 @@ const App = () => {
           <Route path='/mainitems' render={(props) => <MainItems id={id} setId={setId}></MainItems>}></Route>
           <Route path='/seconditems' render={(props) => <SecondItems id={id} setId={setId}></SecondItems>}></Route>
           <Route path='/header' render={(props) => <Header id={id} setId={setId}></Header>}></Route>
+          <Route path='/thisweek' render={(props) => <ThisWeek id={id} setId={setId}></ThisWeek>}></Route>
           
           {/* <ul>
             <Route path='/list' render={(props) => <List></List>}></Route>
