@@ -11,6 +11,7 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Pomodoro from './Pomodoro'
 import TimeLimit from './TimeLimit'
 import Week from './Week'
+import AppContext from "../../contexts/AppContext"
 // import AppContext from '../contexts/AppContext'
 
 const useStyles = makeStyles((theme) => ({
@@ -59,9 +60,10 @@ const StylesTextField=styled(TextField)`
   width: 40%;
 `
 
-const ThisWeekCard = ({stack}) => {
+const ThisWeekCard = ({state, dispatch}) => {
   const classes = useStyles();
-  // const{ state, dispatch } = useContext(AppContext)
+  const{ stack } = useContext(AppContext)
+  
     return (
         <React.Fragment>
           <Container>
@@ -90,7 +92,7 @@ const ThisWeekCard = ({stack}) => {
                 タスク
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {stack.task}
+                {/* {stack.task} */}
               </StyledTypography>
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="今週やること" />
@@ -115,7 +117,8 @@ const ThisWeekCard = ({stack}) => {
               {/* <StyledContainer className="pomodoro-container"> */}
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   ポモドーロ機能
-                </StyledTypography>                <Pomodoro/>
+                </StyledTypography>                
+                <Pomodoro/>
               {/* </StyledContainer> */}
 
               <form className={classes.root} noValidate autoComplete="off">

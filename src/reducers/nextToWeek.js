@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
     FOLLOW_TO_TASK_THIS_WEEK
 } from '../actions/actions';
