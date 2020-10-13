@@ -12,19 +12,11 @@ import SecondItems from '../Layout/SecondItems';
 import ThisWeek from './ThisWeek/ThisWeekCard';
 import SignIn from '../components/SignIn'
 import Stack from '../components/Stack/Stack.jsx'
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import "firebase/auth";
+import {firebaseConfig} from '../firebase/config.jsx'
+import Todos from "./Todos/Todos"
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCgg7aF92zUW1a4EWfPJXL5rTbveJFnAjA",
-  authDomain: "habitforce-822c4.firebaseapp.com",
-  databaseURL: "https://habitforce-822c4.firebaseio.com",
-  projectId: "habitforce-822c4",
-  storageBucket: "habitforce-822c4.appspot.com",
-  messagingSenderId: "162943994229",
-  appId: "1:162943994229:web:dfb0b1caad1db259c3ab3c",
-  measurementId: "G-L2W0YBPMK7"
-};
 
 
 
@@ -50,6 +42,7 @@ const App = () => {
     <MyContext.Provider value={{name: 'to-R Media'}}>
       <BrowserRouter>
             <Route exact path='/' render={() => <SignIn id={id} setId={setId}></SignIn>}></Route>
+            <Route path='/todos' render={(props) => <Todos id={id} setId={setId}></Todos>}></Route>
             <Route path='/top' render={(props) => <Top id={id} setId={setId}></Top>}></Route>
             <Route path='/wanttodo' render={(props) => <Wanttodo id={id} setId={setId}></Wanttodo>}></Route>
             <Route path='/calendar' render={(props) => <Calendar ></Calendar>}></Route>

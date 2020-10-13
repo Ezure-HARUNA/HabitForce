@@ -12,7 +12,7 @@ const TodosContext = createContext()
 
 const TodosProvider = ({ children }) => {
   const [todos, setTodos] = useState([])
-  const { currentUser } = useContext(AuthContext)
+  const  currentUser  = useContext(AuthContext)
 
   const collection = useMemo(() => {
     const col = db.collection('todos')

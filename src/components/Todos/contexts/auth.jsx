@@ -1,5 +1,5 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react'
-import { auth } from '../../App'
+import  auth  from '../../App'
 
 const AuthContext = createContext()
 

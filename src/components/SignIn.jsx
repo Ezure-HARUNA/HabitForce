@@ -18,7 +18,7 @@ const SignIn = () => {
         const provider = new firebase.auth.GoogleAuthProvider()
         const user = await firebase.auth().signInWithPopup(provider)
         alert(  user.user.displayName + "さんでログインしました");
-        history.push('/top')
+        history.push('/todos')
 
         // // ポップアップウィンドウでログインを行う場合はsignInWithPopupを呼び出す
         // firebase.auth().signInWithPopup(provider)
