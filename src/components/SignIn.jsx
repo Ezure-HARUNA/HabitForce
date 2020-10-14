@@ -14,7 +14,7 @@ const SignIn = () => {
     const { history } = useReactRouter();
     const signInWithGoogle = async () => {
        
-        // Googleプロバイダオブジェクトのインスタンスを作成
+        // Googleプロバイダ オブジェクトのインスタンスを作成
         const provider = new firebase.auth.GoogleAuthProvider()
         const user = await firebase.auth().signInWithPopup(provider)
         alert(  user.user.displayName + "さんでログインしました");

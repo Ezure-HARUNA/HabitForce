@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import "firebase/auth";
+
 export const firebaseConfig = {
     apiKey: "AIzaSyCgg7aF92zUW1a4EWfPJXL5rTbveJFnAjA",
     authDomain: "habitforce-822c4.firebaseapp.com",
@@ -9,3 +12,6 @@ export const firebaseConfig = {
     measurementId: "G-L2W0YBPMK7"
   };
   
+  const auth = firebase.auth()
+const db = firebase.firestore()
+db.settings({ timestampsInSnapshots: true })
