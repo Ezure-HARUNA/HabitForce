@@ -13,7 +13,7 @@ import ThisWeek from './ThisWeek/ThisWeekCard';
 import SignIn from '../components/SignIn'
 import Stack from '../components/Stack/Stack.jsx'
 import firebase from 'firebase';
-// import "firebase/auth";
+import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
 import Todos from "./Todos/Todos"
 
@@ -21,9 +21,10 @@ import Todos from "./Todos/Todos"
 
 
 export const MyContext = createContext();
-// export const auth = firebase.auth()
-// export const db = firebase.firestore()
+
 firebase.initializeApp(firebaseConfig);
+export const auth = firebase.auth()
+export const db = firebase.firestore()
 
 const App = () => {
   
