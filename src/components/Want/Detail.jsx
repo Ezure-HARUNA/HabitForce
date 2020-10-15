@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React, { useState, useReducer, useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -11,10 +11,11 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 
-import AppContext from '../../contexts/AppContext'
+// import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../../components/App';
+import { useForm } from "react-hook-form";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledContainer =styled(Container)`
-  display: flex;
-  justify-content: flex-end;
-`
+// const StyledContainer =styled(Container)`
+//   display: flex;
+//   /* justify-content: flex-end; */
+// `
 const StyledButton =styled(Button)`
   margin-left: 2.1%;
   text-decoration: none!important;
@@ -49,11 +50,14 @@ const StyledTextField=styled(TextField)`
   width: 80%;
 `
 
-const StylesTextField=styled(TextField)`
-  width: 40%;
-`
+// const StylesTextField=styled(TextField)`
+//   width: 40%;
+// `
+
+export const TaskContext = createContext();
 
 const Detail = (props) => {
+  
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, [])
   const [task, setTask] = useState('');
@@ -61,9 +65,13 @@ const Detail = (props) => {
   const [category, setCategory] = useState('');
   const myContext = useContext(MyContext)
   console.log(myContext.name)
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = data => console.log(data);
 
   const nextToPage1= (e)=>{
     //e.preventDefault()
+    // e.target.value
+    setTask(task)
     props.setId(props.id)
 
     dispatch({
@@ -74,9 +82,11 @@ const Detail = (props) => {
     })
 }
     return (
-        <React.Fragment>
+      <TaskContext.Provider value={{task, setTask}}>
+          <Paper>
+          <form onSubmit={handleSubmit(onSubmit)}>
           <Container>
-              <StyledContainer className="button-container">
+              <Container className="button-container">
                 {/* <StyledButton
                   variant="contained"
                   color="secondary"
@@ -95,14 +105,21 @@ const Detail = (props) => {
                 >
                   保存
               </StyledButton> */}
-              </StyledContainer>
+              </Container>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 やりたいこと
               </StyledTypography>
-              <p>{myContext.name}</p>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label={task} onChange={e => setTask(e.target.value)}></StyledTextField>
-              </form>
+              <TextField 
+                name="todo"  
+                label="やること" 
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 詳細
               </StyledTypography>
@@ -132,12 +149,13 @@ const Detail = (props) => {
                 カテゴリー
               </StyledTypography>
               <form className={classes.root} noValidate autoComplete="off">
-                <StylesTextField id="standard-basic" label="category" />
+                <StyledTextField id="standard-basic" label="category" />
               </form>
 
               <Link className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
                 <StyledButton
                   variant="contained"
+                  type="submit"
                   color="primary"
                   className={classes.button}
                   size="large"
@@ -147,7 +165,9 @@ const Detail = (props) => {
                 </StyledButton>
               </Link>
           </Container>
-        </React.Fragment>
+          </form>
+          </Paper>
+        </TaskContext.Provider>
     )
 }
 

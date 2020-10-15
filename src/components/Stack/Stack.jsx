@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import Button from '@material-ui/core/Button';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import reducer from '../../reducers/nextToWeek'
-import AppContext from '../../contexts/AppContext'
+// import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 
 
@@ -142,7 +142,7 @@ const Stack = (props) => {
     const [category, setCategory] = useState('');
 
     return (
-            <AppContext.Provider value={{ state, dispatch}}>
+            <>
               <StyledContainer className="router-container">
               　<h2>Top画面だよ</h2>
                 <Link className="link" onClick={(e)=>{handleId()}} to='/wanttodo'>
@@ -169,7 +169,7 @@ const Stack = (props) => {
                       </Box>
                     </Container>
                     </main>
-                  </AppContext.Provider>
+                  </>
       
     )
 }

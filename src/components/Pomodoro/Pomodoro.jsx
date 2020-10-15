@@ -12,7 +12,6 @@ import styled, {createGlobalStyle} from 'styled-components';
 import clsx from 'clsx';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -28,6 +27,21 @@ const DivWeb= styled.div`
   .timer-disc-container {
     display: flex!important;
   }
+`
+const CardWeb=styled(Card)`
+  width: 40%!important;
+`
+
+const DetailSP=styled(Detail)`
+  width: 40%!important;
+`
+
+const CardSP=styled(Card)`
+  width: 40%!important;
+`
+
+const DetailWeb=styled(Detail)`
+  width: 40%!important;
 `
 
 function Copyright() {
@@ -104,21 +118,25 @@ const Pomodoro = (props) => {
             <Header/>
             <GlobalStyle />
             <DivWeb className="timer-disc-container">
-                <Card/>
-                <Detail/>
+                <CardWeb/>
+                <DetailWeb/>
             </DivWeb>
+            <Box pt={4}>
+              <Copyright />
+            </Box>
           </>
         ) : (//SP版
           <>
             <Header/>
             <GlobalStyle />
+
             <StyledContainer className="router-container">
             </StyledContainer>
             <main className={classes.content}>
               <Container maxWidth="lg" className={classes.container}>
-                    <Card id={props.id} setId={props.setId}/>
+                    <CardSP id={props.id} setId={props.setId}/>
                     <StyledPaper className={fixedHeightPaper}>
-                      <Detail />
+                      <DetailSP />
                     </StyledPaper>
                 <Box pt={4}>
                   <Copyright />

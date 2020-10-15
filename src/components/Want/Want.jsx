@@ -66,8 +66,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Top = (props) => {
-  const name = useContext(MyContext)
+const Want = (props) => {
+  const {task, setTask} = useContext(MyContext)
 
   const [state, dispatch] = useReducer(reducer, [])
   const classes = useStyles();
@@ -89,7 +89,7 @@ const Top = (props) => {
           category
         })
     }
-    const [task, setTask] = useState('');
+    // const [task, setTask] = useState('');
     const [week, setWeek] = useState([]);
     const [category, setCategory] = useState('');
 
@@ -116,7 +116,7 @@ const Top = (props) => {
     )
 }
 
-export default Top
+export default Want
 
 
 

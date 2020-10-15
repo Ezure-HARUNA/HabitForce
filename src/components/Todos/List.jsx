@@ -11,6 +11,8 @@ import {
 import styled from 'styled-components'
 import { TodosContext } from './contexts/todos'
 
+console.log(TodosContext)
+
 const Contents = styled.div`
   & {
     flex: 1;
@@ -38,6 +40,7 @@ const Text = styled(ListItemText)`
 
 export default () => {
   const { todos, update, remove } = useContext(TodosContext)
+
   return (
     <Contents>
       {todos.length === 0 ? (

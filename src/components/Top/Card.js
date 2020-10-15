@@ -32,6 +32,10 @@ const StyledContainer=styled(Container)`
     margin-bottom: 16px;
   } */
     `
+
+const StyledFormControlLabel=styled(FormControlLabel)`
+  margin: 16px!important;
+`
 const StyledTypography=styled(Typography)`
     margin: 12px;
 `
@@ -102,7 +106,7 @@ const handleChange = (event) => {
             <Grid item xs={12} md={12} lg={6} container spacing={3}>
               <StyledContainer className="small-container">
                 <StyledPaper m={5} p={5}>
-                  <FormControlLabel
+                  <StyledFormControlLabel
                     control={
                       <Checkbox
                         checked={state.checkedB}
@@ -117,7 +121,7 @@ const handleChange = (event) => {
               </StyledContainer>
               <StyledContainer className="small-container">
                 <StyledPaper m={5} p={1}>
-                  <FormControlLabel
+                  <StyledFormControlLabel
                     control={
                       <Checkbox
                         checked={state.checkedB}

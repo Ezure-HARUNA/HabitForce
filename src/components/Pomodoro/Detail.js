@@ -14,7 +14,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import AppContext from '../../contexts/AppContext'
+// import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 

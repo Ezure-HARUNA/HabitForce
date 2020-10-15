@@ -39,14 +39,7 @@ const StyledContainer=styled(Container)`
   .big-container {
     margin: 50px 60px 50px!important;
   }
-  /* },
-  .small-container {
-    margin-bottom: 16px;
-  } */
     `
-const StyledTypography=styled(Typography)`
-    margin: 12px;
-`
 
 const StyledPaper = styled(Paper)`
   width: 100%!important;

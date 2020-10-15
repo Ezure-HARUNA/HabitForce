@@ -6,9 +6,10 @@ import React, {
   useCallback,
 } from 'react'
 import { AuthContext } from './auth'
-import  db  from '../../App'
-
+import {db } from '../../App'
+// const col = db.collection('todos')
 const TodosContext = createContext()
+
 
 const TodosProvider = ({ children }) => {
   const [todos, setTodos] = useState([])
@@ -16,7 +17,6 @@ const TodosProvider = ({ children }) => {
 
   const collection = useMemo(() => {
     const col = db.collection('todos')
-
     // 更新イベント監視
     col.where('uid', '==', currentUser.uid).onSnapshot(query => {
       const data = []

@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
-import AppContext from '../../contexts/AppContext'
+// import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 

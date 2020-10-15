@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
@@ -11,8 +12,12 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Pomodoro from './Pomodoro'
 import TimeLimit from './TimeLimit'
 import Week from './Week'
-import AppContext from "../../contexts/AppContext"
+// import AppContext from "../../contexts/AppContext"
+import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../contexts/AppContext'
+import { TaskContext } from '../Want/Detail';
+
+
 
 const useStyles = makeStyles((theme) => ({
   
@@ -60,9 +65,14 @@ const StylesTextField=styled(TextField)`
   width: 40%;
 `
 
-const ThisWeekCard = ({state, dispatch}) => {
+const ThisWeekCard = (props) => {
   const classes = useStyles();
-  const{ stack } = useContext(AppContext)
+  const setTask  = useContext(TaskContext)
+  const nextToPage1= (e)=>{
+    //e.preventDefault()
+    props.setId(props.id)
+
+}
   
     return (
         <React.Fragment>
@@ -92,7 +102,7 @@ const ThisWeekCard = ({state, dispatch}) => {
                 タスク
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {/* {stack.task} */}
+                {setTask}
               </StyledTypography>
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="今週やること" />
@@ -136,6 +146,17 @@ const ThisWeekCard = ({state, dispatch}) => {
 
               
               <TimeLimit className={classes.root}/>
+              <Link className="link" onClick={(e)=>{nextToPage1()}} to='/top'>
+                <StyledButton
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    size="large"
+                    startIcon={<ForwardOutlinedIcon />}
+                  >
+                    編集完了(TOPへ)
+                  </StyledButton>
+                </Link>
 
 
           </Container>
