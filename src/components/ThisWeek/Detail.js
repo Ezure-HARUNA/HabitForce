@@ -16,6 +16,7 @@ import Week from './Week'
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../contexts/AppContext'
 import { TaskContext } from '../Want/Detail';
+// import { myContext } from '../../components/App'
 
 
 
@@ -68,6 +69,7 @@ const StylesTextField=styled(TextField)`
 const ThisWeekCard = (props) => {
   const classes = useStyles();
   const setTask  = useContext(TaskContext)
+  // const myContext = useContext(myContext)
   const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
@@ -99,10 +101,10 @@ const ThisWeekCard = (props) => {
               </StyledContainer>
               <h2>今週やること</h2>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                タスク
+                詳細
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {setTask}
+                {/* {myContext.wantTodo} */}
               </StyledTypography>
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="今週やること" />

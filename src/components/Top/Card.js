@@ -22,10 +22,17 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Container from '@material-ui/core/Container';
 
 import styled from 'styled-components'
+import TimeLimit from './TimeLimit';
 
 const StyledContainer=styled(Container)`
   .big-container {
     margin: 50px 60px 50px!important;
+  }
+  .time-container {
+    display: flex;
+  }
+  .category-container {
+    margin-left: 30px;
   }
   /* },
   .small-container {
@@ -43,6 +50,7 @@ const StyledTypography=styled(Typography)`
 const StyledPaper = styled(Paper)`
   width: 250%!important;
   margin-top: 16px;
+  height: 250px!important;
 `
 
 const StyledTooltip=styled(Tooltip)`
@@ -97,12 +105,7 @@ const handleChange = (event) => {
     return (
         <React.Fragment>
           <StyledContainer className="big-container">
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            やりたいことリスト
-          </Typography>
-            <StyledTypography color="textSecondary" >
-              ※できるかでなく、やりたいか、で書く！
-            </StyledTypography>
+          
             <Grid item xs={12} md={12} lg={6} container spacing={3}>
               <StyledContainer className="small-container">
                 <StyledPaper m={5} p={5}>
@@ -117,6 +120,16 @@ const handleChange = (event) => {
                     }
                       label="筋トレ30分"
                   />
+                  <StyledContainer className="time-container">
+                    <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
+                      時間:
+                    </StyledTypography>
+                    <TimeLimit className={classes.root}/>
+                  </StyledContainer>
+                    <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+                      カテゴリー
+                    </StyledTypography>
+                  
                 </StyledPaper>
               </StyledContainer>
               <StyledContainer className="small-container">

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Container from '@material-ui/core/Container';
 
 import styled from 'styled-components'
-import { MyContext } from '../../components/App';
 
 const StyledFormControlLabel=styled(FormControlLabel)`
   margin: 16px!important;
@@ -33,7 +32,7 @@ const StyledTooltip=styled(Tooltip)`
 
 const Card = () => {
   const theme = useTheme();
-  const myContext = useContext(MyContext)
+
   // checkbox 
   const [state, setState] = React.useState({
   checkedA: true,
@@ -60,7 +59,7 @@ const handleChange = (event) => {
                         color="primary"
                       />
                     }
-                      label={myContext.text}
+                      label="筋トレ30分"
                   />
                 </StyledPaper>
               </Container>

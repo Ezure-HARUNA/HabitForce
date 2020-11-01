@@ -9,7 +9,7 @@ import Pomodoro from '../components/Pomodoro/Pomodoro.jsx';
 import Rewards from './Rewards.jsx';
 import MainItems from '../Layout/MainItems';
 import SecondItems from '../Layout/SecondItems';
-import ThisWeek from './ThisWeek/ThisWeekCard';
+import ThisWeek from './ThisWeek/ThisWeek';
 import SignIn from '../components/SignIn'
 import Stack from '../components/Stack/Stack.jsx'
 import firebase from 'firebase';
@@ -34,7 +34,7 @@ const App = () => {
 
   // やりたいことリストの番号
   // const [taskId, setTaskId] =React.useState("")
-  // const [wantTodo, setWantTodo] = React.useState("")
+  const [wantTodo, setWantTodo] = React.useState("")
   // const [description, setDescription] = React.useState("")
   // const [purpose, setPurpose] = React.useState("")
   // const [rewards, setRewards] = React.useState("")
@@ -42,7 +42,7 @@ const App = () => {
 
 
   return (
-    <MyContext.Provider value={{name: 'to-R Media'}}>
+    <MyContext.Provider value={{name: 'to-R Media', wantTodo, setWantTodo}}>
       
       <BrowserRouter>
             <Header id={id} setId={setId}/>

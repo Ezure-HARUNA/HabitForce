@@ -16,6 +16,7 @@ import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../../components/App';
 import { useForm } from "react-hook-form";
+import { SentimentSatisfiedAlt } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +61,7 @@ const Detail = (props) => {
   
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, [])
+  const [text, setText] = useState('');
   const [task, setTask] = useState('');
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
@@ -81,8 +83,12 @@ const Detail = (props) => {
       category
     })
 }
+
+const handleChange = (e) => {
+  setText({value: e.target.value})
+} 
     return (
-      <TaskContext.Provider value={{task, setTask}}>
+      <TaskContext.Provider value={{text, setText, task, setTask}}>
           <Paper>
           <form onSubmit={handleSubmit(onSubmit)}>
           <Container>
@@ -110,8 +116,11 @@ const Detail = (props) => {
                 やりたいこと
               </StyledTypography>
               <TextField 
+                value={myContext.text}
+
                 name="todo"  
                 label="やること" 
+                onChange={handleChange}
                 ref={register({required: true, maxLength: 50})} 
                 type="text"
                 fullWidth

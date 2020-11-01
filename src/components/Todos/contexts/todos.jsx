@@ -17,12 +17,19 @@ const TodosProvider = ({ children }) => {
 
   const collection = useMemo(() => {
     const col = db.collection('todos')
-    // 更新イベント監視
-    col.where('uid', '==', currentUser.uid).onSnapshot(query => {
-      const data = []
-      query.forEach(d => data.push({ ...d.data(), docId: d.id }))
-      setTodos(data)
-    })
+    // // 更新イベント監視
+    // col.where('uid', '==', currentUser.uid).onSnapshot(query => {
+    //   const data = []
+    //   query.forEach(d => data.push({ ...d.data(), docId: d.id }))
+    //   setTodos(data)
+    // })
+
+    col.where('uid', '==', currentUser.uid)
+    .onSnapshot(function(querySnapshot) {
+        const data = [];
+        querySnapshot.forEach(d => data.push({ ...d.data(), docId: d.id }))
+        setTodos(data)
+    });
 
     return col
   }, [])
@@ -58,7 +65,6 @@ const TodosProvider = ({ children }) => {
     },
     [todos]
   )
-
   const remove = useCallback(
     async ({ docId }) => {
       try {
@@ -71,7 +77,7 @@ const TodosProvider = ({ children }) => {
   )
 
   return (
-    <TodosContext.Provider value={{ todos, add, update, remove }}>
+    <TodosContext.Provider value={{ todos,  add, update, remove }}>
       {children}
     </TodosContext.Provider>
   )
