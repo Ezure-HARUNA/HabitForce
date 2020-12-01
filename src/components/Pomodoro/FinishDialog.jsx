@@ -8,9 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
+  const timeContext = useContext(TimeContext)
 
   const handleClickOpen = () => {
     setOpen(true);
+    update({
+      setTime: setTodos([ ...todos,{ id:0, title:"hoge", time }])
+
+    })
   };
 
   const handleClose = () => {

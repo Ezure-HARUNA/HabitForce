@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -14,6 +14,8 @@ import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
+import { MyContext } from '../../components/App';
+import { ThisWeekContext} from '../ThisWeek/Detail'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,6 +60,8 @@ const Detail = (props) => {
   const [task, setTask] = useState('');
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
+  const myContext = useContext(MyContext)
+  const thisWeekContext = useContext(ThisWeekContext)
 
   const nextToPage1= (e)=>{
     //e.preventDefault()
@@ -94,54 +98,18 @@ const Detail = (props) => {
               </StyledButton> */}
               </StyledContainer>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                やりたいこと
-              </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label={task} onChange={e => setTask(e.target.value)}></StyledTextField>
-              </form>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                詳細
-              </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="description" />
-              </form>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                目的
-              </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="purpose" />
-              </form>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                いつやる
+                積み上げ内容
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                月　火　水　木　金　土　日
+                {myContext.category}
               </StyledTypography>
-             
+              
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                ご褒美
+                {/* {thisWeekContext.outlines[0]} */}
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="rewards" />
-              </form>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                カテゴリー
+                
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StylesTextField id="standard-basic" label="category" />
-              </form>
-
-              <Link className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
-                <StyledButton
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  size="large"
-                  startIcon={<ForwardOutlinedIcon />}
-                >
-                  次のページ（今週やること）へ
-                </StyledButton>
-              </Link>
           </Container>
         </React.Fragment>
     )

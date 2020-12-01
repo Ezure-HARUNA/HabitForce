@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import Pomodoro from '../Top/Pomodoro'
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
@@ -14,6 +14,8 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
+import { MyContext } from '../App';
+import { ThisWeekContext } from '../ThisWeek/Detail'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,6 +63,9 @@ const Detail = ({props, stack}) => {
   const [task, setTask] = useState('');
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
+  const myContext = useContext(MyContext)
+  const thisWeekContext = useContext(ThisWeekContext)
+  
 
   const nextToPage1= (e)=>{
     //e.preventDefault()
@@ -76,20 +81,17 @@ const Detail = ({props, stack}) => {
     return (
         <React.Fragment>
           <Container>
-          <StyledButton
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  size="large"
-                  startIcon={<SaveOutlinedIcon />}
-                >
-                  保存
-                </StyledButton>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-              今日のやること
+              やりたいこと
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {/* {todayTask} */}反映部分
+              {/* {thisWeekContext.outlines[0]} */}
+            </StyledTypography2>
+            <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              今週の目標
+            </StyledTypography>
+            <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
+              {myContext.thisWeekTask}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
             今週の目標
@@ -101,19 +103,19 @@ const Detail = ({props, stack}) => {
               元の目標
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {/* {originalGoal} */}反映部分
+              {myContext.wantTodo}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
               元の目標の詳細
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {/* {originalDescription} */}反映部分
+              {myContext.description}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
               元の目的
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {/* {originalPurpose} */}反映部分
+              {myContext.purpose}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
               ポモドーロ機能

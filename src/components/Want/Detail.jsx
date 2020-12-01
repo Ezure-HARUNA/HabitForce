@@ -62,11 +62,16 @@ const Detail = (props) => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, [])
   const [text, setText] = useState('');
+  const [textDescription, setTextDescription] = useState('');
+  const [textPurpose, setTextPurpose] = useState('');
+  const [textCategory, setTextCategory] = useState();
+  const [textRewards, setTextRewards] = useState('');
   const [task, setTask] = useState('');
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
   const myContext = useContext(MyContext)
   console.log(myContext.name)
+  console.log(myContext.wantTodo)
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => console.log(data);
 
@@ -86,9 +91,37 @@ const Detail = (props) => {
 
 const handleChange = (e) => {
   setText({value: e.target.value})
+  myContext.setWantTodo(e.target.value)
 } 
+
+const handleChangeDescription = (e) => {
+  setTextDescription({value: e.target.value})
+  myContext.setDescription(e.target.value)
+} 
+
+const handleChangePurpose = (e) => {
+  setTextPurpose({value: e.target.value})
+  myContext.setPurpose(e.target.value)
+} 
+
+const handleChangeRewards = (e) => {
+  setTextRewards({value: e.target.value})
+  myContext.setRewards(e.target.value)
+} 
+
+const handleChangeCategory = (e) => {
+  setTextCategory({value: e.target.value})
+  myContext.setCategory(e.target.value)
+} 
+
     return (
-      <TaskContext.Provider value={{text, setText, task, setTask}}>
+      <TaskContext.Provider 
+        value={{
+          text, setText, 
+          task, setTask, 
+          textDescription, setTextDescription,
+          textCategory, setTextCategory
+        }}>
           <Paper>
           <form onSubmit={handleSubmit(onSubmit)}>
           <Container>
@@ -117,7 +150,6 @@ const handleChange = (e) => {
               </StyledTypography>
               <TextField 
                 value={myContext.text}
-
                 name="todo"  
                 label="やること" 
                 onChange={handleChange}
@@ -132,15 +164,39 @@ const handleChange = (e) => {
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 詳細
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="description" />
-              </form>
+
+              <TextField 
+                value={myContext.description}
+
+                name="todo"  
+                label="description" 
+                onChange={handleChangeDescription}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 目的
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="purpose" />
-              </form>
+
+              <TextField 
+                value={myContext.purpose}
+
+                name="todo"  
+                label="purpose" 
+                onChange={handleChangePurpose}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 いつやる
               </StyledTypography>
@@ -151,15 +207,38 @@ const handleChange = (e) => {
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 ご褒美
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="rewards" />
-              </form>
+              <TextField 
+                value={myContext.rewards}
+
+                name="todo"  
+                label="rewards" 
+                onChange={handleChangeRewards}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 カテゴリー
               </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="category" />
-              </form>
+
+
+              <TextField 
+                value={myContext.textCategory}
+                name="todo"  
+                label="category" 
+                onChange={handleChangeCategory}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
 
               <Link className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
                 <StyledButton

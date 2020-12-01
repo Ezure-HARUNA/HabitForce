@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -16,7 +16,8 @@ import Week from './Week'
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../contexts/AppContext'
 import { TaskContext } from '../Want/Detail';
-// import { myContext } from '../../components/App'
+import { MyContext } from '../../components/App';
+import { useForm } from "react-hook-form";
 
 
 
@@ -67,17 +68,54 @@ const StylesTextField=styled(TextField)`
 `
 
 const ThisWeekCard = (props) => {
+  const [textThisWeekTask, setTextThisWeekTask] = useState('');
+  const [outlines, setOutlines] = useState([])
+  console.log(outlines)
+  const { register, handleSubmit, errors } = useForm();
   const classes = useStyles();
-  const setTask  = useContext(TaskContext)
-  // const myContext = useContext(myContext)
+ 
+  // const []
+  const taskContext  = useContext(TaskContext)
+  const myContext = useContext(MyContext)
+  const ThisWeekContext = createContext();
   const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
 
 }
+
+const handleChangeThisWeekTask = (e) => {
+  setTextThisWeekTask({value: e.target.value})
+  myContext.setThisWeekTask(e.target.value)
+} 
+
+// const handleChangeOutline = (e) => {
+//   setOutlines[0]({value: e.target.value})
   
+// } 
+  
+const outlineList=thisWeekContext.outlines.map((outline, id) =>{
+  return (
+     <OutlineList/>
+  )
+  })
+
+// const { add } = useContext(TodosContext)
+// const [input, setInput] = useState('')
+
+  const addOutline = useCallback(
+    () => {
+      // add(input)
+      thisWeekContext.setOutlines('')
+    },
+    [outline]
+  )
     return (
-        <React.Fragment>
+      <ThisWeekContext.Provider 
+      value={{
+        textThisWeekTask, setTextThisWeekTask,
+        outlines, setOutlines
+      }}>
           <Container>
               <StyledContainer className="button-container">
                 {/* <StyledButton
@@ -101,20 +139,106 @@ const ThisWeekCard = (props) => {
               </StyledContainer>
               <h2>今週やること</h2>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                詳細
+                タスク
               </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {/* {myContext.wantTodo} */}
-              </StyledTypography>
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="今週やること" />
-              </form>
+              
+
+              <TextField 
+                value={ThisWeekContext.thisWeekTask}
+
+                name="todo"  
+                label="this week task" 
+                onChange={handleChangeThisWeekTask}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              
               {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 詳細なアウトライン
               </StyledTypography> */}
-              <form className={classes.root} noValidate autoComplete="off">
+              {/* <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="詳細なアウトライン" />
-              </form>
+              </form> */}
+              
+
+              {/* <Ul>
+                {outlineList}
+              </Ul> */}
+
+              <Input
+                id="add-outline"
+                label="outline"
+                placeholder="Enter new outline"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                fullWidth
+              />
+              <Button color="primary" onClick={addOutline}>
+                Add
+              </Button>
+
+
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
               {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 ご褒美
               </StyledTypography> */}
@@ -140,7 +264,7 @@ const ThisWeekCard = (props) => {
                 カテゴリー
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
-                カテゴリー
+                {myContext.category}
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
                 制限時間
@@ -162,7 +286,7 @@ const ThisWeekCard = (props) => {
 
 
           </Container>
-        </React.Fragment>
+          </ThisWeekContext.Provider>
     )
 }
 

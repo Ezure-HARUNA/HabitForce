@@ -1,5 +1,6 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react'
 import  auth  from '../../App'
+import firebase from 'firebase'
 
 const AuthContext = createContext()
 
@@ -35,13 +36,31 @@ const AuthProvider = ({ children }) => {
 //   }, [])
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      setLoading(false)
-      setCurrentUser(user)
-    })
+    // auth.onAuthStateChanged(user => {
+    //   setLoading(false)
+    //   setCurrentUser(user)
+    //   console.log(user)
+    // })
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log(user)
+        console.log(firebase.auth().currentUser)
+        console.log(user.uid)
+        setCurrentUser(user)
+
+      } else {
+        // No user is signed in.
+      }
+    });
+  
+    
+
   }, [])
 
   return (
+    
     <AuthContext.Provider
       value={{
         currentUser,

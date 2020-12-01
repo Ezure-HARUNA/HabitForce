@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React, { useState, useContext } from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-// import Title from './Title';
+import { makeStyles } from '@material-ui/core/style';
 import { spacing } from '@material-ui/system';
 
 // +
@@ -23,6 +21,13 @@ import Container from '@material-ui/core/Container';
 
 import styled from 'styled-components'
 import TimeLimit from './TimeLimit';
+import { MyContext } from '../../components/App';
+import { ThisWeekContext } from '../ThisWeek/Detail';
+import { TimeContext } from './TimeLimit'
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const StyledContainer=styled(Container)`
   .big-container {
@@ -87,20 +92,67 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Card = () => {
+  const myContext = useContext(MyContext)
+  const thisWeekContext = useContext(ThisWeekContext)
   const theme = useTheme();
   const classes = useStyles(); 
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   // checkbox 
   const [state, setState] = React.useState({
-  checkedA: true,
-  checkedB: true,
+  checkedA: false,
+  checkedB: false,
   checkedF: true,
   checkedG: true,
 });
 
+const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+const [todos, setTodos] = useState({id: 0, outlines: "", totalTime: 0 })
+
 const handleChange = (event) => {
   setState({ ...state, [event.target.name]: event.target.checked });
+//   if (checked) {
+//     update({
+//       setTodos
+//         ([...todos, 
+//           {id:0,
+//            outlines: {thisWeekContext.outlines[0]}, 
+//            totalTime: todos[0][stackTime].push()
+//           }
+//         ])
+    
+//     })
+    
+
+// } else {
+// 　 todos
+
+// }
+};
+
+
+
+
+const handleClickOpen = () => {
+  setOpen(true);
+  // update({
+  //   setTime: setTodos([ ...todos,{ id:0, title:"hoge", time }])
+
+  // })
 };
     return (
         <React.Fragment>
@@ -112,13 +164,13 @@ const handleChange = (event) => {
                   <StyledFormControlLabel
                     control={
                       <Checkbox
-                        checked={state.checkedB}
+                        checked={state.checkedA}
                         onChange={handleChange}
                         name="checkedB"
                         color="primary"
                       />
                     }
-                      label="筋トレ30分"
+                      label={thisWeekContext.outlines[0]}
                   />
                   <StyledContainer className="time-container">
                     <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
@@ -129,7 +181,34 @@ const handleChange = (event) => {
                     <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
                       カテゴリー
                     </StyledTypography>
-                  
+                    <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                      {myContext.category}
+                    </StyledTypography>
+
+                    <div>
+                      <Button onClick={handleClick}>完了</Button>
+                      <Snackbar
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'left',
+                        }}
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message="Note archived"
+                        action={
+                          <React.Fragment>
+                            <Button color="secondary" size="small" onClick={handleClose}>
+                              UNDO
+                            </Button>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                              <CloseIcon fontSize="small" />
+                            </IconButton>
+                          </React.Fragment>
+                        }
+                      />
+                    </div>
+                
                 </StyledPaper>
               </StyledContainer>
               <StyledContainer className="small-container">

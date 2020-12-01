@@ -92,6 +92,7 @@ const Top = (props) => {
     const [task, setTask] = useState('');
     const [week, setWeek] = useState([]);
     const [category, setCategory] = useState('');
+    const [stackTime, setStackTime] = useState(0)//defaultValue
 
     return (
       <React.Fragment>
@@ -99,7 +100,7 @@ const Top = (props) => {
           <Container maxWidth="lg" >
             <Grid container spacing={3}>
               <Grid item xs={12} md={6} lg={6}>
-                <Card />
+                <Card stackTime={stackTime} setStackTime={setStackTime}/>
               </Grid>
               <Grid item xs={12} md={6} lg={6}>
                 <Paper >

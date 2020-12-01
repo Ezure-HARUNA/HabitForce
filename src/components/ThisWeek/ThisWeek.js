@@ -1,4 +1,4 @@
-import React, { useContext  } from 'react';
+import React, { useContext, useCallback, createContext } from 'react';
 import Card from './Card'
 import Detail from './Detail'
 import {Paper, Grid, Box, Container, Typography} from '@material-ui/core';
@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 import styled, {createGlobalStyle} from 'styled-components';
 import { makeStyles } from '@material-ui/styles';
 
-// import AppContext from '../contexts/AppContext'
-
-import clsx from 'clsx';
+import { AuthContext } from '../Todos/contexts/auth'
+import {db } from '../../App'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -58,9 +57,50 @@ const ThisWeek = (props) => {
   // const { state, dispatch } = useContext(AppContext);
   // const stack = stack.id
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const col = db.collection('todos')
+const OutlineContext = createContext()
+const TodosProvider = ({ children }) => {
+  const [todos, setTodos] = useState([])
+  const  currentUser  = useContext(AuthContext)
+  console.log(currentUser)
+  console.log(currentUser.uid)
+  const collection = useMemo(() => {
+    const col = db.collection('todos')
+    // // 更新イベント監視
+    col.where('uid', '==', currentUser.uid).onSnapshot(query => {
+      const data = []
+      query.forEach(d => data.push({ ...d.data(), docId: d.id }))
+      setTodos(data)
+    })
+
+    col.where('uid', '==', currentUser.uid)
+    .onSnapshot(function(querySnapshot) {
+        const data = [];
+        querySnapshot.forEach(d => data.push({ ...d.data(), docId: d.id }))
+        setTodos(data)
+    });
+
+    return col
+  }, [])
+
+  const add = useCallback(async text => {
+    try {
+      await collection.add(
+        uid: currentUser.uid,
+        text,
+        isComplete: false,
+        createdAt: new Date(),
+        outline,
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }, [])
+
+
     return (
-      <React.Fragment>
+      <OutlineContext.Provider value={{todos, add}}>
       <GlobalStyle/>
         <Container maxWidth="lg" >
           <Grid container spacing={3}>
@@ -77,7 +117,7 @@ const ThisWeek = (props) => {
             <Copyright />
           </Box>
         </Container>  
-    </React.Fragment>
+    </OutlineContext.Provider>
     )
 }
 

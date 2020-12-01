@@ -16,6 +16,7 @@ import firebase from 'firebase';
 import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
 import Todos from "./Todos/Todos"
+import {AuthProvider} from './Todos/contexts/auth.jsx'  
 
 
 
@@ -35,14 +36,26 @@ const App = () => {
   // やりたいことリストの番号
   // const [taskId, setTaskId] =React.useState("")
   const [wantTodo, setWantTodo] = React.useState("")
-  // const [description, setDescription] = React.useState("")
-  // const [purpose, setPurpose] = React.useState("")
-  // const [rewards, setRewards] = React.useState("")
-  // const [category, setCategory] = React.useState("")
+  const [description, setDescription] = React.useState("")
+  const [purpose, setPurpose] = React.useState("")
+  const [rewards, setRewards] = React.useState("")
+  const [category, setCategory] = React.useState("")
+  const [thisWeekTask, setThisWeekTask] = React.useState("")
+　
 
 
   return (
-    <MyContext.Provider value={{name: 'to-R Media', wantTodo, setWantTodo}}>
+    <AuthProvider>
+      <MyContext.Provider 
+        value={{
+          wantTodo, setWantTodo, 
+          description, setDescription,
+          purpose, setPurpose,
+          rewards, setRewards,
+          category, setCategory,
+          thisWeekTask, setThisWeekTask
+
+        }}>
       
       <BrowserRouter>
             <Header id={id} setId={setId}/>
@@ -64,6 +77,8 @@ const App = () => {
             </ul> */}
         </BrowserRouter>
       </MyContext.Provider>
+    </AuthProvider>
+    
          
   )
 }

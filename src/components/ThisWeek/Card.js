@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,6 +15,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Container from '@material-ui/core/Container';
 
 import styled from 'styled-components'
+import { MyContext } from '../../components/App';
 
 const StyledFormControlLabel=styled(FormControlLabel)`
   margin: 16px!important;
@@ -31,7 +32,12 @@ const StyledTooltip=styled(Tooltip)`
 `
 
 const Card = () => {
+
+  const [time , setTime] = useState(0)
   const theme = useTheme();
+  const myContext = useContext(MyContext)
+
+  const TimeContext = createContext()
 
   // checkbox 
   const [state, setState] = React.useState({
@@ -45,7 +51,7 @@ const handleChange = (event) => {
   setState({ ...state, [event.target.name]: event.target.checked });
 };
     return (
-        <React.Fragment>
+      <TimeContext.Provider value={{time}}>
           <Container >
             
               <Container>
@@ -59,7 +65,7 @@ const handleChange = (event) => {
                         color="primary"
                       />
                     }
-                      label="筋トレ30分"
+                      label={myContext.wantTodo}
                   />
                 </StyledPaper>
               </Container>
@@ -87,7 +93,7 @@ const handleChange = (event) => {
               </StyledTooltip>
             </Container>
           </Container>
-        </React.Fragment>
+        </TimeContext.Provider>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef ,useContext, createContext} from 'react';
 import Work from './Work';
 import Break from './Break';
 import clsx from 'clsx';
@@ -12,7 +12,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
-import FinishDialog from './FinishDialog';
+// import FinishDialog from './FinishDialog';
+import { TodosContext } from '../../components/Todos/contexts/todos.jsx';
+import { MyContext } from '../../components/App';
 
 // +
 import Typography from '@material-ui/core/Typography';
@@ -34,6 +36,9 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
+
+
+
 
 const StyledContainer=styled(Container)`
   .big-container {
@@ -128,11 +133,16 @@ function getStyles(name, personName, theme) {
 }
 
 const Card = (props) => {
+  const TimeContext = createContext();
+  // const { update, remove } = useContext(TodosContext)
+  // const { todos, update, remove } = useContext(TodosContext)
+  // console.log(todos)
   const theme = useTheme();
   const classes = useStyles(); 
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const [breakTime, setBreakTime] = React.useState([]);
+  const myContext = useContext(MyContext)
 
  
   // checkbox 
@@ -320,7 +330,7 @@ const handleId = (e) => {
               FINISH
             </Button>
           </Link> */}
-          <FinishDialog/>
+          {/* <FinishDialog/> */}
 
          
           

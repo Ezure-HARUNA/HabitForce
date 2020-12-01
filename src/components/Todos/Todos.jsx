@@ -22,6 +22,7 @@ export default () => (
     <Contents>
       <Form />
       <List />
+      {/* components/pomodoroを入れる */}
     </Contents>
   </TodosProvider>
 )

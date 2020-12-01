@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
+import { MyContext } from '../App'
 
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
@@ -57,11 +58,7 @@ const StylesTextField=styled(TextField)`
 `
 
 const Detail = (props) => {
-  const classes = useStyles();
-  const [state, dispatch] = useReducer(reducer, [])
-  const [task, setTask] = useState('');
-  const [week, setWeek] = useState([]);
-  const [category, setCategory] = useState('');
+  const myContext = useContext(MyContext)
 
   const handleId= (e)=>{
     e.preventDefault()
@@ -92,7 +89,7 @@ const Detail = (props) => {
                 ご褒美
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {/* {smallrewards} {bigrewards} */}
+                {myContext.rewards}
               </StyledTypography>
               
 
