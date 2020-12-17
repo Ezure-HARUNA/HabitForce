@@ -15,7 +15,7 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../App';
-import { ThisWeekContext } from '../ThisWeek/Detail'
+import  ThisWeekContext  from '../ThisWeek/Detail'
 
 
 const useStyles = makeStyles((theme) => ({

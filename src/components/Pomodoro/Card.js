@@ -13,7 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
 // import FinishDialog from './FinishDialog';
-import { TodosContext } from '../../components/Todos/contexts/todos.jsx';
 import { MyContext } from '../../components/App';
 
 // +

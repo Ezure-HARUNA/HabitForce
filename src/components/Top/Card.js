@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/style';
+import { makeStyles } from '@material-ui/core/styles';
 import { spacing } from '@material-ui/system';
 
 // +
@@ -22,7 +22,7 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components'
 import TimeLimit from './TimeLimit';
 import { MyContext } from '../../components/App';
-import { ThisWeekContext } from '../ThisWeek/Detail';
+import  ThisWeekContext  from '../ThisWeek/Detail';
 import { TimeContext } from './TimeLimit'
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';

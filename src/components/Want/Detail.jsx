@@ -17,6 +17,8 @@ import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../../components/App';
 import { useForm } from "react-hook-form";
 import { SentimentSatisfiedAlt } from '@material-ui/icons';
+//firestore
+import { useCreateWant } from '../../helpers/useCreateWant'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,9 +71,11 @@ const Detail = (props) => {
   const [task, setTask] = useState('');
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
+  const [createWant, loading] = useCreateWant()
   const myContext = useContext(MyContext)
-  console.log(myContext.name)
-  console.log(myContext.wantTodo)
+  
+
+  
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => console.log(data);
 
@@ -90,8 +94,10 @@ const Detail = (props) => {
 }
 
 const handleChange = (e) => {
+  // createWant(text)
+  console.log(e.target.value)
   setText({value: e.target.value})
-  myContext.setWantTodo(e.target.value)
+  // myContext.setWantTodo(e.target.value)
 } 
 
 const handleChangeDescription = (e) => {
@@ -113,6 +119,11 @@ const handleChangeCategory = (e) => {
   setTextCategory({value: e.target.value})
   myContext.setCategory(e.target.value)
 } 
+
+const handleClick = (e) => {
+  createWant({text: text.value, description: '詳細'} )
+  // myContext.setWantTodo(e.target.value)
+}
 
     return (
       <TaskContext.Provider 
@@ -242,6 +253,7 @@ const handleChangeCategory = (e) => {
 
               <Link className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
                 <StyledButton
+                  onClick={handleClick}
                   variant="contained"
                   type="submit"
                   color="primary"

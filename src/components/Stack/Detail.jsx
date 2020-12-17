@@ -15,7 +15,7 @@ import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../../components/App';
-import { ThisWeekContext} from '../ThisWeek/Detail'
+import  ThisWeekContext from '../ThisWeek/Detail'
 
 
 const useStyles = makeStyles((theme) => ({

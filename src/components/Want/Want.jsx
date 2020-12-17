@@ -29,21 +29,21 @@ const GlobalStyle = createGlobalStyle`
 //     display: flex!important;
 //   }
 // `
-const WebCard=styled(Card)`
-  width: 40%!important;
-`
+// const WebCard=styled(Card)`
+//   width: 40%!important;
+// `
 
-const WebDetail=styled(Detail)`
-  width: 40%!important;
-`
+// const WebDetail=styled(Detail)`
+//   width: 40%!important;
+// `
 
-const SPCard=styled(Card)`
-  width: 80%!important;
-`
+// const SPCard=styled(Card)`
+//   width: 80%!important;
+// `
 
-const SPDetail=styled(Detail)`
-  width: 80%!important;
-`
+// const SPDetail=styled(Detail)`
+//   width: 80%!important;
+// `
 
 function Copyright() {
 

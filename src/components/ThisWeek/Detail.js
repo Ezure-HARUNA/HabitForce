@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Input, Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import Pomodoro from './Pomodoro'
@@ -94,22 +94,22 @@ const handleChangeThisWeekTask = (e) => {
   
 // } 
   
-const outlineList=thisWeekContext.outlines.map((outline, id) =>{
-  return (
-     <OutlineList/>
-  )
-  })
+// const outlineList=thisWeekContext.outlines.map((outline, id) =>{
+//   return (
+//      <OutlineList/>
+//   )
+//   })
 
 // const { add } = useContext(TodosContext)
-// const [input, setInput] = useState('')
+const [input, setInput] = useState('')
 
-  const addOutline = useCallback(
-    () => {
-      // add(input)
-      thisWeekContext.setOutlines('')
-    },
-    [outline]
-  )
+  // const addOutline = useCallback(
+  //   () => {
+  //     // add(input)
+  //     thisWeekContext.setOutlines('')
+  //   },
+  //   [outline]
+  // )
     return (
       <ThisWeekContext.Provider 
       value={{
@@ -178,7 +178,7 @@ const outlineList=thisWeekContext.outlines.map((outline, id) =>{
                 onChange={e => setInput(e.target.value)}
                 fullWidth
               />
-              <Button color="primary" onClick={addOutline}>
+              <Button color="primary" >
                 Add
               </Button>
 
