@@ -15,8 +15,6 @@ import Stack from '../components/Stack/Stack.jsx'
 import firebase from 'firebase';
 import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
-import Todos from "./Todos/Todos"
-import {AuthProvider} from './Todos/contexts/auth.jsx'  
 
 
 
@@ -45,7 +43,7 @@ const App = () => {
 
 
   return (
-    <AuthProvider>
+    <div id="root">
       <MyContext.Provider 
         value={{
           wantTodo, setWantTodo, 
@@ -60,7 +58,6 @@ const App = () => {
       <BrowserRouter>
             <Header id={id} setId={setId}/>
             <Route exact path='/' render={() => <SignIn id={id} setId={setId}></SignIn>}></Route>
-            <Route path='/todos' render={(props) => <Todos id={id} setId={setId}></Todos>}></Route>
             <Route path='/top' render={(props) => <Top id={id} setId={setId}></Top>}></Route>
             <Route path='/want' render={(props) => <Want id={id} setId={setId}></Want>}></Route>
             <Route path='/calendar' render={(props) => <Calendar ></Calendar>}></Route>
@@ -77,12 +74,11 @@ const App = () => {
             </ul> */}
         </BrowserRouter>
       </MyContext.Provider>
-    </AuthProvider>
+    </div>
     
          
   )
 }
-
 export default App
 
 

@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import firebase from 'firebase/app';
 import { Redirect, Switch, Router, Route } from 'react-router-dom';
 import styled from 'styled-components'
 import { GoogleLoginButton } from 'react-social-login-buttons';
-import Top from './Top/Top.jsx'
+import Want from './Want/Want'
 import useReactRouter from 'use-react-router';
-import Todos from './Todos/Todos'
-
-
+import { auth } from './App'
 
 const SignIn = () => {
 
@@ -17,8 +15,10 @@ const SignIn = () => {
         // Googleプロバイダオブジェクトのインスタンスを作成
         const provider = new firebase.auth.GoogleAuthProvider()
         const user = await firebase.auth().signInWithPopup(provider)
+          
+        
         alert(  user.user.displayName + "さんでログインしました");
-        history.push('/todos')
+        history.push('/want')
 
         // // ポップアップウィンドウでログインを行う場合はsignInWithPopupを呼び出す
         // firebase.auth().signInWithPopup(provider)
@@ -36,7 +36,8 @@ const SignIn = () => {
     
     
     return (
-            <div>
+        <div
+        >
                 <div className="login">
                     <h1>ログイン</h1>
                 </div>
@@ -47,7 +48,7 @@ const SignIn = () => {
                 <Router history={history}>
                     <Switch>
                         <Route path="/"/>
-                            <Route path="/todos" exact component={Todos} />
+                            <Route path="/want" exact component={Want} />
                     </Switch>
                 </Router>
             </div>
