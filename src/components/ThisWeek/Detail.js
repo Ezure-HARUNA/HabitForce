@@ -15,7 +15,7 @@ import Week from './Week'
 // import AppContext from "../../contexts/AppContext"
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../contexts/AppContext'
-import { TaskContext } from '../Want/Detail';
+import { TaskContext } from '../Want/Card';
 import { MyContext } from '../../components/App';
 import { useForm } from "react-hook-form";
 

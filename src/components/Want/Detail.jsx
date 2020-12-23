@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -6,40 +6,50 @@ import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Input, Button } from '@material-ui/core';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+// import Pomodoro from './Pomodoro'
+import TimeLimit from './TimeLimit'
+import Week from './Week'
+// import AppContext from "../../contexts/AppContext"
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
-
-// import AppContext from '../../contexts/AppContext'
-import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
-import reducer from '../../reducers/nextToWeek'
+// import AppContext from '../contexts/AppContext'
+import { TaskContext } from '../Want/Card';
 import { MyContext } from '../../components/App';
 import { useForm } from "react-hook-form";
-import { SentimentSatisfiedAlt } from '@material-ui/icons';
-//firestore
-import { useCreateWant } from '../../helpers/useCreateWant'
+
 
 
 const useStyles = makeStyles((theme) => ({
+  
   root: {
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch',
+      marginLeft: 32,
     },
     button: {
       margin: theme.spacing(1),
     },
+    week: {
+      marginLeft: -16,
+    }
   },
 }));
 
-// const StyledContainer =styled(Container)`
-//   display: flex;
-//   /* justify-content: flex-end; */
-// `
+const StyledContainer =styled(Container)`
+  display: flex;
+  .main-container {
+    display: flex;
+  }
+  .router-container {
+    margin: 50px 60px 50px;
+    background-color: #f8f8f8!important;
+  }
+`
 const StyledButton =styled(Button)`
   margin-left: 2.1%;
-  text-decoration: none!important;
 `
 
 // const StyledPaper =styled(Paper)`
@@ -53,90 +63,61 @@ const StyledTextField=styled(TextField)`
   width: 80%;
 `
 
-// const StylesTextField=styled(TextField)`
-//   width: 40%;
-// `
+const StylesTextField=styled(TextField)`
+  width: 40%;
+`
 
-export const TaskContext = createContext();
-
-const Detail = (props) => {
-  
-  const classes = useStyles();
-  const [state, dispatch] = useReducer(reducer, [])
-  const [text, setText] = useState('');
-  const [textDescription, setTextDescription] = useState('');
-  const [textPurpose, setTextPurpose] = useState('');
-  const [textCategory, setTextCategory] = useState();
-  const [textRewards, setTextRewards] = useState('');
-  const [task, setTask] = useState('');
-  const [week, setWeek] = useState([]);
-  const [category, setCategory] = useState('');
-  const [createWant, loading] = useCreateWant()
-  const myContext = useContext(MyContext)
-  
-
-  
+const ThisWeekCard = (props) => {
+  const [textThisWeekTask, setTextThisWeekTask] = useState('');
+  const [outlines, setOutlines] = useState([])
+  console.log(outlines)
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
-
+  const classes = useStyles();
+ 
+  // const []
+  const taskContext  = useContext(TaskContext)
+  const myContext = useContext(MyContext)
+  const ThisWeekContext = createContext();
   const nextToPage1= (e)=>{
     //e.preventDefault()
-    // e.target.value
-    setTask(task)
     props.setId(props.id)
 
-    dispatch({
-      type: 'FOLLOW_TO_TASK_THIS_WEEK',
-      task,
-      week,
-      category
-    })
 }
 
-const handleChange = (e) => {
-  // createWant(text)
-  console.log(e.target.value)
-  setText({value: e.target.value})
-  // myContext.setWantTodo(e.target.value)
+const handleChangeThisWeekTask = (e) => {
+  setTextThisWeekTask({value: e.target.value})
+  myContext.setThisWeekTask(e.target.value)
 } 
 
-const handleChangeDescription = (e) => {
-  setTextDescription({value: e.target.value})
-  myContext.setDescription(e.target.value)
-} 
+// const handleChangeOutline = (e) => {
+//   setOutlines[0]({value: e.target.value})
+  
+// } 
+  
+// const outlineList=thisWeekContext.outlines.map((outline, id) =>{
+//   return (
+//      <OutlineList/>
+//   )
+//   })
 
-const handleChangePurpose = (e) => {
-  setTextPurpose({value: e.target.value})
-  myContext.setPurpose(e.target.value)
-} 
+// const { add } = useContext(TodosContext)
+const [input, setInput] = useState('')
 
-const handleChangeRewards = (e) => {
-  setTextRewards({value: e.target.value})
-  myContext.setRewards(e.target.value)
-} 
-
-const handleChangeCategory = (e) => {
-  setTextCategory({value: e.target.value})
-  myContext.setCategory(e.target.value)
-} 
-
-const handleClick = (e) => {
-  createWant({text: text.value, description: '詳細'} )
-  // myContext.setWantTodo(e.target.value)
-}
-
+  // const addOutline = useCallback(
+  //   () => {
+  //     // add(input)
+  //     thisWeekContext.setOutlines('')
+  //   },
+  //   [outline]
+  // )
     return (
-      <TaskContext.Provider 
-        value={{
-          text, setText, 
-          task, setTask, 
-          textDescription, setTextDescription,
-          textCategory, setTextCategory
-        }}>
-          <Paper>
-          <form onSubmit={handleSubmit(onSubmit)}>
+      <ThisWeekContext.Provider 
+      value={{
+        textThisWeekTask, setTextThisWeekTask,
+        outlines, setOutlines
+      }}>
           <Container>
-              <Container className="button-container">
+              <StyledContainer className="button-container">
                 {/* <StyledButton
                   variant="contained"
                   color="secondary"
@@ -155,15 +136,19 @@ const handleClick = (e) => {
                 >
                   保存
               </StyledButton> */}
-              </Container>
+              </StyledContainer>
+              <h2>今週やること</h2>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                やりたいこと
+                タスク
               </StyledTypography>
+              
+
               <TextField 
-                value={myContext.text}
+                value={ThisWeekContext.thisWeekTask}
+
                 name="todo"  
-                label="やること" 
-                onChange={handleChange}
+                label="this week task" 
+                onChange={handleChangeThisWeekTask}
                 ref={register({required: true, maxLength: 50})} 
                 type="text"
                 fullWidth
@@ -172,16 +157,25 @@ const handleClick = (e) => {
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               />
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                詳細
-              </StyledTypography>
+              
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                詳細なアウトライン
+              </StyledTypography> */}
+              {/* <form className={classes.root} noValidate autoComplete="off">
+                <StyledTextField id="standard-basic" label="詳細なアウトライン" />
+              </form> */}
+              
+
+              {/* <Ul>
+                {outlineList}
+              </Ul> */}
 
               <TextField 
-                value={myContext.description}
+                // value={ThisWeekContext.outlines[0]}
 
                 name="todo"  
-                label="description" 
-                onChange={handleChangeDescription}
+                label="outline" 
+                // onChange={handleChangeOutline}
                 ref={register({required: true, maxLength: 50})} 
                 type="text"
                 fullWidth
@@ -190,16 +184,12 @@ const handleClick = (e) => {
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               />
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                目的
-              </StyledTypography>
-
               <TextField 
-                value={myContext.purpose}
+                // value={ThisWeekContext.outlines[0]}
 
                 name="todo"  
-                label="purpose" 
-                onChange={handleChangePurpose}
+                label="outline" 
+                // onChange={handleChangeOutline}
                 ref={register({required: true, maxLength: 50})} 
                 type="text"
                 fullWidth
@@ -208,67 +198,77 @@ const handleClick = (e) => {
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               />
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              <TextField 
+                // value={ThisWeekContext.outlines[0]}
+
+                name="todo"  
+                label="outline" 
+                // onChange={handleChangeOutline}
+                ref={register({required: true, maxLength: 50})} 
+                type="text"
+                fullWidth
+                margin="normal"
+                inputRef={register({ required: true, maxLength: 20 })}
+                error={Boolean(errors.todo)}
+                helperText={errors.todo && "やることは20文字以内にして下さい。"}
+              />
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                ご褒美
+              </StyledTypography> */}
+              <form className={classes.root} noValidate autoComplete="off">
+                <StyledTextField id="standard-basic" label="ご褒美" />
+              </form>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 いつやる
               </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                月　火　水　木　金　土　日
-              </StyledTypography>
-             
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                ご褒美
-              </StyledTypography>
-              <TextField 
-                value={myContext.rewards}
+              
+              <Week className={classes.week}/>
 
-                name="todo"  
-                label="rewards" 
-                onChange={handleChangeRewards}
-                ref={register({required: true, maxLength: 50})} 
-                type="text"
-                fullWidth
-                margin="normal"
-                inputRef={register({ required: true, maxLength: 20 })}
-                error={Boolean(errors.todo)}
-                helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
+              <form className={classes.root} noValidate autoComplete="off">
+                <StyledTextField id="standard-basic" label="rewards" />
+              </form>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 カテゴリー
               </StyledTypography>
+              <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
+                {myContext.category}
+              </StyledTypography>
+              <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
+                制限時間
+              </StyledTypography>
 
-
-              <TextField 
-                value={myContext.textCategory}
-                name="todo"  
-                label="category" 
-                onChange={handleChangeCategory}
-                ref={register({required: true, maxLength: 50})} 
-                type="text"
-                fullWidth
-                margin="normal"
-                inputRef={register({ required: true, maxLength: 20 })}
-                error={Boolean(errors.todo)}
-                helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
-
-              <Link className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
+              
+              <TimeLimit className={classes.root}/>
+              <Link className="link" onClick={(e)=>{nextToPage1()}} to='/top'>
                 <StyledButton
-                  onClick={handleClick}
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  className={classes.button}
-                  size="large"
-                  startIcon={<ForwardOutlinedIcon />}
-                >
-                  次のページ（今週やること）へ
-                </StyledButton>
-              </Link>
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    size="large"
+                    startIcon={<ForwardOutlinedIcon />}
+                  >
+                    編集完了(TOPへ)
+                  </StyledButton>
+                </Link>
+
+
           </Container>
-          </form>
-          </Paper>
-        </TaskContext.Provider>
+          </ThisWeekContext.Provider>
     )
 }
 
-export default Detail
+export default ThisWeekCard

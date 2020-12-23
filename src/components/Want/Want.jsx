@@ -8,6 +8,7 @@ import Detail from './Detail';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import styled, {createGlobalStyle} from 'styled-components';
 import Button from '@material-ui/core/Button';
 import reducer from '../../reducers/nextToWeek'
@@ -16,6 +17,7 @@ import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import { MyContext } from '../App';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import { useCreateWant } from '../../helpers/useCreateWant'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -24,26 +26,35 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// const DivWeb= styled.div`
-//   .timer-disc-container {
-//     display: flex!important;
-//   }
-// `
-// const WebCard=styled(Card)`
-//   width: 40%!important;
-// `
+const Div = styled.div`
+  display: flex;
+  justify-content: space-around!important;
+`
 
-// const WebDetail=styled(Detail)`
-//   width: 40%!important;
-// `
+const StyledPaper = styled(Paper)`
+width: 45%!important;
+height: 84.4%!important;
+`
 
-// const SPCard=styled(Card)`
-//   width: 80%!important;
-// `
+const StyledLink = styled(Link)`
+text-decoration: none!important;
+position: relative;
 
-// const SPDetail=styled(Detail)`
-//   width: 80%!important;
-// `
+`
+
+const StyledButton =styled(Button)`
+  margin-left: 2.1%;
+  /* background-color:  #fe6b8b!important; */
+  /* background-color: #ff8e53!important; */
+  background-color: blue!important;
+  font-weight: bold;
+  height: 50px!important;
+  border-radius: 25px!important;
+  position: absolute;
+  bottom: 0px!important;
+  right: 0px!important;
+  z-index: 10!important;
+`
 
 function Copyright() {
 
@@ -69,10 +80,11 @@ const useStyles = makeStyles((theme) => ({
 const Want = (props) => {
   const {task, setTask} = useContext(MyContext)
 
-  const [state, dispatch] = useReducer(reducer, [])
+  const [text, setText] = useState('');
   const classes = useStyles();
   const theme = useTheme();
   const isWeb=useMediaQuery(theme.breakpoints.up('md'));
+  const [createWant, loading] = useCreateWant()
 
   // const handleId= (e)=>{
   //   //e.preventDefault()
@@ -82,12 +94,11 @@ const Want = (props) => {
         //e.preventDefault()
         props.setId(props.id)
 
-        dispatch({
-          type: 'FOLLOW_TO_TASK_THIS_WEEK',
-          task,
-          week,
-          category
-        })
+    }
+
+    const handleClick = (e) => {
+      createWant({text: text.value, description: '詳細'} )
+      // myContext.setWantTodo(e.target.value)
     }
     // const [task, setTask] = useState('');
     const [week, setWeek] = useState([]);
@@ -97,16 +108,30 @@ const Want = (props) => {
       <React.Fragment>
         <GlobalStyle/>
           <Container maxWidth="lg" >
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={6}>
-                <Card />
-              </Grid>
-              <Grid item xs={12} md={6} lg={6}>
-                <Paper >
-                  <Detail id={props.id} setId={props.setId}/>
-                </Paper>
-              </Grid>
-            </Grid>
+            <Div container spacing={3}>
+           
+              <StyledPaper>
+                <Card/>
+              </StyledPaper>
+              <StyledPaper>
+                <Detail/>
+              </StyledPaper>
+            </Div>
+              <StyledLink className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
+                <StyledButton
+                  onClick={handleClick}
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  className={classes.button}
+                  size="large"
+                  startIcon={<ForwardOutlinedIcon />}
+                >
+                  次のページ（今週やること）へ
+                </StyledButton>
+              </StyledLink>
+            
+
             <Box pt={4}>
               <Copyright />
             </Box>
