@@ -12,6 +12,7 @@ import SecondItems from '../Layout/SecondItems';
 import ThisWeek from './ThisWeek/ThisWeek';
 import SignIn from '../components/SignIn'
 import Stack from '../components/Stack/Stack.jsx'
+import EditPlan from '../components/EditPlan/EditPlan'
 import firebase from 'firebase';
 import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
@@ -67,6 +68,7 @@ const App = () => {
             <Route path='/seconditems' render={(props) => <SecondItems id={id} setId={setId}></SecondItems>}></Route>
             {/* <Route path='/header' render={(props) => <Header id={id} setId={setId}></Header>}></Route> */}
             <Route path='/thisweek' render={(props) => <ThisWeek id={id} setId={setId}></ThisWeek>}></Route>
+            <Route path='/editplan' render={(props) => <EditPlan id={id} setId={setId}></EditPlan>}></Route>
             <Route path='/stack' render={(props) => <Stack id={id} setId={setId}></Stack>}></Route>
             
             {/* <ul>
