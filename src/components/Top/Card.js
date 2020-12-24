@@ -170,7 +170,8 @@ const handleClickOpen = () => {
                         color="primary"
                       />
                     }
-                      label={thisWeekContext.outlines[0]}
+                    //!あとで復活させる
+                      // label={thisWeekContext.outlines}
                   />
                   <StyledContainer className="time-container">
                     <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >

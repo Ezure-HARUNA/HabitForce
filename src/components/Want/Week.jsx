@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { makeStyles } from '@material-ui/core/styles';
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const StyledButton = styled(Button)`
-  .body-color{
-  background: coral;
-}
+ background-color: #ff8e53!important;
+ 
+ ${({coral}) => coral ? css`
+     background-color:#a9a9a9!important;
+ ` : ''}
+`
+
+
+const StyledButtonGroup = styled(ButtonGroup)`
+background-color: #ff8e53!important;
 `
 
 
@@ -23,46 +30,71 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Week() {
-  const classes = useStyles();
+    const [coral, setCoral] = useState(false)
+    const classes = useStyles();
 
-  const [toggle,setToggle] = React.useState(false);
-  const toggleIt =()=>{
+    const [toggle,setToggle] = React.useState(false);
+    const toggleIt =()=>{
     setToggle(!toggle)
   }
 
-  const[isWeek, setIsWeek]=React.useState(false)
-  const handleIsWeek = () => {
-    if (isWeek) {
-      setIsWeek(false)
+//   const[isWeek, setIsWeek]=React.useState(false)
+//   const handleIsWeek = () => {
+//     if (isWeek) {
+//       setIsWeek(false)
 
-    } else {
-      setIsWeek(true)
-    }
-  }
-  let isAddWeek
-  if (isWeek) {
-    isAddWeek="休"
+//     } else {
+//       setIsWeek(true)
+//     }
+//   }
+//   let isAddWeek
+//   if (isWeek) {
+//     isAddWeek="休"
 
- } else {
- 　 isAddWeek="月"
+//  } else {
+//  　 isAddWeek="月"
 
-}
+// }
 
   return (
     <div className={classes.root}>
-      <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-        <StyledButton id="button_color" onClick={(e)=>{handleIsWeek(e)}}>
-          <div className={isWeek&&'body-color'}>
-            {isAddWeek} 
-          </div>
+      <StyledButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >月
         </StyledButton>
-        <Button >火</Button>
-        <Button>水</Button>
-        <Button>木</Button>
-        <Button>金</Button>
-        <Button>土</Button>
-        <Button>日</Button>
-      </ButtonGroup>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >火
+        </StyledButton>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >水
+        </StyledButton>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >木
+        </StyledButton>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >金
+        </StyledButton>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >土
+        </StyledButton>
+        <StyledButton 
+          coral={coral}
+            onClick={() => setCoral(!coral)}
+        >日
+        </StyledButton>
+      </StyledButtonGroup>
     </div>
   );
 }

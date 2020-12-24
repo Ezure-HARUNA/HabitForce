@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
@@ -7,6 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Input, Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 // import Pomodoro from './Pomodoro'
@@ -38,6 +43,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const FirstTypography = styled(Typography)`
+  margin-top: 12px!important;
+`
+
+const StyledTypography = styled(Typography)`
+  margin-top: 0px;
+`
+const StyledTextField=styled(TextField)`
+  width: 80%;
+`
+
 const StyledContainer =styled(Container)`
   display: flex;
   .main-container {
@@ -48,26 +64,32 @@ const StyledContainer =styled(Container)`
     background-color: #f8f8f8!important;
   }
 `
-const StyledButton =styled(Button)`
-  margin-left: 2.1%;
-`
-
-// const StyledPaper =styled(Paper)`
-//   color: blue;
+// const StyledLink = styled(Link)`
+// text-decoration: none;
+// margin-left: 60%!important;
+// margin-bottom: 5%!important
 // `
 
-const StyledTypography = styled(Typography)`
-  margin-top: 16px;
-`
-const StyledTextField=styled(TextField)`
-  width: 80%;
-`
-
-const StylesTextField=styled(TextField)`
-  width: 40%;
+const StyledButton =styled(Button)`
+  margin-left: 2.1%;
+  background-color: #ff8e53!important;
+  font-weight: bold;
+  height: 50px!important;
+  border-radius: 25px!important;
 `
 
 const ThisWeekCard = (props) => {
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [textThisWeekTask, setTextThisWeekTask] = useState('');
   const [outlines, setOutlines] = useState([])
   console.log(outlines)
@@ -78,11 +100,11 @@ const ThisWeekCard = (props) => {
   const taskContext  = useContext(TaskContext)
   const myContext = useContext(MyContext)
   const ThisWeekContext = createContext();
-  const nextToPage1= (e)=>{
+  /* const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
 
-}
+} */
 
 const handleChangeThisWeekTask = (e) => {
   setTextThisWeekTask({value: e.target.value})
@@ -137,11 +159,9 @@ const [input, setInput] = useState('')
                   保存
               </StyledButton> */}
               </StyledContainer>
-              <h2>今週やること</h2>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                タスク
-              </StyledTypography>
-              
+              <FirstTypography component="h1" variant="h6" color="inherit" noWrap >
+                今週の目標
+              </FirstTypography>
 
               <TextField 
                 value={ThisWeekContext.thisWeekTask}
@@ -226,44 +246,70 @@ const [input, setInput] = useState('')
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               />
+            
               {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                ご褒美
-              </StyledTypography> */}
-              <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="ご褒美" />
-              </form>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 いつやる
-              </StyledTypography>
+              </StyledTypography> */}
               
-              <Week className={classes.week}/>
+              {/* <Week className={classes.week}/> */}
+
+              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                ご褒美
+              </StyledTypography>
 
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="rewards" />
               </form>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 カテゴリー
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
                 {myContext.category}
-              </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
+              </StyledTypography> */}
+              {/* <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
                 制限時間
               </StyledTypography>
 
               
-              <TimeLimit className={classes.root}/>
-              <Link className="link" onClick={(e)=>{nextToPage1()}} to='/top'>
+              <TimeLimit className={classes.root}/> */}
+
+
+              {/* <StyledLink className="link" to='/top'>  */}
                 <StyledButton
                     variant="contained"
                     color="primary"
                     className={classes.button}
                     size="large"
                     startIcon={<ForwardOutlinedIcon />}
+                    onClick={handleClickOpen}
                   >
                     編集完了(TOPへ)
                   </StyledButton>
-                </Link>
+                  <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            他の目標も追加しますか？
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            はい
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            いいえ
+          </Button>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            キャンセル
+          </Button>
+        </DialogActions>
+      </Dialog>
+              {/* </StyledLink>  */}
 
 
           </Container>
