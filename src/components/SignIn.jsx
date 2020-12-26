@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import { Redirect, Switch, Router, Route } from 'react-router-dom';
 import styled from 'styled-components'
 import { GoogleLoginButton } from 'react-social-login-buttons';
-import Want from './Want/Want'
+import Plan from './Plan/Plan'
 import useReactRouter from 'use-react-router';
 import { auth } from './App'
 
@@ -18,7 +18,7 @@ const SignIn = () => {
           
         
         alert(  user.user.displayName + "さんでログインしました");
-        history.push('/want')
+        history.push('/plan')
 
         // // ポップアップウィンドウでログインを行う場合はsignInWithPopupを呼び出す
         // firebase.auth().signInWithPopup(provider)
@@ -48,7 +48,7 @@ const SignIn = () => {
                 <Router history={history}>
                     <Switch>
                         <Route path="/"/>
-                            <Route path="/want" exact component={Want} />
+                            <Route path="/plan" exact component={Plan} />
                     </Switch>
                 </Router>
             </div>

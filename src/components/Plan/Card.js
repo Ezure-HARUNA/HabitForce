@@ -14,7 +14,7 @@ import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
-import { MyContext } from '../../components/App';
+import { MyContext } from '../App';
 import { useForm } from "react-hook-form";
 import { SentimentSatisfiedAlt } from '@material-ui/icons';
 //firestore
@@ -211,12 +211,12 @@ const handleClick = (e) => {
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               />
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 いつやる
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 月　火　水　木　金　土　日
-              </StyledTypography>
+              </StyledTypography> */}
              
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 ご褒美

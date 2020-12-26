@@ -11,9 +11,6 @@ import Box from '@material-ui/core/Box';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import styled, {createGlobalStyle} from 'styled-components';
 import Button from '@material-ui/core/Button';
-import reducer from '../../reducers/nextToWeek'
-// import AppContext from '../../contexts/AppContext'
-import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import { MyContext } from '../App';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
@@ -39,6 +36,7 @@ height: 84.4%!important;
 const StyledLink = styled(Link)`
 text-decoration: none!important;
 position: relative;
+margin-left: 300px!important;
 
 `
 
@@ -77,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Want = (props) => {
+const Plan = (props) => {
   const {task, setTask} = useContext(MyContext)
 
   const [text, setText] = useState('');
@@ -141,7 +139,7 @@ const Want = (props) => {
     )
 }
 
-export default Want
+export default Plan
 
 
 
