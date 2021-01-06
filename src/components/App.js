@@ -10,7 +10,7 @@ import Rewards from './Rewards.jsx';
 import MainItems from '../Layout/MainItems';
 import SecondItems from '../Layout/SecondItems';
 import SignIn from '../components/SignIn'
-import Stack from '../components/Stack/Stack.jsx'
+import ThisWeekStack from '../components/THisWeekStack/ThisWeekStack.jsx'
 import EditPlan from '../components/EditPlan/EditPlan'
 import firebase from 'firebase';
 import "firebase/auth";
@@ -67,7 +67,7 @@ const App = () => {
             <Route path='/seconditems' render={(props) => <SecondItems id={id} setId={setId}></SecondItems>}></Route>
             {/* <Route path='/header' render={(props) => <Header id={id} setId={setId}></Header>}></Route> */}
             <Route path='/editplan' render={(props) => <EditPlan id={id} setId={setId}></EditPlan>}></Route>
-            <Route path='/stack' render={(props) => <Stack id={id} setId={setId}></Stack>}></Route>
+            <Route path='/thisweekstack' render={(props) => <ThisWeekStack id={id} setId={setId}></ThisWeekStack>}></Route>
             
             {/* <ul>
               <Route path='/list' render={(props) => <List></List>}></Route>

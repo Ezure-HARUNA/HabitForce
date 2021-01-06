@@ -30,7 +30,9 @@ import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import { TaskContext } from './Card';
 import { MyContext } from '../App';
 import { useForm } from "react-hook-form";
-
+import OutlineForm  from './OutlineForm'
+import OutlineList  from './OutlineList'
+ 
 
 
 const useStyles = makeStyles((theme) => ({
@@ -116,15 +118,14 @@ const ThisWeekCard = (props) => {
     setOpenCancel(false);
   };
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   const [textThisWeekTask, setTextThisWeekTask] = useState('');
-  const [outlines, setOutlines] = useState([])
-  console.log(outlines)
+  /* const [outlines, setOutlines] = useState([]) */
   const { register, handleSubmit, errors } = useForm();
   const classes = useStyles();
  
@@ -132,38 +133,30 @@ const ThisWeekCard = (props) => {
   const taskContext  = useContext(TaskContext)
   const myContext = useContext(MyContext)
   const ThisWeekContext = createContext();
-  /* const nextToPage1= (e)=>{
+  const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
 
-} */
+}
 
 const handleChangeThisWeekTask = (e) => {
   setTextThisWeekTask({value: e.target.value})
   myContext.setThisWeekTask(e.target.value)
 } 
 
-// const handleChangeOutline = (e) => {
-//   setOutlines[0]({value: e.target.value})
-  
-// } 
-  
-// const outlineList=thisWeekContext.outlines.map((outline, id) =>{
-//   return (
-//      <OutlineList/>
-//   )
-//   })
-
-// const { add } = useContext(TodosContext)
-const [input, setInput] = useState('')
-
-  // const addOutline = useCallback(
-  //   () => {
-  //     // add(input)
-  //     thisWeekContext.setOutlines('')
-  //   },
-  //   [outline]
-  // )
+//outlineの追加
+const outlinesData = [
+  {id: 1, outline: ''},
+  {id: 2, outline: ''},
+  {id: 3, outline: ''}
+]
+const [outlines, setOutlines] = useState(outlinesData)
+const addOutline = (outline) => {
+    outline.id = outlines.length + 1
+    setOutlines([...outlines, outline])
+    
+  }
+  console.log(outlines)
     return (
       <ThisWeekContext.Provider 
       value={{
@@ -175,37 +168,15 @@ const [input, setInput] = useState('')
               <FirstTypography component="h1" variant="h6" color="inherit" noWrap >
                 今週の目標
               </FirstTypography>
-              
-              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                詳細なアウトライン
-              </StyledTypography> */}
-              {/* <form className={classes.root} noValidate autoComplete="off">
-                <StyledTextField id="standard-basic" label="詳細なアウトライン" />
-              </form> */}
-              
-
-              {/* <Ul>
-                {outlineList}
-              </Ul> */}
+            
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 詳細なアウトライン
               </StyledTypography> 
-
-             <StyledContainer>
-                <TextField 
-                  // value={ThisWeekContext.outlines[0]}
-
-                  name="todo"  
-                  label="outline" 
-                  // onChange={handleChangeOutline}
-                  ref={register({required: true, maxLength: 50})} 
-                  type="text"
-                  fullWidth
-                  margin="normal"
-                  inputRef={register({ required: true, maxLength: 20 })}
-                  error={Boolean(errors.todo)}
-                  helperText={errors.todo && "やることは20文字以内にして下さい。"}
-                />
+               
+                {outlines.map((outline) => (
+                  <OutlineList />
+                ))}
+                <OutlineForm addOutline={addOutline} outlines={outlines}/>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Grid container justify="space-around">
                     <KeyboardDatePicker
@@ -223,14 +194,8 @@ const [input, setInput] = useState('')
                     />
                   </Grid>
                 </MuiPickersUtilsProvider>
-              </StyledContainer>
             
-              <StyledTooltip title="Add" aria-label="add" m={10}>
-                <Fab color="primary" className={classes.absolute}>
-                  <AddIcon />
-                </Fab>
-              </StyledTooltip>
-      
+              
             
               {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 いつやる
@@ -245,21 +210,7 @@ const [input, setInput] = useState('')
               <form className={classes.root} noValidate autoComplete="off">
                 <StyledTextField id="standard-basic" label="rewards" />
               </form>
-              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                カテゴリー
-              </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
-                {myContext.category}
-              </StyledTypography> */}
-              {/* <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
-                制限時間
-              </StyledTypography>
 
-              
-              <TimeLimit className={classes.root}/> */}
-
-
-              {/* <StyledLink className="link" to='/top'>  */}
               <StyledContainer>
                 <StyledButton
                   variant="contained"
