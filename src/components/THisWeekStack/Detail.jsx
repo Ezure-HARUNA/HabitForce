@@ -1,118 +1,66 @@
-import React, { useState, useReducer, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
+import React, { PureComponent } from 'react';
 import Container from '@material-ui/core/Container';
-import styled from 'styled-components';
+import {
+  PieChart, Pie, Sector, Cell,
+} from 'recharts';
+import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
-import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 
-// import AppContext from '../../contexts/AppContext'
-import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
-import reducer from '../../reducers/nextToWeek'
-import { MyContext } from '../../components/App';
-import  ThisWeekContext from '../ThisWeek/Detail'
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-    button: {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-const StyledContainer =styled(Container)`
-  display: flex;
-  justify-content: flex-end;
-`
-const StyledButton =styled(Button)`
-  margin-left: 2.1%;
-  text-decoration: none!important;
+const StyledPieChart =styled(PieChart)`
+  width: 80%!important;
+  margin: 0 auto!important;
 `
 
-// const StyledPaper =styled(Paper)`
-//   color: blue;
-// `
+const data = [
+  { name: 'Group A', value: 400 },
+  { name: 'Group B', value: 300 },
+  { name: 'Group C', value: 300 },
+  { name: 'Group D', value: 200 },
+];
 
-const StyledTypography = styled(Typography)`
-  margin-top: 16px;
-`
-const StyledTextField=styled(TextField)`
-  width: 80%;
-`
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const StylesTextField=styled(TextField)`
-  width: 40%;
-`
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx, cy, midAngle, innerRadius, outerRadius, percent, index, name
+}) => {
+   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-const Detail = (props) => {
-  const classes = useStyles();
-  const [state, dispatch] = useReducer(reducer, [])
-  const [task, setTask] = useState('');
-  const [week, setWeek] = useState([]);
-  const [category, setCategory] = useState('');
-  const myContext = useContext(MyContext)
-  const thisWeekContext = useContext(ThisWeekContext)
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(0)}%`}{name}
+    </text>
+  );
+};
 
-  const nextToPage1= (e)=>{
-    //e.preventDefault()
-    props.setId(props.id)
+export default class Example extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
 
-    dispatch({
-      type: 'FOLLOW_TO_TASK_THIS_WEEK',
-      task,
-      week,
-      category
-    })
-}
+  render() {
     return (
-        <React.Fragment>
-          <Container>
-              <StyledContainer className="button-container">
-                {/* <StyledButton
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  size="large"
-                  startIcon={<CancelOutlinedIcon />}
-                >
-                  キャンセル
-              </StyledButton>
-              <StyledButton
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  size="large"
-                  startIcon={<SaveOutlinedIcon />}
-                >
-                  保存
-              </StyledButton> */}
-              </StyledContainer>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                積み上げ内容
-              </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {myContext.category}
-              </StyledTypography>
-              
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {/* {thisWeekContext.outlines[0]} */}
-              </StyledTypography>
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                
-              </StyledTypography>
-          </Container>
-        </React.Fragment>
-    )
+      <Container>
+         <Typography component="h1" variant="h6" color="inherit" noWrap >
+          日にち
+        </Typography>
+        <StyledPieChart width={400} height={400}>
+          <Pie
+            data={data}
+            cx={200}
+            cy={200}
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {
+              data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+            }
+          </Pie>
+        </StyledPieChart>
+      </Container>
+    );
+  }
 }
-
-export default Detail

@@ -146,15 +146,14 @@ const handleChangeThisWeekTask = (e) => {
 
 //outlineの追加
 const outlinesData = [
-  {id: 1, outline: ''},
-  {id: 2, outline: ''},
-  {id: 3, outline: ''}
+  {id: 1, content: ''},
+  {id: 2, content: ''},
+  {id: 3, content: ''}
 ]
 const [outlines, setOutlines] = useState(outlinesData)
 const addOutline = (outline) => {
     outline.id = outlines.length + 1
-    setOutlines([...outlines, outline])
-    
+    setOutlines([...outlines, {id: outlines.length + 1, content: ''}])
   }
   console.log(outlines)
     return (
@@ -173,8 +172,9 @@ const addOutline = (outline) => {
                 詳細なアウトライン
               </StyledTypography> 
                
-                {outlines.map((outline) => (
-                  <OutlineList />
+                {outlines.map((outline, index) => (
+                  <OutlineList outlines={outlines} setOutlines={setOutlines} index={index}
+                  />
                 ))}
                 <OutlineForm addOutline={addOutline} outlines={outlines}/>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>

@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 
   { TextField
   } 
 from '@material-ui/core'
 import { useForm } from "react-hook-form";
 
-const OutlineList = () => {
+const OutlineList = (props) => {
     const { register, errors } = useForm();
+    const [input, setInput] = useState(props.outlines[props.index].content)
+
+    const handleInputChange = (e) => {
+        //set系は時間差ある
+        setInput(e.target.value)
+        props.outlines[props.index].content=e.target.value
+        props.setOutlines(props.outlines)
+        console.log(props.outlines)
+    }
     return (
         <div>
             <div>
             <TextField 
                 // value={ThisWeekContext.outlines[0]}
                 label="outline" 
+                value={input}
+                // value={props.outlines[props.index].content}
+                onChange={handleInputChange}
                 ref={register({required: true, maxLength: 50})} 
                 type="text"
                 fullWidth

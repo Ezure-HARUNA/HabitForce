@@ -1,146 +1,63 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-// import Title from './Title';
-import { spacing } from '@material-ui/system';
-
-// +
+import React, { PureComponent } from 'react';
+import {
+  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
+} from 'recharts';
 import Typography from '@material-ui/core/Typography';
-// +
 
-// import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+const data = [
+  {
+    name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+  },
+  {
+    name: 'Page B', uv: -3000, pv: 1398, amt: 2210,
+  },
+  {
+    name: 'Page C', uv: -2000, pv: -9800, amt: 2290,
+  },
+  {
+    name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+  },
+  {
+    name: 'Page E', uv: -1890, pv: 4800, amt: 2181,
+  },
+  {
+    name: 'Page F', uv: 2390, pv: -3800, amt: 2500,
+  },
+  {
+    name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+  },
+];
 
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+export default class Example extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/p82xhe2a/';
 
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
-import Container from '@material-ui/core/Container';
-
-import styled from 'styled-components'
-
-const StyledContainer=styled(Container)`
-  .big-container {
-    margin: 50px 60px 50px!important;
-  }
-  /* },
-  .small-container {
-    margin-bottom: 16px;
-  } */
-    `
-const StyledTypography=styled(Typography)`
-    margin: 12px;
-`
-
-const StyledPaper = styled(Paper)`
-  width: 250%!important;
-  margin-top: 16px;
-`
-
-const StyledTooltip=styled(Tooltip)`
-    display: block!important;
-    margin-top: 30px!important;
-    margin: 0 auto;
-    `
-
-
-const theme = {
-    spacing: 8,
-  }
-
-const useStyles = makeStyles((theme) => ({
-    
-    fixedHeight: {
-        height: 120,
-        // margin: 20,
-      },
-    root: {
-    flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        color: theme.palette.text.secondary,
-        height: 120,
-    },
-    fab: {
-        margin: theme.spacing(2),
-      },
-    tooltip: {
-        spacing: 10,
-    }
-}));
-
-const Card = () => {
-  const theme = useTheme();
-  const classes = useStyles(); 
-  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-  // checkbox 
-  const [state, setState] = React.useState({
-  checkedA: true,
-  checkedB: true,
-  checkedF: true,
-  checkedG: true,
-});
-
-const handleChange = (event) => {
-  setState({ ...state, [event.target.name]: event.target.checked });
-};
+  render() {
     return (
-        <React.Fragment>
-          <StyledContainer className="big-container">
-          <Typography component="h2" variant="h6" color="primary" gutterBottom>
-            やりたいことリスト
-          </Typography>
-            <StyledTypography color="textSecondary" >
-              ※できるかでなく、やりたいか、で書く！
-            </StyledTypography>
-            <Grid item xs={12} md={12} lg={6} container spacing={3}>
-              <StyledContainer className="small-container">
-                <StyledPaper m={5} p={5}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={state.checkedB}
-                        onChange={handleChange}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                      label="筋トレ30分"
-                  />
-                </StyledPaper>
-              </StyledContainer>
-              <StyledContainer className="small-container">
-                <StyledPaper m={5} p={1}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={state.checkedB}
-                        onChange={handleChange}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                      label="ポートフォリオ作成"
-                  />
-                </StyledPaper>
-              </StyledContainer>
-            </Grid>
-            <StyledContainer className="tooltip-container">
-              <StyledTooltip title="Add" aria-label="add" m={10}>
-                <Fab color="primary" className={classes.absolute}>
-                  <AddIcon />
-                </Fab>
-              </StyledTooltip>
-            </StyledContainer>
-          </StyledContainer>
-        </React.Fragment>
-    )
+      <>
+        <Typography component="h1" variant="h6" color="inherit" noWrap >
+          やりたいこと
+        </Typography>
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          stackOffset="sign"
+          margin={{
+            top: 5, right: 30, left: 20, bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <ReferenceLine y={0} stroke="#000" />
+          <Bar dataKey="pv" fill="#8884d8" stackId="stack" />
+          <Bar dataKey="uv" fill="#82ca9d" stackId="stack" />
+        </BarChart>
+      </>
+    );
+  }
 }
 
-export default Card;
+

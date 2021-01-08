@@ -10,7 +10,7 @@ import Rewards from './Rewards.jsx';
 import MainItems from '../Layout/MainItems';
 import SecondItems from '../Layout/SecondItems';
 import SignIn from '../components/SignIn'
-import ThisWeekStack from '../components/THisWeekStack/ThisWeekStack.jsx'
+import ThisWeekStack from './ThisWeekStack/ThisWeekStack.jsx'
 import EditPlan from '../components/EditPlan/EditPlan'
 import firebase from 'firebase';
 import "firebase/auth";
