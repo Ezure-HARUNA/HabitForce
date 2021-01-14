@@ -15,7 +15,6 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
 import { MyContext } from '../App';
-import  ThisWeekContext  from '../ThisWeek/Detail'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +63,6 @@ const Detail = ({props, stack}) => {
   const [week, setWeek] = useState([]);
   const [category, setCategory] = useState('');
   const myContext = useContext(MyContext)
-  const thisWeekContext = useContext(ThisWeekContext)
   
 
   const nextToPage1= (e)=>{

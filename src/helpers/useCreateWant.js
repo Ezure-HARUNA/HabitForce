@@ -6,7 +6,7 @@ export const useCreateWant = () => {
   const [want, setWant] = useState([]);
   const [currentUser, setCurrentUser] = useState(null)
 
-  const createWant = async ({ text, description, purpose, rewards, category }) => {
+  const createWant = async ({ text, description, purpose, rewards, category, outlines, thisWeekRewards }) => {
     if (loading) return
 
     setLoading(true)
@@ -43,29 +43,20 @@ export const useCreateWant = () => {
     //   setWant(data)
     // })
     //データを追加
-    await wantRef.set({
+    await firestore().collection('wants').doc(docId).set({
     docId: docId,
     //   createdAt: now,
-    //   updatedAt: now,
+      updatedAt: now,
     // test:'test'
     text: text,
     description: description,
-    // purpose: purpose,
-    // rewards: rewards,
-    // category: category,
+    purpose: purpose,
+    rewards: rewards,
+    category: category,
+    outlines: outlines,
+    thisWeekRewards: thisWeekRewards,
     })
 
-    // //レスポンスを追加する
-    // const Ref = threadRef.collection('responses').doc()
-
-    // //!➁データを追加
-    // await responseRef.set({
-    //   createdAt: now,
-    //   updatedAt: now,
-    //   threadId: threadRef.id,
-    //   username,
-    //   text,
-    // })
 
     setLoading(false)
     return result.data()

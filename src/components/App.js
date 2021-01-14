@@ -12,9 +12,14 @@ import SecondItems from '../Layout/SecondItems';
 import SignIn from '../components/SignIn'
 import ThisWeekStack from './ThisWeekStack/ThisWeekStack.jsx'
 import EditPlan from '../components/EditPlan/EditPlan'
+import UntilNowStack from '../components/UntilNowStack/UntilNowStack'
+import Card from '../components/Top/Card'
 import firebase from 'firebase';
 import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
+import { useCreateWant } from '../helpers/useCreateWant'
+import { firestore } from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 
 
@@ -39,7 +44,10 @@ const App = () => {
   const [rewards, setRewards] = React.useState("")
   const [category, setCategory] = React.useState("")
   const [thisWeekTask, setThisWeekTask] = React.useState("")
-　
+
+  const query = firestore().collection('wants').orderBy('updatedAt', 'desc')
+  const [wants = [], loading] = useCollectionData(query, { docId: 'id' })
+  const [ createWant ] = useCreateWant()
 
 
   return (
@@ -68,6 +76,8 @@ const App = () => {
             {/* <Route path='/header' render={(props) => <Header id={id} setId={setId}></Header>}></Route> */}
             <Route path='/editplan' render={(props) => <EditPlan id={id} setId={setId}></EditPlan>}></Route>
             <Route path='/thisweekstack' render={(props) => <ThisWeekStack id={id} setId={setId}></ThisWeekStack>}></Route>
+            <Route path='/untilnowstack' render={(props) => <UntilNowStack id={id} setId={setId}></UntilNowStack>}></Route>
+            <Route path='/topcard' render={(props) => <Card id={id} setId={setId} createWant={createWant} wants={wants}></Card>}></Route>
             
             {/* <ul>
               <Route path='/list' render={(props) => <List></List>}></Route>

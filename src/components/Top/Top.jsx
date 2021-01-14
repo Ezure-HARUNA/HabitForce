@@ -99,9 +99,9 @@ const Top = (props) => {
         <GlobalStyle/>
           <Container maxWidth="lg" >
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6} lg={6}>
-                <Card stackTime={stackTime} setStackTime={setStackTime}/>
-              </Grid>
+            {props.wants.map((want) => (
+              <Card  want={props.want} getWant={props.getWant}/>
+            ))}
               <Grid item xs={12} md={6} lg={6}>
                 <Paper >
                   <Detail id={props.id} setId={props.setId}/>

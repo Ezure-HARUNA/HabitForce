@@ -76,12 +76,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Plan = (props) => {
-  const {task, setTask} = useContext(MyContext)
-
-  const [text, setText] = useState('');
   const classes = useStyles();
   const theme = useTheme();
   const isWeb=useMediaQuery(theme.breakpoints.up('md'));
+  const [text, setText] = useState('');
+  const [description, setDescription] = useState('')
   const [createWant, loading] = useCreateWant()
 
   // const handleId= (e)=>{
@@ -95,7 +94,11 @@ const Plan = (props) => {
     }
 
     const handleClick = (e) => {
-      createWant({text: text.value, description: '詳細'} )
+      createWant
+        ({
+          text, 
+          description
+        } )
       // myContext.setWantTodo(e.target.value)
     }
     // const [task, setTask] = useState('');
@@ -116,7 +119,7 @@ const Plan = (props) => {
               </StyledPaper>
             </Div>
               <StyledLink className="link" onClick={(e)=>{nextToPage1()}} to='/thisweek'>
-                <StyledButton
+                <Button
                   onClick={handleClick}
                   variant="contained"
                   type="submit"
@@ -125,8 +128,8 @@ const Plan = (props) => {
                   size="large"
                   startIcon={<ForwardOutlinedIcon />}
                 >
-                  次のページ（今週やること）へ
-                </StyledButton>
+                  目標・やること追加
+                </Button>
               </StyledLink>
             
 

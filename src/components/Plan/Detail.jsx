@@ -24,10 +24,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-// import AppContext from "../../contexts/AppContext"
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
-// import AppContext from '../contexts/AppContext'
-import { TaskContext } from './Card';
 import { MyContext } from '../App';
 import { useForm } from "react-hook-form";
 import OutlineForm  from './OutlineForm'
@@ -130,9 +127,7 @@ const ThisWeekCard = (props) => {
   const classes = useStyles();
  
   // const []
-  const taskContext  = useContext(TaskContext)
   const myContext = useContext(MyContext)
-  const ThisWeekContext = createContext();
   const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
@@ -157,11 +152,7 @@ const addOutline = (outline) => {
   }
   console.log(outlines)
     return (
-      <ThisWeekContext.Provider 
-      value={{
-        textThisWeekTask, setTextThisWeekTask,
-        outlines, setOutlines
-      }}>
+      <div>
           <Container>
              
               <FirstTypography component="h1" variant="h6" color="inherit" noWrap >
@@ -291,7 +282,7 @@ const addOutline = (outline) => {
 
 
           </Container>
-          </ThisWeekContext.Provider>
+          </div>
     )
 }
 

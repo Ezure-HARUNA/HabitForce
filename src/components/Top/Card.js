@@ -22,7 +22,6 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components'
 import TimeLimit from './TimeLimit';
 import { MyContext } from '../../components/App';
-import  ThisWeekContext  from '../ThisWeek/Detail';
 import { TimeContext } from './TimeLimit'
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
@@ -93,7 +92,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Card = () => {
   const myContext = useContext(MyContext)
-  const thisWeekContext = useContext(ThisWeekContext)
   const theme = useTheme();
   const classes = useStyles(); 
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -170,7 +168,7 @@ const handleClickOpen = () => {
                         color="primary"
                       />
                     }
-                      label={thisWeekContext.outlines[0]}
+                      // label={thisWeekContext.outlines[0]}
                   />
                   <StyledContainer className="time-container">
                     <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
