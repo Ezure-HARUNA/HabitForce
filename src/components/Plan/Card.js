@@ -98,7 +98,7 @@ const Detail = (props) => {
               error={Boolean(errors.todo)}
               helperText={errors.todo && "やることは20文字以内にして下さい。"}
             />
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 詳細
               </StyledTypography>
 
@@ -113,9 +113,9 @@ const Detail = (props) => {
                 inputRef={register({ required: true, maxLength: 20 })}
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
+              /> */}
 
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 目的
               </StyledTypography>
               <TextField 
@@ -129,9 +129,9 @@ const Detail = (props) => {
                 inputRef={register({ required: true, maxLength: 20 })}
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
+              /> */}
               
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 ご褒美
               </StyledTypography>
               <TextField 
@@ -145,9 +145,9 @@ const Detail = (props) => {
                 inputRef={register({ required: true, maxLength: 20 })}
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
+              /> */}
 
-              <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+              {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                 カテゴリー
               </StyledTypography>
               <TextField 
@@ -161,7 +161,7 @@ const Detail = (props) => {
                 inputRef={register({ required: true, maxLength: 20 })}
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
-              />
+              /> */}
                <Button
                   onClick={handleClick}
                   variant="contained"
@@ -171,7 +171,7 @@ const Detail = (props) => {
                   size="large"
                   startIcon={<ForwardOutlinedIcon />}
                 >
-                  目標・やること追加
+                  目標・やること追加★
                 </Button>
 
               

@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Card = () => {
+const Card = ({ want }, props) => {
   const myContext = useContext(MyContext)
   const theme = useTheme();
   const classes = useStyles(); 
@@ -168,7 +168,7 @@ const handleClickOpen = () => {
                         color="primary"
                       />
                     }
-                      // label={thisWeekContext.outlines[0]}
+                      label={want.text}
                   />
                   <StyledContainer className="time-container">
                     <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >

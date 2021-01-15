@@ -23,6 +23,9 @@ export const useCreateWant = () => {
     const docId = firestore().collection('want').doc().id
     const result = await wantRef.get()
     console.log(result.data())
+    console.log(docId)
+    console.log(text)
+    console.log(now)
 
     // const wantRef = useMemo(() => {
     //   const col = db.collection('want').doc()
@@ -43,18 +46,18 @@ export const useCreateWant = () => {
     //   setWant(data)
     // })
     //データを追加
-    await firestore().collection('wants').doc(docId).set({
+    await firestore().collection('wants').add({
     docId: docId,
     //   createdAt: now,
       updatedAt: now,
     // test:'test'
-    text: text,
+    text,
     description: description,
-    purpose: purpose,
-    rewards: rewards,
-    category: category,
-    outlines: outlines,
-    thisWeekRewards: thisWeekRewards,
+    // purpose: purpose,
+    // rewards: rewards,
+    // category: category,
+    // outlines: outlines,
+    // thisWeekRewards: thisWeekRewards,
     })
 
 

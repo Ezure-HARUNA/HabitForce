@@ -99,14 +99,14 @@ const Top = (props) => {
         <GlobalStyle/>
           <Container maxWidth="lg" >
             <Grid container spacing={3}>
-            {props.wants.map((want) => (
-              <Card  want={props.want} getWant={props.getWant}/>
-            ))}
-              <Grid item xs={12} md={6} lg={6}>
-                <Paper >
-                  <Detail id={props.id} setId={props.setId}/>
-                </Paper>
-              </Grid>
+              {props.wants.map((want) => (
+                <Card  want={props.want} createWant={props.createWant}/>
+              ))}
+              <Paper >
+                {props.wants.map((want) => (
+                  <Detail want={props.want} createWant={props.createWant}/>
+                ))}
+              </Paper>
             </Grid>
             <Box pt={4}>
               <Copyright />

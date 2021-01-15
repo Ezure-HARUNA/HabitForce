@@ -14,6 +14,7 @@ import ThisWeekStack from './ThisWeekStack/ThisWeekStack.jsx'
 import EditPlan from '../components/EditPlan/EditPlan'
 import UntilNowStack from '../components/UntilNowStack/UntilNowStack'
 import Card from '../components/Top/Card'
+import Detail from '../components/Top/Detail'
 import firebase from 'firebase';
 import "firebase/auth";
 import {firebaseConfig} from '../firebase/config.jsx'
@@ -66,7 +67,7 @@ const App = () => {
       <BrowserRouter>
             <Header id={id} setId={setId}/>
             <Route exact path='/' render={() => <SignIn id={id} setId={setId}></SignIn>}></Route>
-            <Route path='/top' render={(props) => <Top id={id} setId={setId}></Top>}></Route>
+            <Route path='/top' render={(props) => <Top id={id} setId={setId} createWant={createWant} wants={wants}></Top>}></Route>
             <Route path='/plan' render={(props) => <Plan id={id} setId={setId}></Plan>}></Route>
             <Route path='/calendar' render={(props) => <Calendar ></Calendar>}></Route>
             <Route path='/pomodoro' render={(props) => <Pomodoro id={id} setId={setId}></Pomodoro>}></Route>
@@ -78,6 +79,7 @@ const App = () => {
             <Route path='/thisweekstack' render={(props) => <ThisWeekStack id={id} setId={setId}></ThisWeekStack>}></Route>
             <Route path='/untilnowstack' render={(props) => <UntilNowStack id={id} setId={setId}></UntilNowStack>}></Route>
             <Route path='/topcard' render={(props) => <Card id={id} setId={setId} createWant={createWant} wants={wants}></Card>}></Route>
+            <Route path='/topdetail' render={(props) => <Detail id={id} setId={setId} createWant={createWant} wants={wants}></Detail>}></Route>
             
             {/* <ul>
               <Route path='/list' render={(props) => <List></List>}></Route>
