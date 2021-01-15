@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Card = ({ want }, props) => {
+  console.log(want.text)
   const myContext = useContext(MyContext)
   const theme = useTheme();
   const classes = useStyles(); 

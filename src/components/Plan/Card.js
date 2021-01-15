@@ -162,6 +162,7 @@ const Detail = (props) => {
                 error={Boolean(errors.todo)}
                 helperText={errors.todo && "やることは20文字以内にして下さい。"}
               /> */}
+              <Link className="link" to='/top'>
                <Button
                   onClick={handleClick}
                   variant="contained"
@@ -173,6 +174,7 @@ const Detail = (props) => {
                 >
                   目標・やること追加★
                 </Button>
+              </Link>
 
               
           </Container>

@@ -51,7 +51,7 @@ export const useCreateWant = () => {
     //   createdAt: now,
       updatedAt: now,
     // test:'test'
-    text,
+    text: text,
     description: description,
     // purpose: purpose,
     // rewards: rewards,

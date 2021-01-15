@@ -100,7 +100,7 @@ const Top = (props) => {
           <Container maxWidth="lg" >
             <Grid container spacing={3}>
               {props.wants.map((want) => (
-                <Card  want={props.want} createWant={props.createWant}/>
+                <Card  want={want} createWant={props.createWant}/>
               ))}
               <Paper >
                 {props.wants.map((want) => (
