@@ -21,6 +21,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import OutlineForm  from './OutlineForm'
 import OutlineList  from './OutlineList'
+import { useCreateTodo } from '../../helpers/useCreateTodo'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -87,8 +88,10 @@ const Plan = (props) => {
   const todoContext = useContext(TodoContext)
   const isWeb=useMediaQuery(theme.breakpoints.up('md'));
   const { register, errors } = useForm();
+  const db = firebase.firestore(); 
 
-  const db = firebase.firestore(); // 追記
+  const [createTodo, loading] = useCreateTodo();
+
 
   // 追記 一番最初にfirestoreからデータを取ってきてstateに入れる
   useEffect(() => {
@@ -110,7 +113,11 @@ const Plan = (props) => {
       todoContext.setIsChangedTodo(true);
       todoContext.setTodoList([...todoContext.todoList, todoContext.inputGoals]);
       todoContext.setInputGoals('');
+      todoContext.setInputCategories('');
+      todoContext.setInputRewards('');
     }
+
+
   }
 
     const handleClick = (e) => {
@@ -120,6 +127,10 @@ const Plan = (props) => {
       //     description
       //   } )
       // myContext.setWantTodo(e.target.value)
+      createTodo({goals, categories, rewards})
+      todoContext.setInputGoals('');
+      todoContext.setInputCategories('');
+      todoContext.setInputRewards('');
     }
     
     const outlinesData = [
@@ -173,6 +184,39 @@ const Plan = (props) => {
                   />
                 ))}
                 <OutlineForm addOutline={addOutline} outlines={outlines}/>
+
+                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                  ご褒美
+                </Typography>
+                <TextField 
+                  value={todoContext.inputRewards}
+                  onChange={(e) => todoContext.setInputGoals(e.target.value)}
+                  name="todo"  
+                  label="ご褒美" 
+                  ref={register({required: true, maxLength: 50})} 
+                  type="text"
+                  fullWidth
+                  margin="normal"
+                  inputRef={register({ required: true, maxLength: 20 })}
+                  error={Boolean(errors.todo)}
+                  helperText={errors.todo && "やることは20文字以内にして下さい。"}
+                  />
+                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                  カテゴリー
+                </Typography>
+                <TextField 
+                  value={todoContext.inputCategories}
+                  onChange={(e) => todoContext.setInputGoals(e.target.value)}
+                  name="todo"  
+                  label="カテゴリー" 
+                  ref={register({required: true, maxLength: 50})} 
+                  type="text"
+                  fullWidth
+                  margin="normal"
+                  inputRef={register({ required: true, maxLength: 20 })}
+                  error={Boolean(errors.todo)}
+                  helperText={errors.todo && "やることは20文字以内にして下さい。"}
+                  />
               </StyledPaper>
               {/* やること追加終了 */}
 
@@ -180,6 +224,7 @@ const Plan = (props) => {
               <StyledLink className="link" to='/top'>
               <Button
                   onClick={addTodo()}
+                  onClick={handleClick}
                   variant="contained"
                   type="submit"
                   color="primary"

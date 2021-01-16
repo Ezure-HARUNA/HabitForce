@@ -6,18 +6,26 @@
 //   const [want, setWant] = useState([]);
 //   const [currentUser, setCurrentUser] = useState(null)
 
-//   const createWant = async () => {
+//   const createWant = async ({ text, description, purpose, rewards, category, outlines, thisWeekRewards }) => {
 //     if (loading) return
 
 //     setLoading(true)
 
 //     const now = firestore.Timestamp.now()
-  
-//     const resTodo = firestore().collection('todoList').doc('todo').get
+
+   
+
+   
+//     //!➀スレッドを追加する
+//     const resTodo = firestore().collection('todoList').doc(todo'')
 
 //     //追加
-//     const docId = firestore().collection('todoList').doc().id
-  
+//     const docId = firestore().collection('want').doc().id
+//     const result = await wantRef.get()
+//     console.log(result.data())
+//     console.log(docId)
+//     console.log(text)
+//     console.log(now)
 
 //     // const wantRef = useMemo(() => {
 //     //   const col = db.collection('want').doc()
@@ -38,12 +46,13 @@
 //     //   setWant(data)
 //     // })
 //     //データを追加
-//     await firestore().collection('todoList').add({
+//     await firestore().collection('wants').add({
 //     docId: docId,
 //     //   createdAt: now,
 //       updatedAt: now,
 //     // test:'test'
 //     text: "text",
+//     description: description,
 //     // purpose: purpose,
 //     // rewards: rewards,
 //     // category: category,
