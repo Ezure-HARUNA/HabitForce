@@ -90,8 +90,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Card = ({ want }, props) => {
-  console.log(want.text)
+const Card = ({todo}) => {
+  // console.log(want.text)
   const todoContext = useContext(TodoContext)
   const theme = useTheme();
   const classes = useStyles(); 
@@ -146,7 +146,7 @@ const handleClickOpen = () => {
                         color="primary"
                       />
                     }
-                      label={want.text}
+                      label={todo.goals}
                   />
                   <StyledContainer className="time-container">
                     <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >

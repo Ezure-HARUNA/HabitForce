@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components'
 import { TodoContext } from '../App';
+import Card from './Card'
 
 // todoListという変数とdeleteTodoという関数をpropsとして受け取る
 const Todo = ({type}) => {
@@ -10,11 +11,12 @@ const Todo = ({type}) => {
             {/*受け取ったtodoListを使って表示する*/}
             {todoContext.todoList.map((todo, idx) => (
             <Container>
-                {todo}
+                <Card key={todo.id} todo={todo} />
                 <button onClick={() => todoContext.deleteTodo(idx)}>削除</button>
                 <button onClick={() => todoContext.changeTodoStatus(idx)}>{type === "todo" ? "完了済みにする" : "戻す"}</button>
             </Container>
             ))}
+            
         </div>
     )
   

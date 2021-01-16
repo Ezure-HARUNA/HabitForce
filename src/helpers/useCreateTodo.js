@@ -11,11 +11,12 @@ export const useCreateTodo = () => {
 
     const now = firestore.Timestamp.now()
   
-    const resTodo = firestore().collection('todoList').doc('todo').get
+    const resTodo = firestore().collection('todoList').doc('todo')
+    const result = await resTodo.get()
 
     //追加
     const docId = firestore().collection('todoList').doc().id
-    const result = await resTodo.get()
+
 
     // const wantRef = useMemo(() => {
     //   const col = db.collection('want').doc()
@@ -43,7 +44,7 @@ export const useCreateTodo = () => {
       goals,
       categories,
       rewards,
-      ottlineList,
+    //   outlineList,
     // test:'test'
     // text,
     // purpose: purpose,
@@ -52,7 +53,6 @@ export const useCreateTodo = () => {
     // outlines: outlines,
     // thisWeekRewards: thisWeekRewards,
     })
-
 
     setLoading(false)
     return result.data()
