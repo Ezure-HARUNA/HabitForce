@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 import styled, {createGlobalStyle} from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { MyContext } from '../App';
+import { TodoContext } from '../App';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { useCreateWant } from '../../helpers/useCreateWant'
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ThisWeekStack = (props) => {
-  const {task, setTask} = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
 
   const [text, setText] = useState('');
   const classes = useStyles();

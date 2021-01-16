@@ -5,7 +5,6 @@ import Top from '../components/Top/Top';
 import Header from '../Layout/Header'
 import Plan from './Plan/Plan'
 import Calendar from './Calendar';
-import Pomodoro from '../components/Pomodoro/Pomodoro.jsx';
 import Rewards from './Rewards.jsx';
 import MainItems from '../Layout/MainItems';
 import SecondItems from '../Layout/SecondItems';
@@ -25,52 +24,54 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 
 
-export const MyContext = createContext();
+export const TodoContext = createContext();
 
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth()
 export const db = firebase.firestore()
-// console.log(firebase.firestore())
-
 
 const App = () => {
   
   const [id, setId] =React.useState("")
 
-  // やりたいことリストの番号
-  // const [taskId, setTaskId] =React.useState("")
-  const [wantTodo, setWantTodo] = React.useState("")
-  const [description, setDescription] = React.useState("")
-  const [purpose, setPurpose] = React.useState("")
-  const [rewards, setRewards] = React.useState("")
-  const [category, setCategory] = React.useState("")
-  const [thisWeekTask, setThisWeekTask] = React.useState("")
-
-  const query = firestore().collection('wants').orderBy('updatedAt', 'desc')
-  const [wants = [], loading] = useCollectionData(query, { docId: 'id' })
-  const [ createWant ] = useCreateWant()
+   const [inputGoals, setInputGoals] = useState('');
+   const [inputRewards, setInputRewards] = useState('');
+   const [inputCategories, setInputCategories] = useState('');
+   const [ inputOutlines, setInputOutlines] = useState([])
+   const [todoList, setTodoList] = useState([]);
+   const [finishedList, setFinishedList] = useState([]);
+   // Loadingを判定する変数
+   const [isLoading, setIsLoading] = useState(true);
+   // 未完了のTodoが変化したかを監視する変数
+   const [isChangedTodo, setIsChangedTodo] = useState(false);
+   // 完了済みのTodoが変化したかを監視する変数
+   const [isChangedFinished, setIsChangedFinished] = useState(false);
 
 
   return (
     <div id="root">
-      <MyContext.Provider 
+      <TodoContext.Provider 
         value={{
-          wantTodo, setWantTodo, 
-          description, setDescription,
-          purpose, setPurpose,
-          rewards, setRewards,
-          category, setCategory,
-          thisWeekTask, setThisWeekTask
+          inputGoals, setInputGoals, 
+          inputRewards, setInputRewards,
+          inputCategories, setInputCategories,
+          inputOutlines, setInputOutlines,
+          todoList, setTodoList,
+          finishedList, setFinishedList,
+          isLoading, setIsLoading, 
+          isChangedTodo, setIsChangedTodo, 
+          isChangedFinished, setIsChangedFinished
 
         }}>
       
       <BrowserRouter>
             <Header id={id} setId={setId}/>
             <Route exact path='/' render={() => <SignIn id={id} setId={setId}></SignIn>}></Route>
-            <Route path='/top' render={(props) => <Top id={id} setId={setId} createWant={createWant} wants={wants}></Top>}></Route>
-            <Route path='/plan' render={(props) => <Plan id={id} setId={setId}></Plan>}></Route>
+            <Route path='/top' render={(props) => <Top id={id} setId={setId} ></Top>}></Route>
+            <Route path='/plan' render={(props) => 
+              <Plan id={id} setId={setId}
+            ></Plan>}></Route>
             <Route path='/calendar' render={(props) => <Calendar ></Calendar>}></Route>
-            <Route path='/pomodoro' render={(props) => <Pomodoro id={id} setId={setId}></Pomodoro>}></Route>
             <Route path='/rewards' render={(props) => <Rewards ></Rewards>}></Route>
             <Route path='/mainitems' render={(props) => <MainItems id={id} setId={setId}></MainItems>}></Route>
             <Route path='/seconditems' render={(props) => <SecondItems id={id} setId={setId}></SecondItems>}></Route>
@@ -78,14 +79,14 @@ const App = () => {
             <Route path='/editplan' render={(props) => <EditPlan id={id} setId={setId}></EditPlan>}></Route>
             <Route path='/thisweekstack' render={(props) => <ThisWeekStack id={id} setId={setId}></ThisWeekStack>}></Route>
             <Route path='/untilnowstack' render={(props) => <UntilNowStack id={id} setId={setId}></UntilNowStack>}></Route>
-            <Route path='/topcard' render={(props) => <Card id={id} setId={setId} createWant={createWant} wants={wants}></Card>}></Route>
-            <Route path='/topdetail' render={(props) => <Detail id={id} setId={setId} createWant={createWant} wants={wants}></Detail>}></Route>
+            <Route path='/topcard' render={(props) => <Card id={id} setId={setId}></Card>}></Route>
+            <Route path='/topdetail' render={(props) => <Detail id={id} setId={setId} ></Detail>}></Route>
             
             {/* <ul>
               <Route path='/list' render={(props) => <List></List>}></Route>
             </ul> */}
         </BrowserRouter>
-      </MyContext.Provider>
+      </TodoContext.Provider>
     </div>
     
          

@@ -1,5 +1,4 @@
 import React, { useState, useReducer, useContext } from 'react';
-import Pomodoro from '../Top/Pomodoro'
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
@@ -14,7 +13,7 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
-import { MyContext } from '../App';
+import { TodoContext } from '../App';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,24 +57,9 @@ const StylesTextField=styled(TextField)`
 
 const Detail = ({props, stack}) => {
   const classes = useStyles();
-  const [state, dispatch] = useReducer(reducer, [])
-  const [task, setTask] = useState('');
-  const [week, setWeek] = useState([]);
-  const [category, setCategory] = useState('');
-  const myContext = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
   
 
-  const nextToPage1= (e)=>{
-    //e.preventDefault()
-    props.setId(props.id)
-
-    dispatch({
-      type: 'FOLLOW_TO_TASK_THIS_WEEK',
-      task,
-      week,
-      category
-    })
-}
     return (
         <React.Fragment>
           <Container>
@@ -89,7 +73,7 @@ const Detail = ({props, stack}) => {
               今週の目標
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {myContext.thisWeekTask}
+              {/* {myContext.thisWeekTask} */}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
             今週の目標
@@ -101,24 +85,21 @@ const Detail = ({props, stack}) => {
               元の目標
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {myContext.wantTodo}
+              {/* {myContext.wantTodo} */}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
               元の目標の詳細
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {myContext.description}
+              {/* {myContext.description} */}
             </StyledTypography2>
             <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
               元の目的
             </StyledTypography>
             <StyledTypography2 component="h1" variant="h6" color="inherit" noWrap >
-              {myContext.purpose}
+              {/* {myContext.purpose} */}
             </StyledTypography2>
-            <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-              ポモドーロ機能
-            </StyledTypography>
-            <Pomodoro/>
+            
             
           </Container>
         </React.Fragment>

@@ -25,7 +25,7 @@ import {
 } from '@material-ui/pickers';
 
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
-import { MyContext } from '../App';
+import { TodoContext } from '../App';
 import { useForm } from "react-hook-form";
 import OutlineForm  from './OutlineForm'
 import OutlineList  from './OutlineList'
@@ -127,7 +127,7 @@ const ThisWeekCard = (props) => {
   const classes = useStyles();
  
   // const []
-  const myContext = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
   const nextToPage1= (e)=>{
     //e.preventDefault()
     props.setId(props.id)
@@ -136,7 +136,7 @@ const ThisWeekCard = (props) => {
 
 const handleChangeThisWeekTask = (e) => {
   setTextThisWeekTask({value: e.target.value})
-  myContext.setThisWeekTask(e.target.value)
+
 } 
 
 //outlineの追加

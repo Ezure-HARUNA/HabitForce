@@ -14,7 +14,7 @@ import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
 import reducer from '../../reducers/nextToWeek'
-import { MyContext } from '../App';
+import { TodoContext } from '../App';
 import { useForm } from "react-hook-form";
 import { SentimentSatisfiedAlt } from '@material-ui/icons';
 //firestore
@@ -64,20 +64,13 @@ const StyledTextField=styled(TextField)`
 const Detail = (props) => {
   
   const classes = useStyles();
-
-  const [createWant, loading] = useCreateWant()
-  const [text, setText] = useState('')
-  const [description, setDescription] = useState('');
-  const [purpose, setPurpose] = useState('');
-  const [category, setCategory] = useState();
-  const [rewards, setRewards] = useState('');
-  
+  // const [createWant, loading] = useCreateWant()
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => console.log(data);
-
+  const todoContext = useContext(TodoContext)
 
   const handleClick = () => {
-    createWant({text, description, purpose, category, rewards})
+    // createWant({text, description, purpose, category, rewards})
   }
     return (
       <div>

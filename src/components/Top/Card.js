@@ -21,7 +21,7 @@ import Container from '@material-ui/core/Container';
 
 import styled from 'styled-components'
 import TimeLimit from './TimeLimit';
-import { MyContext } from '../../components/App';
+import { TodoContext } from '../../components/App';
 import { TimeContext } from './TimeLimit'
 import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Card = ({ want }, props) => {
   console.log(want.text)
-  const myContext = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
   const theme = useTheme();
   const classes = useStyles(); 
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -124,34 +124,11 @@ const [todos, setTodos] = useState({id: 0, outlines: "", totalTime: 0 })
 
 const handleChange = (event) => {
   setState({ ...state, [event.target.name]: event.target.checked });
-//   if (checked) {
-//     update({
-//       setTodos
-//         ([...todos, 
-//           {id:0,
-//            outlines: {thisWeekContext.outlines[0]}, 
-//            totalTime: todos[0][stackTime].push()
-//           }
-//         ])
-    
-//     })
-    
-
-// } else {
-// 　 todos
-
-// }
 };
-
-
 
 
 const handleClickOpen = () => {
   setOpen(true);
-  // update({
-  //   setTime: setTodos([ ...todos,{ id:0, title:"hoge", time }])
-
-  // })
 };
     return (
         <React.Fragment>
@@ -181,7 +158,7 @@ const handleClickOpen = () => {
                       カテゴリー
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                      {myContext.category}
+                    
                     </StyledTypography>
 
                     <div>

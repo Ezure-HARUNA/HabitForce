@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import reducer from '../../reducers/nextToWeek'
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
-import { MyContext } from '../App';
+import { TodoContext } from '../App';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Top = (props) => {
-  const name = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
 
   const [state, dispatch] = useReducer(reducer, [])
   const classes = useStyles();
@@ -99,13 +99,16 @@ const Top = (props) => {
         <GlobalStyle/>
           <Container maxWidth="lg" >
             <Grid container spacing={3}>
-              {props.wants.map((want) => (
+              {/* {props.wants.map((want) => (
                 <Card  want={want} createWant={props.createWant}/>
-              ))}
+              ))} */}
               <Paper >
-                {props.wants.map((want) => (
+                {/* {props.wants.map((want) => (
                   <Detail want={props.want} createWant={props.createWant}/>
-                ))}
+                ))} */}
+              </Paper>
+              <Paper>
+
               </Paper>
             </Grid>
             <Box pt={4}>

@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
-import { MyContext } from '../App'
+import { TodoContext } from '../App'
 
 // import AppContext from '../../contexts/AppContext'
 import { FOLLOW_TO_TASK_THIS_WEEK } from '../../actions/actions'
@@ -58,7 +58,7 @@ const StylesTextField=styled(TextField)`
 `
 
 const Detail = (props) => {
-  const myContext = useContext(MyContext)
+  const todoContext = useContext(TodoContext)
 
   const handleId= (e)=>{
     e.preventDefault()
@@ -89,7 +89,7 @@ const Detail = (props) => {
                 ご褒美
               </StyledTypography>
               <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                {myContext.rewards}
+                {/* {myContext.rewards} */}
               </StyledTypography>
               
 
