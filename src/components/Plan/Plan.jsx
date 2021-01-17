@@ -33,32 +33,40 @@ const GlobalStyle = createGlobalStyle`
 const Div = styled.div`
   display: flex;
   justify-content: space-around!important;
+  
 `
 
 const StyledPaper = styled(Paper)`
 width: 80%!important;
-height: 84.4%!important;
+height: 85%!important;
+position: relative!important;
+`
+
+const StyledTypography = styled(Typography)`
+  margin-top: 2.5%!important;
+  margin-left: 5%!important;
+`
+const StyledTextField = styled(TextField)`
+width: 90%!important;
+margin-left: 5%!important;
 `
 
 const StyledLink = styled(Link)`
 text-decoration: none!important;
-position: relative;
 margin-left: 300px!important;
 
 `
 
 const StyledButton =styled(Button)`
-  margin-left: 2.1%;
-  /* background-color:  #fe6b8b!important; */
-  /* background-color: #ff8e53!important; */
-  background-color: blue!important;
+  margin-left: 52.5%;
   font-weight: bold;
-  height: 50px!important;
   border-radius: 25px!important;
-  position: absolute;
+  position: absolute!important;
   bottom: 0px!important;
-  right: 0px!important;
+  right: 0px!important; 
   z-index: 10!important;
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 `
 
 function Copyright() {
@@ -162,10 +170,10 @@ const Plan = (props) => {
 
               {/* やること追加 */}
               <StyledPaper>
-                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   今週のゴール
-                </Typography>
-                <TextField 
+                </StyledTypography>
+                <StyledTextField 
                   value={todoContext.inputGoals}
                   onChange={(e) => todoContext.setInputGoals(e.target.value)}
                   name="todo"  
@@ -179,19 +187,19 @@ const Plan = (props) => {
                   helperText={errors.todo && "やることは20文字以内にして下さい。"}
                   />
 
-                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   アウトライン
-                </Typography>
+                </StyledTypography>
                 {outlines.map((outline, index) => (
                   <OutlineList outlines={outlines} setOutlines={setOutlines} index={index}
                   />
                 ))}
                 <OutlineForm addOutline={addOutline} outlines={outlines}/>
 
-                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   ご褒美
-                </Typography>
-                <TextField 
+                </StyledTypography>
+                <StyledTextField 
                   value={todoContext.inputRewards}
                   onChange={(e) => todoContext.setInputGoals(e.target.value)}
                   name="todo"  
@@ -204,10 +212,10 @@ const Plan = (props) => {
                   error={Boolean(errors.todo)}
                   helperText={errors.todo && "やることは20文字以内にして下さい。"}
                   />
-                <Typography component="h1" variant="h6" color="inherit" noWrap >
+                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   カテゴリー
-                </Typography>
-                <TextField 
+                </StyledTypography>
+                <StyledTextField 
                   value={todoContext.inputCategories}
                   onChange={(e) => todoContext.setInputGoals(e.target.value)}
                   name="todo"  
@@ -225,7 +233,7 @@ const Plan = (props) => {
 
             </Div>
               <StyledLink className="link" to='/top'>
-              <Button
+              <StyledButton
                   // onClick={addTodo()}
                   onClick={handleClick}
                   variant="contained"
@@ -236,7 +244,7 @@ const Plan = (props) => {
                   startIcon={<ForwardOutlinedIcon />}
                 >
                   やること追加
-                </Button>
+                </StyledButton>
               </StyledLink>
             
 

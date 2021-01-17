@@ -60,13 +60,7 @@ class Demo extends React.Component {
   handleClick = (value) => {
     alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
   };
-
-  const randomValues = getRange(200).map(index => {
-    return {
-      date: shiftDate(today, -index),
-      count: getRandomInt(1, 3),
-    };
-  });
+  
 
   render() {
     return (

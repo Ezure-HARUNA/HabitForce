@@ -4,6 +4,13 @@ import
   } 
 from '@material-ui/core'
 import { useForm } from "react-hook-form";
+import styled from 'styled-components'
+
+const StyledTextField = styled(TextField)`
+width: 90%!important;
+margin-left: 5%!important;
+
+`
 
 const OutlineList = (props) => {
     const { register, errors } = useForm();
@@ -19,7 +26,7 @@ const OutlineList = (props) => {
     return (
         <div>
             <div>
-            <TextField 
+            <StyledTextField 
                 // value={ThisWeekContext.outlines[0]}
                 label="outline" 
                 value={input}
