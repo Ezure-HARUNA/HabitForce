@@ -1,6 +1,12 @@
 import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
+import 'react-calendar-heatmap/dist/styles.css';
+import styled from 'styled-components'
+
+const StyledCalendarHeatmap = styled(CalendarHeatmap)`
+width: 40%!important
+` 
 
 function shiftDate(date, numDays) {
   const newDate = new Date(date);
@@ -55,12 +61,19 @@ class Demo extends React.Component {
     alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
   };
 
+  const randomValues = getRange(200).map(index => {
+    return {
+      date: shiftDate(today, -index),
+      count: getRandomInt(1, 3),
+    };
+  });
+
   render() {
     return (
       <div>
         <div className="row">
           <div className="col-12 col-sm-6">
-            <CalendarHeatmap
+            <StyledCalendarHeatmap
               values={this.state.values}
               classForValue={(value) => {
                 if (!value) {
@@ -72,19 +85,7 @@ class Demo extends React.Component {
               onClick={this.handleClick}
             />
           </div>
-          <div className="col-12 col-sm-6">
-            <CalendarHeatmap
-              values={this.state.values}
-              classForValue={(value) => {
-                if (!value) {
-                  return 'color-empty';
-                }
-                return `color-gitlab-${value.count}`;
-              }}
-              tooltipDataAttrs={this.getTooltipDataAttrs}
-              onClick={this.handleClick}
-            />
-          </div>
+         
         </div>{' '}
         <div className="text-sm-center mt-4">
           <button className="btn btn-link btn-sm text-secondary" onClick={this.generateValues}>

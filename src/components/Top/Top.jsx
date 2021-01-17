@@ -85,12 +85,6 @@ const Top = (props) => {
         //e.preventDefault()
         props.setId(props.id)
 
-        dispatch({
-          type: 'FOLLOW_TO_TASK_THIS_WEEK',
-          task,
-          week,
-          category
-        })
     }
     const [task, setTask] = useState('');
     const [week, setWeek] = useState([]);

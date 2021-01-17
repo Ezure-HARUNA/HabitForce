@@ -133,6 +133,8 @@ const handleChange = (event) => {
 const handleClickOpen = () => {
   setOpen(true);
 };
+
+console.log(todo.goals)
     return (
         <React.Fragment>
           <StyledContainer className="big-container">

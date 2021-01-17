@@ -16,6 +16,9 @@ export const useCreateTodo = () => {
 
     //追加
     const docId = firestore().collection('todoList').doc().id
+    console.log(result.data())
+    console.log(docId)
+    console.log(now)
 
 
     // const wantRef = useMemo(() => {
@@ -37,11 +40,11 @@ export const useCreateTodo = () => {
     //   setWant(data)
     // })
     //データを追加
-    await firestore().collection('todoList').add({
-      // docId: docId,
+    const retTodo = await firestore().collection('todoList').doc('todo').set({
+      docId: docId,
     //   createdAt: now,
-      // updatedAt: now,
-      goals,
+      updatedAt: now,
+      goals: goals,
       categories,
       rewards,
     //   outlineList,
