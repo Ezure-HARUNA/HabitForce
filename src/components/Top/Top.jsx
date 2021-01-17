@@ -25,33 +25,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Title = styled.p`
-  font-size: 26px;
-  color: #0097a7;
-  letter-spacing: 2.8px;
-  font-weight: 200;
-`;
 
-const SubTitle = styled.p`
-  font-size: 22px;
-  color: #5c5c5c;
-`;
-
-const SubContainer = styled.div`
-  width: 400px;
-`;
-
-const TodoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  margin: 0 auto;
-  justify-content: space-between;
-`;
-
-const Loading = styled.div`
-  margin: 40px auto;
-`;
 
 // const DivWeb= styled.div`
 //   .timer-disc-container {
@@ -137,21 +111,21 @@ const Top = (props) => {
                 ))} */}
               </Paper>
               <Paper>
-                {todoContext.isLoading ? 
-                  <Loading>loading</Loading>
-                :
-                  <TodoContainer>
+                {/* {todoContext.isLoading ?  */}
+                  {/* <Typography>loading</Typography> */}
+                {/* : */}
+                  <Container>
                   {/* todoListという変数とdeleteTodoという関数をpropsとしてTodoコンポーネントに渡している*/}
-                    <SubContainer>
-                      <SubTitle>未完了</SubTitle>
+                    <Container>
+                      <Typography>未完了</Typography>
                       <Todo type="todo"/>
-                    </SubContainer>
-                    <SubContainer>
-                      <SubTitle>完了済み</SubTitle>
+                    </Container>
+                    <Container>
+                      <Typography>完了済み</Typography>
                       <Todo type="done"/>
-                    </SubContainer>
-                  </TodoContainer>
-                }
+                    </Container>
+                  </Container>
+                {/* // } */}
               </Paper>
             </Grid>
             <Box pt={4}>

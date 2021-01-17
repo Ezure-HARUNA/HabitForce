@@ -93,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
 const Card = ({todo}) => {
   // console.log(want.text)
   const todoContext = useContext(TodoContext)
+  console.log(todo.goals)
+  console.log(todo.categories)
+  
   const theme = useTheme();
   const classes = useStyles(); 
   // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
