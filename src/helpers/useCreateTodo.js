@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
 
-  const createTodo = async ({ goals, categories, rewards}) => {
+  const createTodo = async ({ goals, categories, rewards, outlines}) => {
     if (loading) return
 
     setLoading(true)
@@ -16,7 +16,7 @@ export const useCreateTodo = () => {
 
     //追加
     const docId = firestore().collection('todoList').doc().id
-    console.log(result.data())
+    // console.log(result.data())
     console.log(docId)
     console.log(now)
 
@@ -44,10 +44,10 @@ export const useCreateTodo = () => {
       docId: docId,
     //   createdAt: now,
       updatedAt: now,
-      goals: goals,
+      goals: "goals",
       categories,
       rewards,
-    //   outlineList,
+      outlines: ["a", "b", "c"]
     // test:'test'
     // text,
     // purpose: purpose,
@@ -57,6 +57,12 @@ export const useCreateTodo = () => {
     // thisWeekRewards: thisWeekRewards,
     })
 
+    console.log("引数", { docId: docId,
+        //   createdAt: now,
+          updatedAt: now,
+          goals: goals,
+          categories,
+          rewards,})
     setLoading(false)
     return result.data()
   }

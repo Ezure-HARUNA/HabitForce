@@ -28,18 +28,22 @@ import CloseIcon from '@material-ui/icons/Close';
 import Card from './Card'
 import BarGraph from './BarGraph'
 import ContributionGraph from './ContributionGraph'
+import Text from './Text'
 
 const StyledCardPaper = styled(Paper)`
-  width: 20%!important;
+  width: 40%!important;
   margin-top: 16px;
 `
 const StyledBarGraphPaper = styled(Paper)`
-width: 40%!important;
+width: 50%!important;
 `
 
 const StyledContributionGraphPaper = styled(Paper)`
 width: 40%!important;
 `
+
+const StyledContainer = styled(Container)`
+display: flex!important` 
 
 const UntilNowStack = () => {
     //outlineの追加
@@ -51,14 +55,7 @@ const UntilNowStack = () => {
   const [cards, setCards] = useState(cardsData)
     return (
         <div>
-            <Container>
-                <StyledCardPaper>
-                    {cards.map((card, index) => (
-                    <Card index={index}
-                    />
-                    ))}
-                </StyledCardPaper>
-            </Container>
+            <StyledContainer className="small-container">
             <Container>
                 <StyledBarGraphPaper>
                     <BarGraph/>
@@ -66,9 +63,15 @@ const UntilNowStack = () => {
                 <StyledContributionGraphPaper>
                     <ContributionGraph/>
                 </StyledContributionGraphPaper>
+               
                 
             </Container>
-            
+            <Container>
+                <StyledCardPaper>
+                        <Text/>
+                </StyledCardPaper>
+            </Container>
+            </StyledContainer>
         </div>
     )
 }

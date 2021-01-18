@@ -21,6 +21,12 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import OutlineForm  from './OutlineForm'
 import OutlineList  from './OutlineList'
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import { useCreateTodo } from '../../helpers/useCreateTodo'
 
 const GlobalStyle = createGlobalStyle`
@@ -29,6 +35,17 @@ const GlobalStyle = createGlobalStyle`
     background-color: #F2F2F2;
   }
 `;
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  appBarSpacer: theme.mixins.toolbar,
+}));
 
 const Div = styled.div`
   display: flex;
@@ -45,6 +62,10 @@ position: relative!important;
 const StyledTypography = styled(Typography)`
   margin-top: 2.5%!important;
   margin-left: 5%!important;
+`
+
+const StyledFormControl = styled(FormControl)`
+margin-left: 5%!important;
 `
 const StyledTextField = styled(TextField)`
 width: 90%!important;
@@ -85,9 +106,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  appBarSpacer: theme.mixins.toolbar,
-}));
+
 
 
 const Plan = (props) => {
@@ -102,6 +121,12 @@ const Plan = (props) => {
   const [goals, setGoals] = useState('')
   const [rewards, setRewards] = useState('')
   const [categories, setCategories] = useState('')
+
+  const [schedule, setSchedule] = React.useState('');
+
+  const handleChange = (event) => {
+    setSchedule(event.target.value);
+  };
 
 
   // 追記 一番最初にfirestoreからデータを取ってきてstateに入れる
@@ -138,7 +163,7 @@ const Plan = (props) => {
       //     description
       //   } )
       // myContext.setWantTodo(e.target.value)
-      createTodo({goals, categories, rewards})
+      createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
       todoContext.setInputGoals('');
       todoContext.setInputCategories('');
       todoContext.setInputRewards('');
@@ -186,6 +211,26 @@ const Plan = (props) => {
                   error={Boolean(errors.todo)}
                   helperText={errors.todo && "やることは20文字以内にして下さい。"}
                   />
+
+                  <StyledFormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">shedule</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={schedule}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={10} type="habit">毎日同じことをする</MenuItem>
+                      <MenuItem value={20} type="outline">アウトラインを作成する</MenuItem>
+                    </Select>
+                  </StyledFormControl>
+
+                  {/* {type === "habit" ? (
+                    <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                      アウトライン
+                    </StyledTypography>
+                   ) : ( <h2>なし</h2>)
+                  } */}
 
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   アウトライン

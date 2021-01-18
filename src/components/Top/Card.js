@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Card = ({todo}) => {
+const Card = ({todo, type}) => {
   // console.log(want.text)
   const todoContext = useContext(TodoContext)
   console.log(todo.goals)
@@ -166,7 +166,7 @@ console.log(todo.goals)
                     
                     </StyledTypography>
 
-                    <div>
+                   
                       <Button onClick={handleClick}>完了</Button>
                       <Snackbar
                         anchorOrigin={{
@@ -188,7 +188,7 @@ console.log(todo.goals)
                           </React.Fragment>
                         }
                       />
-                    </div>
+                    
                 
                 </StyledPaper>
               </StyledContainer>
