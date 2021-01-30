@@ -77,7 +77,7 @@ const Detail = (props) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Container>
             <FirstTypography component="h1" variant="h6" color="inherit" noWrap >
-              やりたいこと
+              ゴール
             </FirstTypography>
             <TextField 
               // value={text}

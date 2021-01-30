@@ -94,38 +94,39 @@ const Top = (props) => {
     return (
       <React.Fragment>
         <GlobalStyle/>
-          <Container maxWidth="lg" >
-            <Grid container spacing={3}>
+          {/* <Container maxWidth="lg" > */}
+            {/* <Grid container spacing={3}> */}
               {/* {props.wants.map((want) => (
                 <Card  want={want} createWant={props.createWant}/>
               ))} */}
-              <Paper >
+              {/* <Paper > */}
                 {/* {props.wants.map((want) => (
                   <Detail want={props.want} createWant={props.createWant}/>
                 ))} */}
-              </Paper>
-              <Paper>
+              {/* </Paper>
+              <Paper> */}
                 {/* {todoContext.isLoading ?  */}
                   {/* <Typography>loading</Typography> */}
                 {/* : */}
-                  <Container>
+                  {/* <Container> */}
                   {/* todoListという変数とdeleteTodoという関数をpropsとしてTodoコンポーネントに渡している*/}
-                    <Container>
-                      <Typography>未完了</Typography>
+                    {/* <Container> */}
+                      {/* <Typography>未完了</Typography>
                       <Todo type="todo"/>
                     </Container>
                     <Container>
                       <Typography>完了済み</Typography>
                       <Todo type="done"/>
-                    </Container>
-                  </Container>
+                    </Container> */}
+{/*                 
+                  </Container> */}
                 {/* // } */}
-              </Paper>
+              {/* </Paper>
             </Grid>
             <Box pt={4}>
               <Copyright />
             </Box>
-          </Container>  
+          </Container>   */}
       </React.Fragment>
       
     )

@@ -27,6 +27,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { CardTravel } from '@material-ui/icons';
 
 const StyledContainer=styled(Container)`
   .big-container {
@@ -90,11 +91,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Card = ({todo, type}) => {
+const Card = ({card, type}) => {
   // console.log(want.text)
   const todoContext = useContext(TodoContext)
-  console.log(todo.goals)
-  console.log(todo.categories)
+
   
   const theme = useTheme();
   const classes = useStyles(); 
@@ -134,7 +134,6 @@ const handleClickOpen = () => {
   setOpen(true);
 };
 
-console.log(todo.goals)
     return (
         <React.Fragment>
           <StyledContainer className="big-container">
@@ -151,19 +150,13 @@ console.log(todo.goals)
                         color="primary"
                       />
                     }
-                      label={todo.goals}
+                      label={card.goals}
                   />
-                  <StyledContainer className="time-container">
-                    <StyledTypography component="h1" variant="h6" color="inherit"  noWrap >
-                      時間:
-                    </StyledTypography>
-                    <TimeLimit className={classes.root}/>
-                  </StyledContainer>
                     <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
-                      カテゴリー
+                      アウトライン
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                    
+                    　{card.outlines}
                     </StyledTypography>
 
                    

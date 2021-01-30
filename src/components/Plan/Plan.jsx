@@ -122,6 +122,13 @@ const Plan = (props) => {
   const [rewards, setRewards] = useState('')
   const [categories, setCategories] = useState('')
 
+  const cardsData = [
+    {id: 1, content: ''},
+    {id: 2, content: ''},
+    {id: 3, content: ''}
+  ]
+  const [cards, setCards] = useState(cardsData)
+
   const [schedule, setSchedule] = React.useState('');
 
   const handleChange = (event) => {
@@ -156,17 +163,15 @@ const Plan = (props) => {
 
   // }
 
-    const handleClick = (e) => {
-      // createWant
-      //   ({
-      //     text, 
-      //     description
-      //   } )
-      // myContext.setWantTodo(e.target.value)
+    const handleClick = (card) => {
+
       createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
       todoContext.setInputGoals('');
       todoContext.setInputCategories('');
       todoContext.setInputRewards('');
+      //cardのadd
+        card.id = cards.length + 1
+        setCards([...cards, {id: cards.length + 1, content: ''}])
     }
     
     const outlinesData = [
@@ -246,7 +251,7 @@ const Plan = (props) => {
                 </StyledTypography>
                 <StyledTextField 
                   value={todoContext.inputRewards}
-                  onChange={(e) => todoContext.setInputGoals(e.target.value)}
+                  onChange={(e) => todoContext.setInputRewards(e.target.value)}
                   name="todo"  
                   label="ご褒美" 
                   ref={register({required: true, maxLength: 50})} 
@@ -257,12 +262,14 @@ const Plan = (props) => {
                   error={Boolean(errors.todo)}
                   helperText={errors.todo && "やることは20文字以内にして下さい。"}
                   />
+
+             
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   カテゴリー
                 </StyledTypography>
                 <StyledTextField 
                   value={todoContext.inputCategories}
-                  onChange={(e) => todoContext.setInputGoals(e.target.value)}
+                  onChange={(e) => todoContext.setInputCategories(e.target.value)}
                   name="todo"  
                   label="カテゴリー" 
                   ref={register({required: true, maxLength: 50})} 
