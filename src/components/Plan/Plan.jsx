@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import Header from '../../Layout/Header'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -188,16 +189,7 @@ const Plan = (props) => {
     return (
       <React.Fragment>
         <GlobalStyle/>
-          <Container maxWidth="lg" >
-            <Div container spacing={3}>
-           
-              {/* <StyledPaper>
-                <Card/>
-              </StyledPaper>
-              <StyledPaper>
-                <Detail/>
-              </StyledPaper> */}
-
+              <Header />
               {/* やること追加 */}
               <StyledPaper>
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
@@ -283,7 +275,6 @@ const Plan = (props) => {
               </StyledPaper>
               {/* やること追加終了 */}
 
-            </Div>
               <StyledLink className="link" to='/top'>
               <StyledButton
                   // onClick={addTodo()}
@@ -302,8 +293,7 @@ const Plan = (props) => {
 
             <Box pt={4}>
               <Copyright />
-            </Box>
-          </Container>  
+            </Box> 
       </React.Fragment>
       
     )

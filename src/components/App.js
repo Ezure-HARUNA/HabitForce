@@ -2,7 +2,7 @@ import React, {createContext, useState} from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 // import About from '../components/About'
 import Top from '../components/Top/Top';
-import Header from '../Layout/Header'
+// import Header from '../Layout/Header'
 import Plan from './Plan/Plan'
 import Calendar from './Calendar';
 import Rewards from './Rewards.jsx';
@@ -67,7 +67,7 @@ const App = () => {
         }}>
       
       <BrowserRouter>
-            <Header id={id} setId={setId}/>
+            {/* <Header id={id} setId={setId}/> */}
             <Route exact path='/' render={() => <SignIn id={id} setId={setId}></SignIn>}></Route>
             <Route path='/top' render={(props) => <Top id={id} setId={setId} ></Top>}></Route>
             <Route path='/plan' render={(props) => 
