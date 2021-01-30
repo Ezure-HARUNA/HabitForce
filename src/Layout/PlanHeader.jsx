@@ -29,15 +29,6 @@ import {Link} from 'react-router-dom'
 
 const drawerWidth = 240;
 
-const StyledAppBar = styled(AppBar)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -95,12 +86,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const StyledAppBar = styled(AppBar)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+`
+
+const StyledToolbar = styled(Toolbar)`
+  position: relative!important;
+`
+
+const StyledButton = styled(Button)`
+  position: absolute!important;
+  right: 0%!important;
+  font-weight: bold!important;
+`
+
 const StyledListItemText=styled(ListItemText)`
  :hover {
     color: blue!important;
   }
 `
-
 
 const StyledLink=styled(Link)`
   /* text-decoration:none!important; */
@@ -108,17 +117,17 @@ const StyledLink=styled(Link)`
   text-decoration: none;
 `
 
-const StyledButton = styled(Button)`
-background: blue;
-  border-radius: 3px;
-  border: 0;
-  color: white!important;
-  height: 48px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  margin-left:10px;
-  margin-top:-15px;
-`;
+// const StyledButton = styled(Button)`
+// background: blue;
+//   border-radius: 3px;
+//   border: 0;
+//   color: white!important;
+//   height: 48px;
+//   padding: 0 30px;
+//   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+//   margin-left:10px;
+//   margin-top:-15px;
+// `;
 
 
 
@@ -149,7 +158,7 @@ export default function Header(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <StyledToolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -162,7 +171,8 @@ export default function Header(props) {
           <Typography variant="h5" noWrap>
             Habit Force
           </Typography>
-        </Toolbar>
+          <StyledButton color="inherit">保存</StyledButton>
+        </StyledToolbar>
       </StyledAppBar>
       <Drawer
         className={classes.drawer}

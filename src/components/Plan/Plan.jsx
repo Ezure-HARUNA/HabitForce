@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Header from '../../Layout/Header'
+import PlanHeader from '../../Layout/PlanHeader'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -189,7 +189,7 @@ const Plan = (props) => {
     return (
       <React.Fragment>
         <GlobalStyle/>
-              <Header />
+              <PlanHeader />
               {/* やること追加 */}
               <StyledPaper>
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
