@@ -17,6 +17,8 @@ import { TodoContext } from '../App';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Todo from './Todo'
+import { firestore } from 'firebase/app';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -70,6 +72,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Top = (props) => {
+  const query = firestore().collection('todoList').orderBy('updatedAt', 'desc')
+  const [todoList = [], loading] = useCollectionData(query, { docId: 'id' })
+  
   const todoContext = useContext(TodoContext)
 
   const [state, dispatch] = useReducer(reducer, [])
@@ -94,39 +99,11 @@ const Top = (props) => {
     return (
       <React.Fragment>
         <GlobalStyle/>
-          {/* <Container maxWidth="lg" > */}
-            {/* <Grid container spacing={3}> */}
-              {/* {props.wants.map((want) => (
-                <Card  want={want} createWant={props.createWant}/>
-              ))} */}
-              {/* <Paper > */}
-                {/* {props.wants.map((want) => (
-                  <Detail want={props.want} createWant={props.createWant}/>
-                ))} */}
-              {/* </Paper>
-              <Paper> */}
-                {/* {todoContext.isLoading ?  */}
-                  {/* <Typography>loading</Typography> */}
-                {/* : */}
-                  {/* <Container> */}
-                  {/* todoListという変数とdeleteTodoという関数をpropsとしてTodoコンポーネントに渡している*/}
-                    {/* <Container> */}
-                      {/* <Typography>未完了</Typography>
-                      <Todo type="todo"/>
-                    </Container>
-                    <Container>
-                      <Typography>完了済み</Typography>
-                      <Todo type="done"/>
-                    </Container> */}
-{/*                 
-                  </Container> */}
-                {/* // } */}
-              {/* </Paper>
-            </Grid>
-            <Box pt={4}>
-              <Copyright />
-            </Box>
-          </Container>   */}
+         
+          {todoList.map((card) => (
+            <Card key={card.id} card={card}/>
+          ))}
+
       </React.Fragment>
       
     )

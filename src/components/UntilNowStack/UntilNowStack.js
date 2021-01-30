@@ -39,7 +39,7 @@ width: 50%!important;
 `
 
 const StyledContributionGraphPaper = styled(Paper)`
-width: 40%!important;
+/* width: 40%!important; */
 `
 
 const StyledContainer = styled(Container)`

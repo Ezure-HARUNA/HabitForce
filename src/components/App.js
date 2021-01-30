@@ -38,6 +38,7 @@ const App = () => {
    const [inputRewards, setInputRewards] = useState('');
    const [inputCategories, setInputCategories] = useState('');
    const [ inputOutlines, setInputOutlines] = useState([])
+   const [ inputTimes, setInputTimes ] = useState('');
    const [todoList, setTodoList] = useState([]);
    const [finishedList, setFinishedList] = useState([]);
    // Loadingを判定する変数
@@ -56,6 +57,7 @@ const App = () => {
           inputRewards, setInputRewards,
           inputCategories, setInputCategories,
           inputOutlines, setInputOutlines,
+          inputTimes, setInputTimes,
           todoList, setTodoList,
           finishedList, setFinishedList,
           isLoading, setIsLoading, 
@@ -78,7 +80,7 @@ const App = () => {
             {/* <Route path='/header' render={(props) => <Header id={id} setId={setId}></Header>}></Route> */}
             <Route path='/editplan' render={(props) => <EditPlan id={id} setId={setId}></EditPlan>}></Route>
             <Route path='/thisweekstack' render={(props) => <ThisWeekStack id={id} setId={setId}></ThisWeekStack>}></Route>
-            <Route path='/untilnowstack' render={(props) => <UntilNowStack id={id} setId={setId}></UntilNowStack>}></Route>
+            <Route path='/stack' render={(props) => <UntilNowStack id={id} setId={setId}></UntilNowStack>}></Route>
             <Route path='/topcard' render={(props) => <Card id={id} setId={setId}></Card>}></Route>
             <Route path='/topdetail' render={(props) => <Detail id={id} setId={setId} ></Detail>}></Route>
             

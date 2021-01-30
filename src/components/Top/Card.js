@@ -28,34 +28,23 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { CardTravel } from '@material-ui/icons';
+import TextField from '@material-ui/core/TextField';
 
 const StyledContainer=styled(Container)`
-  .big-container {
-    margin: 50px 60px 50px!important;
-  }
-  .time-container {
-    display: flex;
-  }
-  .category-container {
-    margin-left: 30px;
-  }
-  /* },
-  .small-container {
-    margin-bottom: 16px;
-  } */
+  display: flex!important;
+
     `
 
 const StyledFormControlLabel=styled(FormControlLabel)`
-  margin: 16px!important;
+  /* margin: 16px!important; */
 `
 const StyledTypography=styled(Typography)`
-    margin: 12px;
+    margin: 12px!important;
 `
 
 const StyledPaper = styled(Paper)`
-  width: 250%!important;
-  margin-top: 16px;
-  height: 250px!important;
+  width: 85%!important;
+  margin: 0 auto !important;
 `
 
 const StyledTooltip=styled(Tooltip)`
@@ -88,10 +77,26 @@ const useStyles = makeStyles((theme) => ({
       },
     tooltip: {
         spacing: 10,
+    },
+    container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
     }
 }));
 
+
+
+
 const Card = ({card, type}) => {
+  //timeの設定
+  // const formatDate = (date) => isNil(date.seconds)
+  //  ? date // Already a javascript date object
+  //  : date.toDate()
   // console.log(want.text)
   const todoContext = useContext(TodoContext)
 
@@ -136,30 +141,36 @@ const handleClickOpen = () => {
 
     return (
         <React.Fragment>
-          <StyledContainer className="big-container">
-          
-            <Grid item xs={12} md={12} lg={6} container spacing={3}>
-              <StyledContainer className="small-container">
+            <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+              {card.categories}
+            </StyledTypography>
                 <StyledPaper m={5} p={5}>
-                  <StyledFormControlLabel
-                    control={
-                      <Checkbox
-                        checked={state.checkedA}
-                        onChange={handleChange}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                      label={card.goals}
-                  />
-                    <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
-                      アウトライン
-                    </StyledTypography>
-                    <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                    　{card.outlines}
-                    </StyledTypography>
-
-                   
+                  <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+                    {card.goals}
+                  </StyledTypography>
+                  <StyledContainer>
+                  {/* {outlines.map((outline) => (
+                    <Outline key={outline.id} outline={outline}/>
+                  ))} */}
+                  <form className={classes.container} noValidate>
+                    <TextField
+                      id="time"
+                      label=""
+                      type="time"
+                      defaultValue="00:00"
+                      // value={
+                      // form.datapedido.toDate()
+                      // }
+                      onChange={(e) => todoContext.setInputTimes(e.target.value)}
+                      className={classes.textField}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      inputProps={{
+                        step: 300, // 5 min
+                      }}
+                    />
+                  </form>
                       <Button onClick={handleClick}>完了</Button>
                       <Snackbar
                         anchorOrigin={{
@@ -169,46 +180,21 @@ const handleClickOpen = () => {
                         open={open}
                         autoHideDuration={6000}
                         onClose={handleClose}
-                        message="Note archived"
+                        message="タスクを完了しました"
                         action={
                           <React.Fragment>
-                            <Button color="secondary" size="small" onClick={handleClose}>
+                            {/* <Button color="secondary" size="small" onClick={handleClose}>
                               UNDO
-                            </Button>
+                            </Button> */}
                             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
                               <CloseIcon fontSize="small" />
                             </IconButton>
                           </React.Fragment>
                         }
-                      />
-                    
+                      />  
+                      </StyledContainer>
                 
                 </StyledPaper>
-              </StyledContainer>
-              <StyledContainer className="small-container">
-                <StyledPaper m={5} p={1}>
-                  <StyledFormControlLabel
-                    control={
-                      <Checkbox
-                        checked={state.checkedB}
-                        onChange={handleChange}
-                        name="checkedB"
-                        color="primary"
-                      />
-                    }
-                      label="ポートフォリオ作成"
-                  />
-                </StyledPaper>
-              </StyledContainer>
-            </Grid>
-            <StyledContainer className="tooltip-container">
-              <StyledTooltip title="Add" aria-label="add" m={10}>
-                <Fab color="primary" className={classes.absolute}>
-                  <AddIcon />
-                </Fab>
-              </StyledTooltip>
-            </StyledContainer>
-          </StyledContainer>
         </React.Fragment>
     )
 }

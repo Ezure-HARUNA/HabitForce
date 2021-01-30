@@ -3,8 +3,8 @@ import { useState, useMemo } from 'react'
 
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
-
-  const createTodo = async ({ goals, categories, rewards, outlines}) => {
+  const [todoList, setTodoList] = useState([])
+  const createTodo = async ({ goals, categories, rewards, outlines, times}) => {
     if (loading) return
 
     setLoading(true)
@@ -44,10 +44,11 @@ export const useCreateTodo = () => {
       docId: docId,
     //   createdAt: now,
       updatedAt: now,
-      goals: "goals",
+      goals,
       categories,
       rewards,
-      outlines: ["a", "b", "c"]
+      outlines: [], 
+      times
     // test:'test'
     // text,
     // purpose: purpose,
@@ -61,8 +62,11 @@ export const useCreateTodo = () => {
         //   createdAt: now,
           updatedAt: now,
           goals: goals,
+          outlines: outlines,
           categories,
-          rewards,})
+          rewards,
+          times
+        })
     setLoading(false)
     return result.data()
   }
