@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -26,6 +26,11 @@ import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
 import styled from 'styled-components';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link} from 'react-router-dom'
+import { useCreateTodo } from '../helpers/useCreateTodo'
+import { TodoContext } from '../components/App'
+import { PlanContext } from '../components/Plan/Plan';
+
+
 
 const drawerWidth = 240;
 
@@ -99,10 +104,10 @@ const StyledToolbar = styled(Toolbar)`
   position: relative!important;
 `
 
-const StyledButton = styled(Button)`
+const StyledTypography = styled(Typography)`
   position: absolute!important;
   right: 0%!important;
-  font-weight: bold!important;
+  /* font-weight: bold!important; */
 `
 
 const StyledListItemText=styled(ListItemText)`
@@ -113,9 +118,10 @@ const StyledListItemText=styled(ListItemText)`
 
 const StyledLink=styled(Link)`
   /* text-decoration:none!important; */
-  color: gray!important;
-  text-decoration: none;
+  text-decoration: none!important;
+  color: white!important;
 `
+
 
 // const StyledButton = styled(Button)`
 // background: blue;
@@ -149,6 +155,25 @@ export default function Header(props) {
     setOpen(false);
   };
 
+  //handleClickのタスク追加の処理
+  const todoContext = useContext(TodoContext)
+  const planContext = useContext(PlanContext)
+  const [createTodo, loading] = useCreateTodo();
+  const [goals, setGoals] = useState('')
+  const [rewards, setRewards] = useState('')
+  const [categories, setCategories] = useState('')
+  console.log(todoContext)
+
+  const handleClick = (card) => {
+
+    createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
+    todoContext.setInputGoals('');
+    todoContext.setInputCategories('');
+    todoContext.setInputRewards('');
+    //cardのadd
+      card.id = planContext.cards.length + 1
+      planContext.setCards([...planContext.cards, {id: planContext.cards.length + 1, content: ''}])
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -171,7 +196,14 @@ export default function Header(props) {
           <Typography variant="h5" noWrap>
             Habit Force
           </Typography>
-          <StyledButton color="inherit">保存</StyledButton>
+          <StyledLink className="link" to='/top'>
+          <StyledTypography 
+            variant="h6" noWrap
+            onClick={handleClick}
+          >
+            保存
+          </StyledTypography>
+          </StyledLink>
         </StyledToolbar>
       </StyledAppBar>
       <Drawer

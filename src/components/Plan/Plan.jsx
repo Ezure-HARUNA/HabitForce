@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, createContext } from 'react';
 import PlanHeader from '../../Layout/PlanHeader'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -107,8 +107,7 @@ function Copyright() {
   );
 }
 
-
-
+export const PlanContext = createContext();
 
 const Plan = (props) => {
   const classes = useStyles();
@@ -189,6 +188,10 @@ const Plan = (props) => {
     return (
       <React.Fragment>
         <GlobalStyle/>
+          <PlanContext.Provider 
+          value={{
+            cards, setCards
+          }}>
               <PlanHeader />
               {/* やること追加 */}
               <StyledPaper>
@@ -293,7 +296,8 @@ const Plan = (props) => {
 
             <Box pt={4}>
               <Copyright />
-            </Box> 
+            </Box>
+          </PlanContext.Provider> 
       </React.Fragment>
       
     )

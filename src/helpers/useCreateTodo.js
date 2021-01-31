@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
-  const createTodo = async ({ goals, categories, rewards, outlines, times}) => {
+  const createTodo = async ({ goals, categories, rewards, outlines}) => {
     if (loading) return
 
     setLoading(true)
@@ -48,7 +48,7 @@ export const useCreateTodo = () => {
       categories,
       rewards,
       outlines: [], 
-      times
+      // times
     // test:'test'
     // text,
     // purpose: purpose,
@@ -65,7 +65,7 @@ export const useCreateTodo = () => {
           outlines: outlines,
           categories,
           rewards,
-          times
+          // times
         })
     setLoading(false)
     return result.data()
