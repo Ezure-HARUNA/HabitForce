@@ -136,33 +136,6 @@ const Plan = (props) => {
   };
 
 
-  // 追記 一番最初にfirestoreからデータを取ってきてstateに入れる
-  // useEffect(() => {
-  //   (async () => {
-  //     const resTodo = await db.collection("todoList").doc("todo").get();
-  //     // stateに入れる
-  //     todoContext.setTodoList(resTodo.data());
-  //     const resFinishedTodo = await db.collection("todoList").doc("finishedTodo").get();
-  //     // stateに入れる
-  //     todoContext.setFinishedList(resFinishedTodo.data());
-  //     // Loading終了
-  //     todoContext.setIsLoading(false);
-  //   })()
-  // }, [db])
-
-  // const addTodo = async () => {
-  //   if (!!todoContext.inputGoals) {
-  //     // 追記 Todoが変化したのでtrue
-  //     todoContext.setIsChangedTodo(true);
-  //     todoContext.setTodoList([...todoContext.todoList, todoContext.inputGoals]);
-  //     todoContext.setInputGoals('');
-  //     todoContext.setInputCategories('');
-  //     todoContext.setInputRewards('');
-  //   }
-
-
-  // }
-
     const handleClick = (card) => {
 
       createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })

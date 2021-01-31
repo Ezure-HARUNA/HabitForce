@@ -1,5 +1,6 @@
 import React, { useContext, useState, useReducer } from 'react';
 import { Link } from 'react-router-dom';
+import TopHeader from '../../Layout/TopHeader'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -98,6 +99,7 @@ const Top = (props) => {
 
     return (
       <React.Fragment>
+        <TopHeader/>
         <GlobalStyle/>
          
           {todoList.map((card) => (
