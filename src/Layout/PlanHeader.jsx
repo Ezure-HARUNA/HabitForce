@@ -171,8 +171,8 @@ export default function Header(props) {
     todoContext.setInputCategories('');
     todoContext.setInputRewards('');
     //cardのadd
-      card.id = planContext.cards.length + 1
-      planContext.setCards([...planContext.cards, {id: planContext.cards.length + 1, content: ''}])
+      card.id = planContext.todoList.length + 1
+      planContext.setTodoList([...planContext.todoList, {id: planContext.todoList.length + 1, content: ''}])
   }
   return (
     <div className={classes.root}>

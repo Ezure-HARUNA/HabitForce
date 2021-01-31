@@ -193,7 +193,9 @@ const handleClickOpen = () => {
                         }
                       />  
                       </StyledContainer>
-                
+                       <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+                        {card.rewards}
+                      </StyledTypography>              
                 </StyledPaper>
         </React.Fragment>
     )

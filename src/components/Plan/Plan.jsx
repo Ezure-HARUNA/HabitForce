@@ -127,7 +127,7 @@ const Plan = (props) => {
     {id: 2, content: ''},
     {id: 3, content: ''}
   ]
-  const [cards, setCards] = useState(cardsData)
+  const [todoList, setTodoList] = useState(cardsData)
 
   const [schedule, setSchedule] = React.useState('');
 
@@ -143,8 +143,8 @@ const Plan = (props) => {
       todoContext.setInputCategories('');
       todoContext.setInputRewards('');
       //cardのadd
-        card.id = cards.length + 1
-        setCards([...cards, {id: cards.length + 1, content: ''}])
+        card.id = todoList.length + 1
+        setTodoList([...todoList, {id: todoList.length + 1, content: ''}])
     }
     
     const outlinesData = [
@@ -163,7 +163,7 @@ const Plan = (props) => {
         <GlobalStyle/>
           <PlanContext.Provider 
           value={{
-            cards, setCards
+            todoList, setTodoList
           }}>
               <PlanHeader />
               {/* やること追加 */}
