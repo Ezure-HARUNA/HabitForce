@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
-  const createTodo = async ({ goals, categories, rewards, outlines}) => {
+  const createTodo = async ({ goals, categories, rewards, outlines, isComplete}) => {
     if (loading) return
 
     setLoading(true)
@@ -48,6 +48,7 @@ export const useCreateTodo = () => {
       categories,
       rewards,
       outlines: [], 
+      isComplete: false,
       // times
     // test:'test'
     // text,
@@ -65,6 +66,7 @@ export const useCreateTodo = () => {
           outlines: outlines,
           categories,
           rewards,
+          isComplete
           // times
         })
     setLoading(false)

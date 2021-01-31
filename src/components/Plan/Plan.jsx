@@ -163,7 +163,7 @@ const Plan = (props) => {
         <GlobalStyle/>
           <PlanContext.Provider 
           value={{
-            todoList, setTodoList
+            todoList, setTodoList,
           }}>
               <PlanHeader />
               {/* やること追加 */}

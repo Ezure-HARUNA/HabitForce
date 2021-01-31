@@ -29,6 +29,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { CardTravel } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
+import Outline from './Outline'
 
 const StyledContainer=styled(Container)`
   display: flex!important;
@@ -139,6 +140,13 @@ const handleClickOpen = () => {
   setOpen(true);
 };
 
+const outlinesData = [
+  {id: 1, content: ''},
+  {id: 2, content: ''},
+  {id: 3, content: ''}
+]
+const [outlines, setOutlines] = useState(outlinesData)
+
     return (
         <React.Fragment>
             <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
@@ -148,10 +156,11 @@ const handleClickOpen = () => {
                   <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
                     {card.goals}
                   </StyledTypography>
-                  <StyledContainer>
-                  {/* {outlines.map((outline) => (
+                   {outlines.map((outline) => (
                     <Outline key={outline.id} outline={outline}/>
-                  ))} */}
+                  ))}
+                  <StyledContainer>
+                 
                   <form className={classes.container} noValidate>
                     <TextField
                       id="time"

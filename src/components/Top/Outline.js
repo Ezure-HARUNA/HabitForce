@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import styled from 'styled-components'
 
-const Outlines = () => {
+const StyledFormControlLabel=styled(FormControlLabel)`
+  margin: 16px!important;
+`
+
+const Outlines = ({outline}) => {
     return (
         <div>
             <StyledFormControlLabel
               control={
                 <Checkbox
-                  checked={state.checkedA}
-                  onChange={handleChange}
+                  checked={outline.isComplete}
+                  // onChange={handleChange}
                   name="checkedB"
                   color="primary"
                 />
               }
-              label={card.outlines}                    
+              label={outline.outlines}                    
             />
         </div>
     )
