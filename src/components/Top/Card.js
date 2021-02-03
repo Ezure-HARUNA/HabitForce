@@ -32,10 +32,33 @@ import TextField from '@material-ui/core/TextField';
 import Outline from './Outline'
 import { useCreateTodo } from '../../helpers/useCreateTodo'
 
+const StyledButton =styled(Button)`
+  /* margin-left: 52.5%; */
+  font-weight: bold;
+  /* border-radius: 25px!important; */
+  /* position: absolute!important;
+  bottom: 0%!important;
+  right: 0%!important; 
+  z-index: 10!important;  */
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+`
+
+const StyledTextField = styled(TextField)`
+  width: 80%!important;
+  /* display: flex !important;
+  margin: 0 auto!important; */
+  margin-left: 2.5% !important;
+  margin-bottom: 2.5% !important;
+`
+
+const TimeTextField = styled(TextField)`
+  margin-right: 60%!important;
+`
+
 const StyledContainer=styled(Container)`
   display: flex!important;
-
-    `
+`
 
 const StyledFormControlLabel=styled(FormControlLabel)`
   /* margin: 16px!important; */
@@ -45,7 +68,7 @@ const StyledTypography=styled(Typography)`
 `
 
 const StyledPaper = styled(Paper)`
-  width: 85%!important;
+  width: 45%!important;
   margin: 0 auto !important;
 `
 
@@ -161,60 +184,84 @@ const [createTodo, loading] = useCreateTodo();
               {card.categories}
             </StyledTypography>
                 <StyledPaper m={5} p={5}>
-                  <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+                  {/* <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
                     {card.goals}
                   </StyledTypography>
                    {outlines.map((outline) => (
                     <Outline key={outline.id} outline={outline}/>
-                  ))}
-                  <StyledContainer>
+                  ))} */}
+
+            <StyledTextField 
+              // value={text}
+              name="task"  
+              label="行ったタスク" 
+              // ref={register({required: true, maxLength: 50})} 
+              type="text"
+              fullWidth
+              margin="normal"
+              // inputRef={register({ required: true, maxLength: 20 })}
+              // error={Boolean(errors.todo)}
+              // helperText={errors.todo && "やることは20文字以内にして下さい。"}
+            />
+            <StyledContainer>
                  
-                  <form className={classes.container} noValidate>
-                    <TextField
-                      id="time"
-                      label=""
-                      type="time"
-                      defaultValue="00:00"
-                      // value={
-                      // form.datapedido.toDate()
-                      // }
-                      onChange={(e) => todoContext.setInputTimes(e.target.value)}
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      inputProps={{
-                        step: 300, // 5 min
-                      }}
-                    />
-                  </form>
-                      <Button onClick={handleClick}>完了</Button>
-                      <Snackbar
-                        anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'left',
-                        }}
-                        open={open}
-                        autoHideDuration={6000}
-                        onClose={handleClose}
-                        message="タスクを完了しました"
-                        action={
-                          <React.Fragment>
-                            {/* <Button color="secondary" size="small" onClick={handleClose}>
-                              UNDO
-                            </Button> */}
-                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-                              <CloseIcon fontSize="small" />
-                            </IconButton>
-                          </React.Fragment>
-                        }
-                      />  
-                      </StyledContainer>
-                       <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
-                        {card.rewards}
-                      </StyledTypography>              
-                </StyledPaper>
-        </React.Fragment>
+              <form className={classes.container} noValidate>
+                <TimeTextField
+                  id="time"
+                  label=""
+                  type="time"
+                  defaultValue="00:00"
+                  // value={
+                  // form.datapedido.toDate()
+                  // }
+                  onChange={(e) => todoContext.setInputTimes(e.target.value)}
+                  className={classes.textField}
+                  InputLabelProps={{
+                  shrink: true,
+                  }}
+                  inputProps={{
+                    step: 300, // 5 min
+                  }}
+                />
+              </form>
+              <StyledButton
+                  // onClick={addTodo()}
+                  onClick={handleClick}
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  className={classes.button}
+                  size="large"
+                  // startIcon={<ForwardOutlinedIcon />}
+                >
+                  commit
+                </StyledButton>
+                <Snackbar
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                  message="タスクを完了しました"
+                  action={
+                    <React.Fragment>
+                      {/* <Button color="secondary" size="small" onClick={handleClose}>
+                        UNDO
+                      </Button> */}
+                      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                        <CloseIcon fontSize="small" />
+                      </IconButton>
+                    </React.Fragment>
+                  }
+                />  
+                </StyledContainer>
+                 <StyledTypography className="category-container"　component="h1" variant="h6" color="inherit"  noWrap >
+                  {card.rewards}
+                </StyledTypography>              
+          </StyledPaper>
+  </React.Fragment>
     )
 }
 
