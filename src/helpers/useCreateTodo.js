@@ -6,7 +6,7 @@ export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
   const todoContext = useContext(TodoContext)
-  const createTodo = async ({ goals, categories, rewards, outlines, isComplete, calendarCounts, times, calendar}) => {
+  const createTodo = async ({  categories, rewards, outlines, isComplete, calendarCounts, times, calendar}) => {
     if (loading) return
 
     setLoading(true)
@@ -49,7 +49,7 @@ export const useCreateTodo = () => {
       docId: docId,
     //   createdAt: now,
       updatedAt: now,
-      goals,
+      // goals,
       categories,
       rewards,
       outlines: [{time: 10, title: 'title'}], 
@@ -67,7 +67,7 @@ export const useCreateTodo = () => {
     console.log("引数", { docId: docId,
         //   createdAt: now,
           updatedAt: now,
-          goals: goals,
+          // goals: goals,
           outlines,
           date,
           count,

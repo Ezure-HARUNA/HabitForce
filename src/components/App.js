@@ -34,10 +34,9 @@ const App = () => {
   
   const [id, setId] =React.useState("")
 
-   const [inputGoals, setInputGoals] = useState('');
    const [inputRewards, setInputRewards] = useState('');
    const [inputCategories, setInputCategories] = useState('');
-   const [ inputOutlines, setInputOutlines] = useState([])
+   const [ inputCommits, setInputCommits] = useState('')
    const [ calendarCounts, setCalendarCounts] = useState(0);
    const [ inputTimes, setInputTimes ] = useState('');
    const [todoList, setTodoList] = useState([]);
@@ -54,10 +53,9 @@ const App = () => {
     <div id="root">
       <TodoContext.Provider 
         value={{
-          inputGoals, setInputGoals, 
           inputRewards, setInputRewards,
           inputCategories, setInputCategories,
-          inputOutlines, setInputOutlines,
+          inputCommits, setInputCommits,
           calendarCounts, setCalendarCounts,
           inputTimes, setInputTimes,
           todoList, setTodoList,
