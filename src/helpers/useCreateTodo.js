@@ -6,7 +6,7 @@ export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
   const todoContext = useContext(TodoContext)
-  const createTodo = async ({ goals, categories, rewards, outlines, isComplete, calendarCounts, times, calendar, count}) => {
+  const createTodo = async ({ goals, categories, rewards, outlines, isComplete, calendarCounts, times, calendar}) => {
     if (loading) return
 
     setLoading(true)
@@ -20,6 +20,8 @@ export const useCreateTodo = () => {
     const docId = firestore().collection('todoList').doc().id
 
     const date = new Date().toLocaleDateString();
+
+    const count = todoContext.calendarCounts;
    
     console.log(todoContext.calendarCounts)
 
@@ -52,7 +54,7 @@ export const useCreateTodo = () => {
       rewards,
       outlines: [{time: 10, title: 'title'}], 
       isComplete: false,
-      calendar: [{date: date, count: todoContext.calendarCounts}],
+      calendar: [{date: date, count: count}],
     // test:'test'
     // text,
     // purpose: purpose,
