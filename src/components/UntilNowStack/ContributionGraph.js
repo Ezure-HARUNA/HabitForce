@@ -45,7 +45,7 @@ class Demo extends React.Component {
       values: generateRandomValues(200),
     });
   };
-
+/* 
   getTooltipDataAttrs = (value) => {
     // Temporary hack around null value.date issue
     if (!value || !value.date) {
@@ -59,7 +59,7 @@ class Demo extends React.Component {
 
   handleClick = (value) => {
     alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
-  };
+  }; */
   
 
   render() {
@@ -68,7 +68,15 @@ class Demo extends React.Component {
         <div className="row">
           <div className="col-12 col-sm-6">
             <StyledCalendarHeatmap
-              values={this.state.values}
+                startDate={new Date('2021-01-15')}
+                endDate={new Date('2021-07-20')}
+               values={[
+                { date: '2021-01-22', count: 4 },
+                { date: '2021-01-30', count: 2 },
+                { date: '2021-01-21', count: 3 },
+                // ...and so on
+              ]}
+              /* values={this.state.values} */
               classForValue={(value) => {
                 if (!value) {
                   return 'color-empty';

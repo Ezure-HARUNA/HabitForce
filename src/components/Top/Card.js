@@ -30,6 +30,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { CardTravel } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import Outline from './Outline'
+import { useCreateTodo } from '../../helpers/useCreateTodo'
 
 const StyledContainer=styled(Container)`
   display: flex!important;
@@ -116,10 +117,14 @@ const Card = ({card, type}) => {
 
 const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const handleClick = (outline) => {
     setOpen(true);
-
-  };
+    createTodo({count: todoContext.calendarCounts + 1,  })
+    todoContext.setInputCalendarCounts('')
+    //cardのadd
+      outline.id = outlines.length + 1
+      outlines([...outlines, {id: outlines.length + 1, content: ''}])
+  }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -146,6 +151,9 @@ const outlinesData = [
   {id: 3, content: ''}
 ]
 const [outlines, setOutlines] = useState(outlinesData)
+
+//
+const [createTodo, loading] = useCreateTodo();
 
     return (
         <React.Fragment>

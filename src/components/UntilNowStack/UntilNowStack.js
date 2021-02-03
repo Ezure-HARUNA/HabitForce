@@ -29,6 +29,7 @@ import Card from './Card'
 import BarGraph from './BarGraph'
 import ContributionGraph from './ContributionGraph'
 import Text from './Text'
+import StackHeader from '../../Layout/StackHeader'
 
 const StyledCardPaper = styled(Paper)`
   width: 40%!important;
@@ -53,8 +54,17 @@ const UntilNowStack = () => {
     {id: 3, content: ''}
   ]
   const [cards, setCards] = useState(cardsData)
+
+  const outlinesData = [
+  {id: 1, content: ''},
+  {id: 2, content: ''},
+  {id: 3, content: ''}
+]
+const [outlines, setOutlines] = useState(outlinesData)
+
     return (
         <div>
+            <StackHeader/>
             <StyledContainer className="small-container">
             <Container>
                 <StyledBarGraphPaper>
@@ -67,9 +77,9 @@ const UntilNowStack = () => {
                 
             </Container>
             <Container>
-                <StyledCardPaper>
-                        <Text/>
-                </StyledCardPaper>
+                 {outlines.map((outline) => (
+                    <Text key={outline.id} outline={outline}/>
+                  ))}
             </Container>
             </StyledContainer>
         </div>
