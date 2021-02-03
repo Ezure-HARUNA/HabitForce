@@ -56,13 +56,21 @@ const Div = styled.div`
 
 const StyledPaper = styled(Paper)`
 width: 80%!important;
-height: 85%!important;
+height: 80%!important;
+margin: 0 auto!important;
 position: relative!important;
+margin-top: 10%!important;
+padding-top: 1%!important;
+padding-bottom: 1%!important;
+`
+const GuidanceTypography = styled(Typography)`
+  margin-top: 2%!important;
+  margin-left: 2.5%!important;
 `
 
 const StyledTypography = styled(Typography)`
   margin-top: 2.5%!important;
-  margin-left: 5%!important;
+  margin-left: 2.5%!important;
 `
 
 const StyledFormControl = styled(FormControl)`
@@ -80,32 +88,32 @@ margin-left: 300px!important;
 `
 
 const StyledButton =styled(Button)`
-  margin-left: 52.5%;
+  /* margin-left: 52.5%; */
   font-weight: bold;
   border-radius: 25px!important;
-  position: absolute!important;
-  bottom: 0px!important;
-  right: 0px!important; 
-  z-index: 10!important;
+  /* position: absolute!important;
+  bottom: 30%!important;
+  right: 10%!important; 
+  z-index: 10!important; */
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 `
 
-function Copyright() {
+// function Copyright() {
 
-  return (
-    // <AppContext.Provider value={{ state, dispatch}}>
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    // </AppContext.Provider>
-  );
-}
+//   return (
+//     // <AppContext.Provider value={{ state, dispatch}}>
+//       <Typography variant="body2" color="textSecondary" align="center">
+//         {'Copyright © '}
+//         <Link color="inherit" href="https://material-ui.com/">
+//           Your Website
+//         </Link>{' '}
+//         {new Date().getFullYear()}
+//         {'.'}
+//       </Typography>
+//     // </AppContext.Provider>
+//   );
+// }
 
 export const PlanContext = createContext();
 
@@ -138,8 +146,8 @@ const Plan = (props) => {
 
     const handleClick = (card) => {
 
-      createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
-      todoContext.setInputGoals('');
+      createTodo({categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
+      // todoContext.setInputGoals('');
       todoContext.setInputCategories('');
       todoContext.setInputRewards('');
       //cardのadd
@@ -166,26 +174,28 @@ const Plan = (props) => {
             todoList, setTodoList,
           }}>
               <PlanHeader />
-              {/* やること追加 */}
+              <GuidanceTypography component="h1" variant="h6" color="inherit" noWrap >
+                  身につけたい習慣とモチベ維持のためのご褒美を設定してください！
+                </GuidanceTypography>
               <StyledPaper>
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                  今週のゴール
+                  習慣
                 </StyledTypography>
                 <StyledTextField 
-                  value={todoContext.inputGoals}
-                  onChange={(e) => todoContext.setInputGoals(e.target.value)}
-                  name="todo"  
-                  label="やること" 
+                  value={todoContext.inputCategories}
+                  onChange={(e) => todoContext.setInputCategories(e.target.value)}
+                  name="categories"  
+                  label="categories" 
                   ref={register({required: true, maxLength: 50})} 
                   type="text"
                   fullWidth
                   margin="normal"
                   inputRef={register({ required: true, maxLength: 20 })}
                   error={Boolean(errors.todo)}
-                  helperText={errors.todo && "やることは20文字以内にして下さい。"}
+                  helperText={errors.todo && "カテゴリーは20文字以内にして下さい。"}
                   />
 
-                  <StyledFormControl className={classes.formControl}>
+                  {/* <StyledFormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">shedule</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
@@ -196,7 +206,7 @@ const Plan = (props) => {
                       <MenuItem value={10} type="habit">毎日同じことをする</MenuItem>
                       <MenuItem value={20} type="outline">アウトラインを作成する</MenuItem>
                     </Select>
-                  </StyledFormControl>
+                  </StyledFormControl> */}
 
                   {/* {type === "habit" ? (
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
@@ -205,14 +215,14 @@ const Plan = (props) => {
                    ) : ( <h2>なし</h2>)
                   } */}
 
-                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   アウトライン
                 </StyledTypography>
                 {outlines.map((outline, index) => (
                   <OutlineList outlines={outlines} setOutlines={setOutlines} index={index}
                   />
                 ))}
-                <OutlineForm addOutline={addOutline} outlines={outlines}/>
+                <OutlineForm addOutline={addOutline} outlines={outlines}/> */}
 
                 <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   ご褒美
@@ -232,7 +242,7 @@ const Plan = (props) => {
                   />
 
              
-                <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
+                {/* <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                   カテゴリー
                 </StyledTypography>
                 <StyledTextField 
@@ -247,11 +257,11 @@ const Plan = (props) => {
                   inputRef={register({ required: true, maxLength: 20 })}
                   error={Boolean(errors.todo)}
                   helperText={errors.todo && "やることは20文字以内にして下さい。"}
-                  />
+                  /> */}
               </StyledPaper>
               {/* やること追加終了 */}
 
-              <StyledLink className="link" to='/top'>
+              {/* <StyledLink className="link" to='/top'>
               <StyledButton
                   // onClick={addTodo()}
                   onClick={handleClick}
@@ -264,12 +274,12 @@ const Plan = (props) => {
                 >
                   やること追加
                 </StyledButton>
-              </StyledLink>
+              </StyledLink> */}
             
 
-            <Box pt={4}>
+            {/* <Box pt={4}>
               <Copyright />
-            </Box>
+            </Box> */}
           </PlanContext.Provider> 
       </React.Fragment>
       
