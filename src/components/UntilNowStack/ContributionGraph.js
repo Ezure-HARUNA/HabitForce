@@ -35,8 +35,9 @@ function generateRandomValues(count, date = new Date()) {
   });
 }
 
-class Demo extends React.Component {
-  state = {
+/* class Demo extends React.Component { */
+const Demo = ({commit}) => {
+  /* state = {
     values: generateRandomValues(200),
   };
 
@@ -44,7 +45,7 @@ class Demo extends React.Component {
     this.setState({
       values: generateRandomValues(200),
     });
-  };
+  }; */
 /* 
   getTooltipDataAttrs = (value) => {
     // Temporary hack around null value.date issue
@@ -62,7 +63,6 @@ class Demo extends React.Component {
   }; */
   
 
-  render() {
     return (
       <div>
         <div className="row">
@@ -77,7 +77,7 @@ class Demo extends React.Component {
 
                 // ...and so on
               ]} */
-              values={[commit.calendar]}
+              values={commit.calendar}
               /* values={this.state.values} */
               classForValue={(value) => {
                 if (!value) {
@@ -99,7 +99,6 @@ class Demo extends React.Component {
         <ReactTooltip />
       </div>
     );
-  }
 }
 
 export default Demo;
