@@ -70,12 +70,14 @@ class Demo extends React.Component {
             <StyledCalendarHeatmap
                 startDate={new Date('2021-01-15')}
                 endDate={new Date('2021-07-20')}
-               values={[
+               /* values={[
                 { date: '2021-01-22', count: 4 },
                 { date: '2021-01-30', count: 2 },
                 { date: '2021-01-21', count: 3 },
+
                 // ...and so on
-              ]}
+              ]} */
+              values={[commit.calendar]}
               /* values={this.state.values} */
               classForValue={(value) => {
                 if (!value) {

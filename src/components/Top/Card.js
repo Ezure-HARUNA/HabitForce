@@ -30,7 +30,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { CardTravel } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import Outline from './Outline'
-import { useCreateTodo } from '../../helpers/useCreateTodo'
+import { useCreateCommit } from '../../helpers/useCreateCommit'
 
 const StyledButton =styled(Button)`
   /* margin-left: 52.5%; */
@@ -140,13 +140,28 @@ const Card = ({card, type}) => {
 
 const [open, setOpen] = React.useState(false);
 
-  const handleClick = (outline) => {
+  // const handleClick = (outline) => {
+    
+  //   createTodo({count: todoContext.calendarCounts + 1,  })
+  //   todoContext.setInputCalendarCounts('')
+  //   //cardのadd
+  //     outline.id = outlines.length + 1
+  //     outlines([...outlines, {id: outlines.length + 1, content: ''}])
+  // }
+
+  const commitsData = [
+    {id: 1, time: ''},
+    {id: 2, content: ''},
+    {id: 3, content: ''}
+  ]
+  const [commits, setCommits] = useState(commitsData)
+
+  const handleClick = (commit) => {
     setOpen(true);
-    createTodo({count: todoContext.calendarCounts + 1,  })
-    todoContext.setInputCalendarCounts('')
+    createCommit({ date: new Date(), count: todoContext.calendarCounts + 1, times: todoContext.inputTimes})
     //cardのadd
-      outline.id = outlines.length + 1
-      outlines([...outlines, {id: outlines.length + 1, content: ''}])
+      // commit.id = commit.length + 1
+      // setCommits([...commits, {id: commits.length + 1, time: todoContext.inputTimes}])
   }
 
   const handleClose = (event, reason) => {
@@ -176,7 +191,7 @@ const outlinesData = [
 const [outlines, setOutlines] = useState(outlinesData)
 
 //
-const [createTodo, loading] = useCreateTodo();
+const [createCommit, loading] = useCreateCommit();
 
     return (
         <React.Fragment>
@@ -191,18 +206,6 @@ const [createTodo, loading] = useCreateTodo();
                     <Outline key={outline.id} outline={outline}/>
                   ))} */}
 
-            <StyledTextField 
-              // value={text}
-              name="task"  
-              label="行ったタスク" 
-              // ref={register({required: true, maxLength: 50})} 
-              type="text"
-              fullWidth
-              margin="normal"
-              // inputRef={register({ required: true, maxLength: 20 })}
-              // error={Boolean(errors.todo)}
-              // helperText={errors.todo && "やることは20文字以内にして下さい。"}
-            />
             <StyledContainer>
                  
               <form className={classes.container} noValidate>

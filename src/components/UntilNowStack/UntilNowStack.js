@@ -30,6 +30,8 @@ import BarGraph from './BarGraph'
 import ContributionGraph from './ContributionGraph'
 import Text from './Text'
 import StackHeader from '../../Layout/StackHeader'
+import { firestore } from 'firebase/app';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const StyledCardPaper = styled(Paper)`
   width: 40%!important;
@@ -47,20 +49,16 @@ const StyledContainer = styled(Container)`
 display: flex!important` 
 
 const UntilNowStack = () => {
-    //outlineの追加
-    const cardsData = [
-    {id: 1, content: ''},
-    {id: 2, content: ''},
-    {id: 3, content: ''}
-  ]
-  const [cards, setCards] = useState(cardsData)
 
-  const outlinesData = [
+    const query = firestore().collection('todoList').orderBy('updatedAt', 'desc')
+    const [todoList = [], loading] = useCollectionData(query, { docId: 'id' })
+ 
+  const commitsData = [
   {id: 1, content: ''},
   {id: 2, content: ''},
   {id: 3, content: ''}
 ]
-const [outlines, setOutlines] = useState(outlinesData)
+const [commits, setCommits] = useState(commitsData)
 
     return (
         <div>
@@ -77,9 +75,11 @@ const [outlines, setOutlines] = useState(outlinesData)
                 
             </Container>
             <Container>
-                 {outlines.map((outline) => (
-                    <Text key={outline.id} outline={outline}/>
-                  ))}
+                 
+                  {todoList.map((commit) => (
+                    <Text key={commit.id} commit={commit}/>
+                ))}
+                    
             </Container>
             </StyledContainer>
         </div>

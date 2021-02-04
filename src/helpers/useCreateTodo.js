@@ -6,7 +6,7 @@ export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
   const todoContext = useContext(TodoContext)
-  const createTodo = async ({  categories, rewards, outlines, isComplete, calendarCounts, times, calendar}) => {
+  const createTodo = async ({  categories, rewards, calendar}) => {
     if (loading) return
 
     setLoading(true)
@@ -19,11 +19,11 @@ export const useCreateTodo = () => {
     //追加
     const docId = firestore().collection('todoList').doc().id
 
-    const date = new Date().toLocaleDateString();
+    // const date = new Date().toLocaleDateString();
 
-    const count = todoContext.calendarCounts;
+    // const count = todoContext.calendarCounts;
    
-    console.log(todoContext.calendarCounts)
+    // console.log(todoContext.calendarCounts)
 
 
     // const wantRef = useMemo(() => {
@@ -52,28 +52,21 @@ export const useCreateTodo = () => {
       // goals,
       categories,
       rewards,
-      outlines: [{time: 10, title: 'title'}], 
-      isComplete: false,
-      calendar: [{date: date, count: count}],
-    // test:'test'
-    // text,
-    // purpose: purpose,
-    // rewards: rewards,
-    // category: category,
-    // outlines: outlines,
-    // thisWeekRewards: thisWeekRewards,
+      // outlines: [{time: 10, title: 'title'}], 
+      // isComplete: false,
+      // calendar: [{date: date, count: count}],
     })
 
     console.log("引数", { docId: docId,
         //   createdAt: now,
           updatedAt: now,
           // goals: goals,
-          outlines,
-          date,
-          count,
+          // outlines,
+          // date,
+          // count,
           categories,
           rewards,
-          isComplete,
+          // isComplete,
           calendar
           // times
         })
