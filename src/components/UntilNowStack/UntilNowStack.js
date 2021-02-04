@@ -26,27 +26,21 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Card from './Card'
-import BarGraph from './BarGraph'
 import ContributionGraph from './ContributionGraph'
 import Text from './Text'
 import StackHeader from '../../Layout/StackHeader'
 import { firestore } from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-const StyledCardPaper = styled(Paper)`
-  width: 40%!important;
-  margin-top: 16px;
-`
-const StyledBarGraphPaper = styled(Paper)`
-width: 50%!important;
+const StyledTextPaper = styled(Paper)`
+  width: 90%!important;
+  margin: 0 auto!important;
 `
 
 const StyledContributionGraphPaper = styled(Paper)`
-/* width: 40%!important; */
+width: 90%!important;
+margin: 0 auto!important;
 `
-
-const StyledContainer = styled(Container)`
-display: flex!important` 
 
 const UntilNowStack = () => {
 
@@ -63,25 +57,16 @@ const [commits, setCommits] = useState(commitsData)
     return (
         <div>
             <StackHeader/>
-            <StyledContainer className="small-container">
-            <Container>
-                <StyledBarGraphPaper>
-                    <BarGraph/>
-                </StyledBarGraphPaper>
+            
                 <StyledContributionGraphPaper>
                     <ContributionGraph/>
                 </StyledContributionGraphPaper>
-               
-                
-            </Container>
-            <Container>
-                 
-                  {todoList.map((commit) => (
+                     
+                <StyledTextPaper>
+                {todoList.map((commit) => (
                     <Text key={commit.id} commit={commit}/>
                 ))}
-                    
-            </Container>
-            </StyledContainer>
+                </StyledTextPaper>
         </div>
     )
 }

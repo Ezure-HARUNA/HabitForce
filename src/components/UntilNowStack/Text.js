@@ -41,10 +41,9 @@ const Text = ({commit}) => {
     return (
         <React.Fragment>
               <StyledContainer className="small-container">
-                <StyledPaper m={5} p={5}>
                     {/* .mapでカテゴリーを表示する */}
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                        {commit.times}
+                        {/* {commit.times} */}
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                         {/* {outline.outlines} */}
@@ -57,7 +56,6 @@ const Text = ({commit}) => {
                         アウトライン(かかった時間)(反映部分)
                     </StyledTypography>
                     
-                </StyledPaper>
           </StyledContainer>
         </React.Fragment>
     )

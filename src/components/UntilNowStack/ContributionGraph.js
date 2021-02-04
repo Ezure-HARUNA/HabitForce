@@ -35,9 +35,8 @@ function generateRandomValues(count, date = new Date()) {
   });
 }
 
-/* class Demo extends React.Component { */
-const Demo = ({commit}) => {
-  /* state = {
+class Demo extends React.Component {
+  state = {
     values: generateRandomValues(200),
   };
 
@@ -45,9 +44,9 @@ const Demo = ({commit}) => {
     this.setState({
       values: generateRandomValues(200),
     });
-  }; */
-/* 
-  getTooltipDataAttrs = (value) => {
+  };
+
+  /* getTooltipDataAttrs = (value) => {
     // Temporary hack around null value.date issue
     if (!value || !value.date) {
       return null;
@@ -56,13 +55,14 @@ const Demo = ({commit}) => {
     return {
       'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
     };
-  };
+  }; */
 
   handleClick = (value) => {
     alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
-  }; */
+  };
   
 
+  render() {
     return (
       <div>
         <div className="row">
@@ -70,14 +70,12 @@ const Demo = ({commit}) => {
             <StyledCalendarHeatmap
                 startDate={new Date('2021-01-15')}
                 endDate={new Date('2021-07-20')}
-               /* values={[
+               values={[
                 { date: '2021-01-22', count: 4 },
                 { date: '2021-01-30', count: 2 },
                 { date: '2021-01-21', count: 3 },
-
                 // ...and so on
-              ]} */
-              values={commit.calendar}
+              ]}
               /* values={this.state.values} */
               classForValue={(value) => {
                 if (!value) {
@@ -99,6 +97,7 @@ const Demo = ({commit}) => {
         <ReactTooltip />
       </div>
     );
+  }
 }
 
 export default Demo;
