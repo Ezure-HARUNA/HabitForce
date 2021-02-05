@@ -29,11 +29,7 @@ import Card from './Card'
 import ContributionGraph from './ContributionGraph'
 import Text from './Text'
 import StackHeader from '../../Layout/StackHeader'
-<<<<<<< HEAD
 import { firestore } from 'firebase/app'
-=======
-import { firestore } from 'firebase/app';
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const StyledTextPaper = styled(Paper)`
@@ -48,20 +44,8 @@ margin: 0 auto!important;
 
 const UntilNowStack = () => {
 
-<<<<<<< HEAD
   const query = firestore().collection('todoList').doc('todo').collection('commitList').doc('commits').orderBy('updatedAt', 'desc');
   const [commits = [], loading] = useCollectionData(query, { docId: 'id' })
-=======
-    const query = firestore().collection('todoList').orderBy('updatedAt', 'desc')
-    const [todoList = [], loading] = useCollectionData(query, { docId: 'id' })
- 
-  const commitsData = [
-  {id: 1, content: ''},
-  {id: 2, content: ''},
-  {id: 3, content: ''}
-]
-const [commits, setCommits] = useState(commitsData)
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
 
     return (
         <div>
@@ -70,24 +54,13 @@ const [commits, setCommits] = useState(commitsData)
                 <StyledContributionGraphPaper>
                     <ContributionGraph/>
                 </StyledContributionGraphPaper>
-<<<<<<< HEAD
                
                 
-            </Container>
             <Container>
                  {commits.map((commit) => (
                     <Text key={commit.id} commit={commit}/>
                   ))}
             </Container>
-            </StyledContainer>
-=======
-                     
-                <StyledTextPaper>
-                {todoList.map((commit) => (
-                    <Text key={commit.id} commit={commit}/>
-                ))}
-                </StyledTextPaper>
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
         </div>
     )
 }

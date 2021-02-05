@@ -37,11 +37,7 @@ const App = () => {
    const [inputRewards, setInputRewards] = useState('');
    const [inputCategories, setInputCategories] = useState('');
    const [ inputCommits, setInputCommits] = useState('')
-<<<<<<< HEAD
    const [ calendarCounts, setCalendarCounts] = useState(0);
-=======
-   const [ calendarCounts, setCalendarCounts] = useState(1);
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
    const [ inputTimes, setInputTimes ] = useState('');
    const [todoList, setTodoList] = useState([]);
    const [finishedList, setFinishedList] = useState([]);
@@ -59,11 +55,7 @@ const App = () => {
         value={{
           inputRewards, setInputRewards,
           inputCategories, setInputCategories,
-<<<<<<< HEAD
           inputCommits, setInputCommits,
-=======
-          
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
           calendarCounts, setCalendarCounts,
           inputTimes, setInputTimes,
           todoList, setTodoList,
