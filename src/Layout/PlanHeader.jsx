@@ -166,13 +166,12 @@ export default function Header(props) {
 
   const handleClick = (card) => {
 
-    createTodo({goals: todoContext.inputGoals, categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
-    todoContext.setInputGoals('');
+    createTodo({ categories: todoContext.inputCategories, rewards: todoContext.inputRewards })
     todoContext.setInputCategories('');
     todoContext.setInputRewards('');
-    //cardのadd
-      card.id = planContext.todoList.length + 1
-      planContext.setTodoList([...planContext.todoList, {id: planContext.todoList.length + 1, content: ''}])
+  //   //cardのadd
+  //     card.id = planContext.todoList.length + 1
+  //     planContext.setTodoList([...planContext.todoList, {id: planContext.todoList.length + 1, content: ''}])
   }
   return (
     <div className={classes.root}>

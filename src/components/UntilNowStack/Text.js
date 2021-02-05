@@ -34,7 +34,7 @@ const StyledPaper = styled(Paper)`
   height: 250px!important;
 `
 
-const Text = ({outline}) => {
+const Text = ({commit}) => {
 
     return (
         <React.Fragment>
@@ -42,10 +42,10 @@ const Text = ({outline}) => {
                 <StyledPaper m={5} p={5}>
                     {/* .mapでカテゴリーを表示する */}
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                        {outline.categories}
+                        {commit.times}
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-                        {outline.outlines}
+                        {/* {outline.outlines} */}
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                         合計時間:反映部分
