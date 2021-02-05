@@ -35,22 +35,13 @@ const StyledPaper = styled(Paper)`
 `
 
 const Text = ({commit}) => {
-<<<<<<< HEAD
-=======
-
-  console.log(commit.calendar);
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
 
     return (
         <React.Fragment>
               <StyledContainer className="small-container">
                     {/* .mapでカテゴリーを表示する */}
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
-<<<<<<< HEAD
                         {commit.times}
-=======
-                        {/* {commit.times} */}
->>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
                     </StyledTypography>
                     <StyledTypography component="h1" variant="h6" color="inherit" noWrap >
                         {/* {outline.outlines} */}
