@@ -30,7 +30,31 @@ import CloseIcon from '@material-ui/icons/Close';
 import { CardTravel } from '@material-ui/icons';
 import TextField from '@material-ui/core/TextField';
 import Outline from './Outline'
-import { useCreateTodo } from '../../helpers/useCreateTodo'
+import { useCreateCommit } from '../../helpers/useCreateCommit'
+
+const StyledButton =styled(Button)`
+  /* margin-left: 52.5%; */
+  font-weight: bold;
+  /* border-radius: 25px!important; */
+  /* position: absolute!important;
+  bottom: 0%!important;
+  right: 0%!important; 
+  z-index: 10!important;  */
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+`
+
+const StyledTextField = styled(TextField)`
+  width: 80%!important;
+  /* display: flex !important;
+  margin: 0 auto!important; */
+  margin-left: 2.5% !important;
+  margin-bottom: 2.5% !important;
+`
+
+const TimeTextField = styled(TextField)`
+  margin-right: 60%!important;
+`
 
 const StyledButton =styled(Button)`
   /* margin-left: 52.5%; */
@@ -140,13 +164,36 @@ const Card = ({card, type}) => {
 
 const [open, setOpen] = React.useState(false);
 
-  const handleClick = (outline) => {
+  // const handleClick = (outline) => {
+    
+  //   createTodo({count: todoContext.calendarCounts + 1,  })
+  //   todoContext.setInputCalendarCounts('')
+  //   //cardのadd
+  //     outline.id = outlines.length + 1
+  //     outlines([...outlines, {id: outlines.length + 1, content: ''}])
+  // }
+
+  const commitsData = [
+    {id: 1, time: ''},
+    {id: 2, content: ''},
+    {id: 3, content: ''}
+  ]
+  const [commits, setCommits] = useState(commitsData)
+
+  const handleClick = (commit) => {
     setOpen(true);
+<<<<<<< HEAD
     createTodo({count: todoContext.calendarCounts + 1, date: new Date(), times: todoContext.inputTimes })
     todoContext.setInputTimes('0:00')
     //cardのadd
       // outline.id = outlines.length + 1
       // outlines([...outlines, {id: outlines.length + 1, content: ''}])
+=======
+    createCommit({ date: new Date(), count: todoContext.calendarCounts + 1, times: todoContext.inputTimes})
+    //cardのadd
+      // commit.id = commit.length + 1
+      // setCommits([...commits, {id: commits.length + 1, time: todoContext.inputTimes}])
+>>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
   }
 
   const handleClose = (event, reason) => {
@@ -176,7 +223,7 @@ const outlinesData = [
 const [outlines, setOutlines] = useState(outlinesData)
 
 //
-const [createTodo, loading] = useCreateTodo();
+const [createCommit, loading] = useCreateCommit();
 
     return (
         <React.Fragment>
@@ -191,7 +238,10 @@ const [createTodo, loading] = useCreateTodo();
                     <Outline key={outline.id} outline={outline}/>
                   ))} */}
 
+<<<<<<< HEAD
            
+=======
+>>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
             <StyledContainer>
                  
               <form className={classes.container} noValidate>

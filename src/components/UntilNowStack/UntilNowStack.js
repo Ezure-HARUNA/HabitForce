@@ -26,51 +26,51 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Card from './Card'
-import BarGraph from './BarGraph'
 import ContributionGraph from './ContributionGraph'
 import Text from './Text'
 import StackHeader from '../../Layout/StackHeader'
+<<<<<<< HEAD
 import { firestore } from 'firebase/app'
+=======
+import { firestore } from 'firebase/app';
+>>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 
-const StyledCardPaper = styled(Paper)`
-  width: 40%!important;
-  margin-top: 16px;
-`
-const StyledBarGraphPaper = styled(Paper)`
-width: 50%!important;
+const StyledTextPaper = styled(Paper)`
+  width: 90%!important;
+  margin: 0 auto!important;
 `
 
 const StyledContributionGraphPaper = styled(Paper)`
-/* width: 40%!important; */
+width: 90%!important;
+margin: 0 auto!important;
 `
 
-const StyledContainer = styled(Container)`
-display: flex!important` 
-
 const UntilNowStack = () => {
-    //outlineの追加
-    const cardsData = [
-    {id: 1, content: ''},
-    {id: 2, content: ''},
-    {id: 3, content: ''}
-  ]
-  const [cards, setCards] = useState(cardsData)
 
+<<<<<<< HEAD
   const query = firestore().collection('todoList').doc('todo').collection('commitList').doc('commits').orderBy('updatedAt', 'desc');
   const [commits = [], loading] = useCollectionData(query, { docId: 'id' })
+=======
+    const query = firestore().collection('todoList').orderBy('updatedAt', 'desc')
+    const [todoList = [], loading] = useCollectionData(query, { docId: 'id' })
+ 
+  const commitsData = [
+  {id: 1, content: ''},
+  {id: 2, content: ''},
+  {id: 3, content: ''}
+]
+const [commits, setCommits] = useState(commitsData)
+>>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
 
     return (
         <div>
             <StackHeader/>
-            <StyledContainer className="small-container">
-            <Container>
-                <StyledBarGraphPaper>
-                    <BarGraph/>
-                </StyledBarGraphPaper>
+            
                 <StyledContributionGraphPaper>
                     <ContributionGraph/>
                 </StyledContributionGraphPaper>
+<<<<<<< HEAD
                
                 
             </Container>
@@ -80,6 +80,14 @@ const UntilNowStack = () => {
                   ))}
             </Container>
             </StyledContainer>
+=======
+                     
+                <StyledTextPaper>
+                {todoList.map((commit) => (
+                    <Text key={commit.id} commit={commit}/>
+                ))}
+                </StyledTextPaper>
+>>>>>>> c24dee576154e3cd08c919bc0fa8c1de0e83afc8
         </div>
     )
 }

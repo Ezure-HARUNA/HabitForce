@@ -45,8 +45,8 @@ class Demo extends React.Component {
       values: generateRandomValues(200),
     });
   };
-/* 
-  getTooltipDataAttrs = (value) => {
+
+  /* getTooltipDataAttrs = (value) => {
     // Temporary hack around null value.date issue
     if (!value || !value.date) {
       return null;
@@ -55,11 +55,11 @@ class Demo extends React.Component {
     return {
       'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
     };
-  };
+  }; */
 
   handleClick = (value) => {
     alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
-  }; */
+  };
   
 
   render() {
