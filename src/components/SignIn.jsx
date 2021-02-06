@@ -6,6 +6,9 @@ import { GoogleLoginButton } from 'react-social-login-buttons';
 import Plan from './Plan/Plan'
 import useReactRouter from 'use-react-router';
 import { auth } from './App'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/CircularProgress';
 
 const SignIn = () => {
 
@@ -32,13 +35,49 @@ const SignIn = () => {
         
         //   });
         
-    }
+		}
+
+		const [textEmail, setTextEmail] = useState('')
+		
+		const  onEmailChange = email => {
+			// フォームにテキストが入力されたらreduxのstoreを更新
+			setTextEmail(email.target.value);
+		};
     
-    
+		const googleLogin = () => {
+			// Googleログイン処理
+			const provider = new firebase.auth.GoogleAuthProvider();
+			firebase.auth().signInWithRedirect(provider);
+		};
     return (
-        <div
-        >
-                <div className="login">
+        <div>
+          <GoogleLoginButton onClick={googleLogin} align="center" iconSize={'20'} size={'40'}>
+          	<span style={{ fontSize: 16 }}>Googleで{formText}</span>
+        	</GoogleLoginButton>
+					<div style={{ textAlign: 'center', marginTop: 20 }}>または</div>
+        <form style={{ textAlign: 'center' }} noValidate autoComplete="off"
+					onSubmit={(e) => e.preventDefault()}
+				>
+					<div>
+						<TextField
+							id="standard-email"
+							label="メールアドレス"
+							value={textEmail}
+							onChange={onEmailChange}
+							margin="normal"
+							/>
+						</div>
+						<div style={{ color: '#fa755a' }}>{this.renderErrorMessage()}</div>
+						{this.props.loading ? (
+            <CircularProgress style={{ marginTop: 5 }} />
+          ) : (
+            <Button style={{ margin: 20 }} onClick={this.onButtonPress} variant="contained" color="primary">
+              {this.props.formText}
+            </Button>
+          )}
+				</form>
+								{/* Google認証のみ(修正前) */}
+                {/* <div className="login">
                     <h1>ログイン</h1>
                 </div>
                 <div className="signin_button">
@@ -50,7 +89,7 @@ const SignIn = () => {
                         <Route path="/"/>
                             <Route path="/plan" exact component={Plan} />
                     </Switch>
-                </Router>
+                </Router> */}
             </div>
         );
 }
