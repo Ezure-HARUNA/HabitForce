@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import firebase from './utils/firebase';
+import firebase from '../firebase/config';
 
-import { loggined, logouted } from './actions/auth';
+import { loggined, logouted } from '../actions/auth';
 import history from './history';
 import LandingPage from './LandingPage';
-import LoginedPage from './LoginedPage';
+import Top from './Top/Top';
 import NavBar from './NavBar';
 import Auth from './Auth';
-
 class App extends Component {
+  
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -25,12 +25,13 @@ class App extends Component {
   }
   render() {
     return (
+      
       <Router history={history}>
         <NavBar />
         <Switch>
           <Route path="/" exact component={LandingPage} />
           <Auth>
-            <Route path="/logined" exact component={LoginedPage} />
+            <Route path="/top" exact component={Top} />
           </Auth>
         </Switch>
       </Router>

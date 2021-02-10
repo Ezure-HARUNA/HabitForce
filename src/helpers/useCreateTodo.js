@@ -1,23 +1,23 @@
 import { firestore } from 'firebase/app'
 import { useState, useContext } from 'react'
-import { TodoContext } from '../components/App';
+import { TodoContext } from '../components/Context';
 
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
   const [todoList, setTodoList] = useState([])
   const todoContext = useContext(TodoContext)
-  const createTodo = async ({  categories, rewards, outlines, isComplete, calendarCounts, times, calendar}) => {
+  const createTodo = async ({ updatedAt, todo}) => {
     if (loading) return
 
     setLoading(true)
 
     const now = firestore.Timestamp.now()
   
-    const resTodo = firestore().collection('todoList').doc('todo')
+    const resTodo = firestore().collection('habits')
     const result = await resTodo.get()
 
     //追加
-    const docId = firestore().collection('todoList').doc().id
+    const docId = firestore().collection('habits').doc().id
 
     const date = new Date().toLocaleDateString();
 
@@ -45,36 +45,26 @@ export const useCreateTodo = () => {
     //   setWant(data)
     // })
     //データを追加
-    const retTodo = await firestore().collection('todoList').doc('todo').set({
+    await firestore().collection('habits').doc(docId).add({
       docId: docId,
-    //   createdAt: now,
-      updatedAt: now,
-      // goals,
-      categories,
-      rewards,
-      outlines: [{time: 10, title: 'title'}], 
-      isComplete: false,
-      calendar: [{date: date, count: count}],
-    // test:'test'
-    // text,
-    // purpose: purpose,
-    // rewards: rewards,
-    // category: category,
-    // outlines: outlines,
-    // thisWeekRewards: thisWeekRewards,
-    })
+      //   createdAt: now,
+        updatedAt: now,
+      // test:'test'
+      todo,
+      // purpose: purpose,
+      // rewards: rewards,
+      // category: category,
+      // outlines: outlines,
+      // thisWeekRewards: thisWeekRewards,
+      })
 
-    console.log("引数", { docId: docId,
+    console.log("引数", { 
         //   createdAt: now,
           updatedAt: now,
-          // goals: goals,
-          outlines,
-          date,
-          count,
-          categories,
-          rewards,
+          docId,
+          todo
           // isComplete,
-          calendar
+          // calendar
           // times
         })
     setLoading(false)

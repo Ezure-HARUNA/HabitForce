@@ -1,4 +1,7 @@
-export const firebaseConfig = {
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+const config = {
     apiKey: "AIzaSyCgg7aF92zUW1a4EWfPJXL5rTbveJFnAjA",
     authDomain: "habitforce-822c4.firebaseapp.com",
     databaseURL: "https://habitforce-822c4.firebaseio.com",
@@ -8,4 +11,8 @@ export const firebaseConfig = {
     appId: "1:162943994229:web:dfb0b1caad1db259c3ab3c",
     measurementId: "G-L2W0YBPMK7"
   };
+
+  firebase.initializeApp(config);
+
+export default firebase;
   

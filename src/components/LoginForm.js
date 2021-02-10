@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { emailChanged, passwordChanged, loginUser, signUpUser, loggined } from '../actions/auth';
 import { FacebookLoginButton, GoogleLoginButton, TwitterLoginButton } from 'react-social-login-buttons';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import firebase from '../firebase/config';
+import  firebase  from '../firebase/config';
 
 class LoginForm extends Component {
   onEmailandPasswordLogin = () => {
