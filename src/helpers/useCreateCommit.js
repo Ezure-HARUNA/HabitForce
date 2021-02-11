@@ -1,55 +1,38 @@
+// ./src/helpers/useCreateThread.js
+
 import { firestore } from 'firebase/app'
-import { useState, useContext } from 'react'
-import  TodoContext  from '../components/App';
+import { useState } from 'react'
+import firebase from 'firebase';
 
 export const useCreateCommit = () => {
   const [loading, setLoading] = useState(false)
-  const [todoList, setTodoList] = useState([])
-  const todoContext = useContext(TodoContext)
-  const createCommit = async ({  updatedAt }) => {
+
+  const createCommit = async ({ todo, habitId, date, count  }) => {
     if (loading) return
 
     setLoading(true)
 
-    const now = firestore.Timestamp.now()
-  
-    const resCommit = firestore().collection('todoList').doc('commit')
-    const result = await resCommit.get()
+    const now = firebase.firestore.Timestamp.now()
 
-    const commit = todoContext.inputCommits;
+    const habitRef = firebase.firestore().collection('habits').doc(habitId)
 
-    const date = new Date().toLocaleDateString();
+    // await habitRef.update({
+    //   // responseCount: firestore.FieldValue.increment(1),
+    //   updatedAt: now,
+    // })
 
-    const times = todoContext.inputTimes
+    const commitRef = habitRef.collection('commits').doc()
 
-    const count = todoContext.calendarCounts;
-
-    const calendar = [{date, count}]
-   
-    console.log(todoContext.calendarCounts)
-   
-    console.log(todoContext.inputCommits)
-
-
-    //データを追加
-    const retCommit = await firestore().collection('todoList').doc('commit').set({
-        // commit: commit,
-        // calendar: [{date: date, count: count}],
-        calendar,
-        updatedAt: now,
-        times: times
+    await commitRef.update({
+      // createdAt: now,
+      // updatedAt: now,
+      // todo,
+      habitId,
+      date: now,
+      count: firebase.firestore.FieldValue.increment(1),
     })
 
-    console.log("引数", { 
-        commit,
-        updatedAt,
-        date, 
-        count,
-        calendar,
-        times
-        })
     setLoading(false)
-    return result.data()
   }
 
   return [createCommit, loading]

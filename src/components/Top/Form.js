@@ -1,30 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { 
     Container, TextField, Button 
 } from '@material-ui/core'
 import ContributionGraph from './ContributionGraph'
 import { TodoContext } from '../Context'
 import { useCreateTodo } from '../../helpers/useCreateTodo'
+import firebase from 'firebase'; 
+import styled from 'styled-components'
+
+const StyledContainer =styled(Container)`
+display: flex!important;
+`
 
 const Form = () => {
     const todoContext = useContext(TodoContext);
 
     const [createTodo, loading] = useCreateTodo()
+    const [todo, setTodo] = useState('')
 
     const handleClick = () => {
-      createTodo({ todo: todoContext.inputTodo })
-      todoContext.setInputTodo('')
+      createTodo({ todo: todo })
+      setTodo('')
 
     }
     return (
         <div>
-            <Container>
+            <StyledContainer>
             <TextField 
                   disabled={loading}
-                  value={todoContext.inputCategories}
-                  onChange={(e) => todoContext.setInputCategories(e.target.value)}
-                  name="categories"  
-                  label="categories" 
+                  value={todo}
+                  onChange={(e) => setTodo(e.target.value)}
+                  name="todo"  
+                  label="todo" 
                 //   ref={register({required: true, maxLength: 50})} 
                   type="text"
                   fullWidth
@@ -35,9 +42,8 @@ const Form = () => {
                   />
             <Button
                 onClick={handleClick}
-            >Commit</Button>
-            </Container>
-            <ContributionGraph/>
+            >追加</Button>
+            </StyledContainer>
 
         </div>
     )

@@ -23,6 +23,7 @@ import Form from './Form'
 import { useCreateTodo} from '../../helpers/useCreateTodo'
 import { useParams } from 'react-router-dom'
 import Progress from '../Progress'
+import firebase from 'firebase'; 
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -38,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Top = () => {
-  const query = firestore().collection('habits').orderBy('updatedAt', 'desc')
-  const [habits = [], loading] = useCollectionData(query, { docId: 'id' })
+  console.log(firebase.firestore());
+  const query = firebase.firestore().collection('habits').orderBy('updatedAt', 'desc')
+  const [habits = [], loading] = useCollectionData(query, { idField: 'id' })
 
 
   const [createTodo] = useCreateTodo();
@@ -52,7 +54,6 @@ const Top = () => {
 
     return (
       <React.Fragment>
-        <NavBar/>
         <GlobalStyle/>
           <Form/>
           {habits.map((habit) => (

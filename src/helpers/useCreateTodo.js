@@ -1,56 +1,33 @@
 import { firestore } from 'firebase/app'
 import { useState, useContext } from 'react'
-import { TodoContext } from '../components/Context';
+import firebase from 'firebase'; 
 
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
-  const [todoList, setTodoList] = useState([])
-  const todoContext = useContext(TodoContext)
-  const createTodo = async ({ updatedAt, todo}) => {
+  const createCommit = async ({ date, count,  todo, habitId}) => {
     if (loading) return
 
     setLoading(true)
 
-    const now = firestore.Timestamp.now()
+    const now = firebase.firestore.Timestamp.now()
   
-    const resTodo = firestore().collection('habits')
-    const result = await resTodo.get()
+    const habitRef = firebase.firestore().collection('habits').doc()
+    // const result = await resTodo.get()
 
     //追加
-    const docId = firestore().collection('habits').doc().id
+    // const docId = firestore().collection('habits').doc().id
 
-    const date = new Date().toLocaleDateString();
-
-    const count = todoContext.calendarCounts;
-   
-    console.log(todoContext.calendarCounts)
+    // const date = new Date().toLocaleDateString();
 
 
-    // const wantRef = useMemo(() => {
-    //   const col = db.collection('want').doc()
-  
-    //   col.where('uid', '==', currentUser.uid).onSnapshot(query => {
-    //     const data = []
-    //     query.forEach(d => data.push({ ...d.data(), docId: d.id }))
-    //     setWant(data)
-    //   })
-  
-    //   return col
-    // }, [])
-
-    //コメントアウト
-    // wantRef.where('uid', '==', currentUser.uid).onSnapshot(query => {
-    //   const data = []
-    //   query.forEach(d => data.push({ ...d.data(), docId: d.id }))
-    //   setWant(data)
-    // })
     //データを追加
-    await firestore().collection('habits').doc(docId).add({
-      docId: docId,
+    await habitRef.set({
       //   createdAt: now,
         updatedAt: now,
       // test:'test'
       todo,
+      // date,
+      // count: 0,
       // purpose: purpose,
       // rewards: rewards,
       // category: category,
@@ -58,18 +35,31 @@ export const useCreateTodo = () => {
       // thisWeekRewards: thisWeekRewards,
       })
 
+    const commitRef = habitRef.collection('commits').doc()
+
+    await commitRef.set({
+      // updatedAt: now,
+      habitId: habitRef.id,
+      // todo,
+      count: 0,
+      // date
+
+    })
+
     console.log("引数", { 
         //   createdAt: now,
           updatedAt: now,
-          docId,
-          todo
+          count,
+          date,
+          todo,
+          habitId,
           // isComplete,
           // calendar
           // times
         })
     setLoading(false)
-    return result.data()
+    // return result.data()
   }
 
-  return [createTodo, loading]
+  return [createCommit, loading]
 }

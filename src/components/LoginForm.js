@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -68,6 +68,7 @@ class LoginForm extends Component {
         <GoogleLoginButton onClick={this.googleLogin} align="center" iconSize={'20'} size={'40'}>
           <span style={{ fontSize: 16 }}>Googleで{this.props.formText}</span>
         </GoogleLoginButton>
+        <Button onClick={this.guestLogin}>ゲストログイン</Button>
 
         <div style={{ textAlign: 'center', marginTop: 20 }}>または</div>
         <form style={{ textAlign: 'center' }} noValidate autoComplete="off">
