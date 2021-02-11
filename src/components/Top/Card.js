@@ -18,8 +18,11 @@ const StyledPaper = styled(Paper)`
 const Card = ({habit}) => {
   const [createCommit, loading] = useCreateCommit();
   const now = firebase.firestore.Timestamp.now()
-  const handleClick = () => {
-    createCommit({date: now,  })
+  const handleClick = ({habitId}) => {
+    //idが必要
+    //idを渡す？
+    //commit
+    createCommit({commits: })
   }
 
   return (
@@ -32,7 +35,11 @@ const Card = ({habit}) => {
             >
               Commit</Button>
         </StyledContainer>
-        <ContributionGraph/>
+        <ContributionGraph key={commit.habitId} id={id} commit={commit}/>
+
+        {habits.map((habit) => (
+            <Card key={habit.id} habit={habit}/>
+          ))}
       </StyledPaper>
       
       

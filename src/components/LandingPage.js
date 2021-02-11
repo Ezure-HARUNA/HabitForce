@@ -6,7 +6,7 @@ function LandingPage(props) {
   if (props.isLoggedIn) {
     return <Redirect to={'/top'} />;
   } else {
-    return <div>LandingPage</div>;
+    return <div>ログインしてください</div>;
   }
 }
 

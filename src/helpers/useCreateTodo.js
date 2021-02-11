@@ -42,6 +42,7 @@ export const useCreateTodo = () => {
       habitId: habitRef.id,
       // todo,
       count: 0,
+      commits: []
       // date
 
     })

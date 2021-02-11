@@ -6,6 +6,7 @@ import firebase from 'firebase';
 
 export const useCreateCommit = () => {
   const [loading, setLoading] = useState(false)
+  const [ commit, setCommit] = useState([])
 
   const createCommit = async ({ todo, habitId, date, count  }) => {
     if (loading) return
@@ -21,15 +22,15 @@ export const useCreateCommit = () => {
     //   updatedAt: now,
     // })
 
-    const commitRef = habitRef.collection('commits').doc()
+    // const commitRef = habitRef.collection('commits').doc()
 
-    await commitRef.update({
+    const commits = setCommit.push({date: now, count: 1})
+
+    await habitRef.update({
       // createdAt: now,
       // updatedAt: now,
       // todo,
-      habitId,
-      date: now,
-      count: firebase.firestore.FieldValue.increment(1),
+      commits
     })
 
     setLoading(false)
