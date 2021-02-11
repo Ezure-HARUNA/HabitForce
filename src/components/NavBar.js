@@ -8,9 +8,14 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import styled from 'styled-components'
 
 import firebase from '../firebase/config';
 import LoginForm from './LoginForm';
+
+const StyledToolbar = styled(Toolbar)`
+  background-color: green!important;
+`
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -140,12 +145,12 @@ function NavBar(props) {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <StyledToolbar>
         <Typography variant="h6" className={classes.title}>
-          News
+          Habit Force
         </Typography>
         {renderAuth()}
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 }
