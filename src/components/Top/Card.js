@@ -35,10 +35,9 @@ const Card = ({habit}) => {
             >
               Commit</Button>
         </StyledContainer>
-        <ContributionGraph key={commit.habitId} id={id} commit={commit}/>
 
         {habits.map((habit) => (
-            <Card key={habit.id} habit={habit}/>
+            <ContributionGraph key={habit.id} habit={habit}/>
           ))}
       </StyledPaper>
       
