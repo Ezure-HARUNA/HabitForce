@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Button, Paper } from '@material-ui/core' 
 import { useCreateCommit } from '../../helpers/useCreateCommit'
 import ContributionGraph from './ContributionGraph'
 import styled from 'styled-components'
 import { firestore } from 'firebase/app';
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import firebase from 'firebase'; 
 
 const StyledContainer = styled(Container)`
@@ -16,13 +17,17 @@ const StyledPaper = styled(Paper)`
 `
 
 const Card = ({habit}) => {
-  const [createCommit, loading] = useCreateCommit();
+  const [createCommit] = useCreateCommit();
   const now = firebase.firestore.Timestamp.now()
+  const [commits, setCommits] = useState([])
+
+  const query = firebase.firestore().collection('habits').orderBy('updatedAt', 'desc')
+  const [habits = [], loading] = useCollectionData(query, { idField: 'id' })
   const handleClick = ({habitId}) => {
     //idが必要
     //idを渡す？
     //commit
-    createCommit({commits: })
+    createCommit({commits: commits.push({date: now, count: 1})})
   }
 
   return (

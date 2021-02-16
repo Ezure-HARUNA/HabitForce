@@ -8,14 +8,16 @@ export const useCreateCommit = () => {
   const [loading, setLoading] = useState(false)
   const [ commit, setCommit] = useState([])
 
-  const createCommit = async ({ todo, habitId, date, count  }) => {
+  const createCommit = async ({ todo, date, count, commits  }) => {
     if (loading) return
 
     setLoading(true)
 
     const now = firebase.firestore.Timestamp.now()
 
-    const habitRef = firebase.firestore().collection('habits').doc(habitId)
+    const habitId = firebase.firestore().collection('habits').id
+
+    const commitRef = firebase.firestore().collection('habits').doc(habitId).collection('commits').doc(habitId)
 
     // await habitRef.update({
     //   // responseCount: firestore.FieldValue.increment(1),
@@ -24,12 +26,13 @@ export const useCreateCommit = () => {
 
     // const commitRef = habitRef.collection('commits').doc()
 
-    const commits = setCommit.push({date: now, count: 1})
+    //! const commits = setCommit.push({date: now, count: 1})
 
-    await habitRef.update({
+    await commitRef.update({
       // createdAt: now,
       // updatedAt: now,
       // todo,
+      habitId: habitId,
       commits
     })
 
