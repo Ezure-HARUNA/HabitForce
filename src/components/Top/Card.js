@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Button, Paper } from '@material-ui/core' 
+import { Container, Button, Paper, Snackbar } from '@material-ui/core' 
 import { useCreateCommit } from '../../helpers/useCreateCommit'
 import ContributionGraph from './ContributionGraph'
 import styled from 'styled-components'
@@ -24,19 +24,38 @@ const Card = ({habit}) => {
 
   const query = firebase.firestore().collection('habits').orderBy('updatedAt', 'desc')
   const [habits = [], loading] = useCollectionData(query, { idField: 'id' })
-  const handleClick = ({habitId}) => {
+
+  //!snackbarの出現と、commitの処理
+
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (newState) => () => {
     //idが必要
     //idを渡す？
     //commit
     // createCommit({commits: commits.push({date: now, count: 1})})
-    createCommit({commits, test})
+    //! createCommit({commits, test})
     // setCommits.push({date: now, count: 1})
     // test.push({date: now, count: 1})
     // console.log(test)
-    console.log(now)
-    console.log(commits)
+    //! console.log(now)
+    //! console.log(commits)
     // console.log(test)
+
+    setState({ open: true, ...newState });
+
   }
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
 
   return (
     <div>
@@ -44,10 +63,20 @@ const Card = ({habit}) => {
         <StyledContainer>
             <h2>{habit.todo}</h2>
             {/* <h3>{setTest}</h3> */}
+            {/* createCommitしつつ、openする */}
             <Button
-              onClick={handleClick}
+              // onClick={handleClickOpen}
+              onClick={handleClick({ vertical: 'top', horizontal: 'right' })}
             >
               Commit</Button>
+            {/* 以下にsnackbarを設置する */}
+            <Snackbar
+              anchorOrigin={{ vertical, horizontal }}
+              open={open}
+              onClose={handleClose}
+              message="積み上げをcommitしました"
+              key={vertical + horizontal}
+            />
         </StyledContainer>
 
         {habits.map((habit) => (
