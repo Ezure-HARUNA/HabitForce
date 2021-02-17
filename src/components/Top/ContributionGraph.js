@@ -47,19 +47,21 @@ class Demo extends React.Component {
     });
   };
 
-  /* getTooltipDataAttrs = (value) => {
+   getTooltipDataAttrs = (value) => {
     // Temporary hack around null value.date issue
     if (!value || !value.date) {
       return null;
     }
     // Configuration for react-tooltip
     return {
-      'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
+      // 'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${value.count}`,
+      // 'data-tip': `${value.date.slice(0, 10)} のカウント: ${value.count}`,
+      'data-tip': `${value.date.slice(0, 10)} `,
     };
-  }; */
+  }; 
 
   handleClick = (value) => {
-    alert(`You clicked on ${value.date.toISOString().slice(0, 10)} with count: ${value.count}`);
+    alert(`You clicked on ${value.date.slice(0, 10)} with count: ${value.count}`);
   };
   
 
