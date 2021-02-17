@@ -9,6 +9,7 @@ width: 80%!important;
 margin: 0 auto!important;
 ` 
 
+
 function shiftDate(date, numDays) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + numDays);
@@ -36,7 +37,14 @@ function generateRandomValues(count, date = new Date()) {
   });
 }
 
+const today = new Date();
+console.log(today)
+// today.setDate(today.getDate -150)
+const startDate = today.setDate(today.getDate -150);
+console.log(startDate)
 class Demo extends React.Component {
+
+
   state = {
     values: generateRandomValues(200),
   };
@@ -60,9 +68,18 @@ class Demo extends React.Component {
     };
   }; 
 
-  handleClick = (value) => {
-    alert(`You clicked on ${value.date.slice(0, 10)} with count: ${value.count}`);
-  };
+  // handleClick = (value) => {
+  //   alert(`You clicked on ${value.date.slice(0, 10)} with count: ${value.count}`);
+  // };
+
+  // randomValues = getRange(200).map(index => {
+  //   return {
+  //     date: shiftDate(today, -index),
+  //     count: getRandomInt(1, 3),
+  //   };
+  // });
+
+  // randomValues = 
   
 
   render() {
@@ -71,14 +88,20 @@ class Demo extends React.Component {
         <div className="row">
           <div className="col-12 col-sm-6">
             <StyledCalendarHeatmap
-                startDate={new Date('2021-01-15')}
-                endDate={new Date('2021-07-20')}
+                // startDate={today.getDate() - 200}
+                // startDate={today.setDate(today.getDate() - 150)}
+                startDate={new Date('2020-08-20')}
+                // startDate={new Date(startDate)}
+                // startDate={shiftDate(today, -150)}
+                endDate={new Date('2021-02-20')}
+                // endDate={today}
                values={[
                 { date: '2021-01-22', count: 4 },
                 { date: '2021-01-30', count: 2 },
                 { date: '2021-01-21', count: 3 },
                 // ...and so on
               ]}
+              // values={randomValues}
               /* values={[
                   date: commit.date, count: commit.count
               ]} */
@@ -90,7 +113,7 @@ class Demo extends React.Component {
                 return `color-github-${value.count}`;
               }}
               tooltipDataAttrs={this.getTooltipDataAttrs}
-              onClick={this.handleClick}
+              // onClick={this.handleClick}
             />
           </div>
          

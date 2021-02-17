@@ -35,7 +35,7 @@ export const useCreateCommit = () => {
       // todo,
       habitId: habitId,
       // commits: commit.push({date: now, count: 1}),
-      commits: [1, 2, 3],
+      commits: commit.push('aaaa'),
       test: test.push('aaaaa')
     })
 

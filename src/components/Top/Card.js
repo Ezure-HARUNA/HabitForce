@@ -79,9 +79,10 @@ const Card = ({habit}) => {
             />
         </StyledContainer>
 
-        {habits.map((habit) => (
+        {/* {habits.map((habit) => (
             <ContributionGraph key={habit.id} habit={habit}/>
-          ))}
+          ))} */}
+          <ContributionGraph key={habit.id} habit={habit}/>
       </StyledPaper>
       
       
