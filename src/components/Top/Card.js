@@ -18,8 +18,9 @@ const StyledPaper = styled(Paper)`
 
 const Card = ({habit}) => {
   const [createCommit] = useCreateCommit();
-  const now = firebase.firestore.Timestamp.now()
+  const now = new Date().toLocaleDateString();
   const [commits, setCommits] = useState([])
+  // const [test, setTest] = useState([])
 
   const query = firebase.firestore().collection('habits').orderBy('updatedAt', 'desc')
   const [habits = [], loading] = useCollectionData(query, { idField: 'id' })
@@ -27,7 +28,14 @@ const Card = ({habit}) => {
     //idが必要
     //idを渡す？
     //commit
-    createCommit({commits: commits.push({date: now, count: 1})})
+    // createCommit({commits: commits.push({date: now, count: 1})})
+    createCommit({commits, test})
+    // setCommits.push({date: now, count: 1})
+    // test.push({date: now, count: 1})
+    // console.log(test)
+    console.log(now)
+    console.log(commits)
+    // console.log(test)
   }
 
   return (
@@ -35,6 +43,7 @@ const Card = ({habit}) => {
        <StyledPaper>
         <StyledContainer>
             <h2>{habit.todo}</h2>
+            {/* <h3>{setTest}</h3> */}
             <Button
               onClick={handleClick}
             >
