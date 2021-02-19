@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Container, Button, Paper, Snackbar } from '@material-ui/core' 
 import { useCreateCommit } from '../../helpers/useCreateCommit'
 import ContributionGraph from './ContributionGraph'
+import TestGraph from './TestGraph'
 import styled from 'styled-components'
 import { firestore } from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -40,12 +41,12 @@ const Card = ({habit}) => {
     //idを渡す？
     //commit
     // createCommit({commits: commits.push({date: now, count: 1})})
-    //! createCommit({commits, test})
+    createCommit({commits})
     // setCommits.push({date: now, count: 1})
     // test.push({date: now, count: 1})
     // console.log(test)
     //! console.log(now)
-    //! console.log(commits)
+     console.log(commits)
     // console.log(test)
 
     setState({ open: true, ...newState });
@@ -79,9 +80,9 @@ const Card = ({habit}) => {
             />
         </StyledContainer>
 
-        {/* {habits.map((habit) => (
-            <ContributionGraph key={habit.id} habit={habit}/>
-          ))} */}
+        {habits.map((habit) => (
+            <TestGraph key={habit.id} habit={habit}/>
+          ))}
           <ContributionGraph key={habit.id} habit={habit}/>
       </StyledPaper>
       

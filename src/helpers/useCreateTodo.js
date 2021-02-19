@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 export const useCreateTodo = () => {
   const [loading, setLoading] = useState(false)
-  const createCommit = async ({ date, count,  todo, habitId}) => {
+  const createCommit = async ({ habit, commits, hoge, array}) => {
     if (loading) return
 
     setLoading(true)
@@ -25,35 +25,28 @@ export const useCreateTodo = () => {
       //   createdAt: now,
         updatedAt: now,
       // test:'test'
-      todo,
-      // date,
-      // count: 0,
-      // purpose: purpose,
-      // rewards: rewards,
-      // category: category,
-      // outlines: outlines,
-      // thisWeekRewards: thisWeekRewards,
+      habit,
+      commits,
+      hoge, 
+      array,
+      habitId: habitRef.id
       })
 
-    const commitRef = habitRef.collection('commits').doc()
+    // const commitRef = habitRef.collection('commits').doc()
 
-    await commitRef.set({
-      // updatedAt: now,
-      habitId: habitRef.id,
-      // todo,
-      count: 0,
-      commits: []
-      // date
+    // await commitRef.set({
+    //   updatedAt: now,
+    //   habitId: habitRef.id,
+    //   // todo,
+    //   count: 0,
+    //   commits,
+    //   // date
 
-    })
+    // })
 
     console.log("引数", { 
         //   createdAt: now,
           updatedAt: now,
-          count,
-          date,
-          todo,
-          habitId,
           // isComplete,
           // calendar
           // times

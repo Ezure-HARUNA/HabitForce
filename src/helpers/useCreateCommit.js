@@ -9,16 +9,22 @@ export const useCreateCommit = () => {
   const [ commit, setCommit] = useState([])
   const [ test , setTest ] = useState([])
 
-  const createCommit = async ({ todo, date, count, commits, test }) => {
+  const createCommit = async ({ todo, date, count, commits, test, hoge, array }) => {
     if (loading) return
 
     setLoading(true)
 
     const now = firebase.firestore.Timestamp.now()
 
-    const habitId = firebase.firestore().collection('habits').id
+    // const habitId = firebase.firestore().collection('habits').id
 
-    const commitRef = firebase.firestore().collection('habits').doc(habitId).collection('commits').doc()
+    // 引数にする
+    //collection指定 doc指定
+    //collectionをget
+    //createCommitに引数を持たせてidを
+    // !const habitId = "PudxEQFgUcMeB8Z55HiQ"
+
+    // !const commitRef = firebase.firestore().collection('habits').doc(habitId).collection('commits').doc("5sM8MOEU3RCoWpEu0SwM")
 
     // await habitRef.update({
     //   // responseCount: firestore.FieldValue.increment(1),
@@ -29,14 +35,21 @@ export const useCreateCommit = () => {
 
     //! const commits = setCommit.push({date: now, count: 1})
 
-    await commitRef.update({
+    const habitId = firebase.firestore().collection('habits').doc().id
+
+    const habitRef = firebase.firestore().collection('habits').doc(habitId)
+    console.log(habitId)
+
+    await habitRef.update({
       // createdAt: now,
       // updatedAt: now,
       // todo,
-      habitId: habitId,
       // commits: commit.push({date: now, count: 1}),
       commits: commit.push('aaaa'),
-      test: test.push('aaaaa')
+      // commits,
+      // test: test.push('aaaaa')
+      hoge: "hoge",
+      array: [1,2,3]
     })
 
     console.log("引数", { 
@@ -44,8 +57,8 @@ export const useCreateCommit = () => {
         updatedAt: now,
         commits,
         todo,
-        habitId,
-        test,
+        hoge,
+        array
         // isComplete,
         // calendar
         // times
